@@ -14,5 +14,6 @@ return {
 		})
 
 		vim.keymap.set("n", "<C-Tab>", ":BufferLineCycleNext", {})
+		vim.keymap.set("n", "<C-Tab>", ":BufferLineCycleNext", {})
 	end,
 }

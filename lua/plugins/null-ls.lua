@@ -12,7 +12,7 @@ return {
 			})
 
 			-- formatting
-			vim.keymap.set("n", "<leader>ii", vim.lsp.buf.format, {})
+			vim.keymap.set("n", "<leader>i", vim.lsp.buf.format, {})
 		end,
 	},
 }
