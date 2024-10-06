@@ -10,9 +10,9 @@ return {
 					null_ls.builtins.diagnostics.eslint_d,
 				},
 			})
+
+			-- formatting
+			vim.keymap.set("n", "<leader>ii", vim.lsp.buf.format, {})
 		end,
-	},
-	{
-		"nvimtools/none-ls-extras.nvim",
 	},
 }

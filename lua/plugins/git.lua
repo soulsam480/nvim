@@ -2,6 +2,7 @@ return {
 	"lewis6991/gitsigns.nvim",
 	config = function()
 		require("gitsigns").setup({
+			current_line_blame = true,
 			on_attach = function(bufnr)
 				local gitsigns = require("gitsigns")
 
@@ -11,15 +12,7 @@ return {
 					vim.keymap.set(mode, l, r, opts)
 				end
 
-				map("n", "<leader>hd", gitsigns.diffthis)
-
-				map("n", "<leader>hp", gitsigns.preview_hunk)
-
-				map("n", "<leader>hb", function()
-					gitsigns.blame_line({ full = true })
-				end)
-
-				map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
+				map("n", "<leader>gpc", gitsigns.preview_hunk)
 			end,
 		})
 	end,
