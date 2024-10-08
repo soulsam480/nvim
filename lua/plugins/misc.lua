@@ -1,0 +1,78 @@
+return {
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+	},
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+	},
+	{
+		"j-hui/fidget.nvim",
+		opts = {},
+	},
+	{
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	},
+	{
+		"goolord/alpha-nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			local dash = require("alpha.themes.theta")
+
+			dash.file_icons.provider = "devicons"
+
+			require("alpha").setup(dash.config)
+		end,
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("ibl").setup({
+				indent = { char = "|" },
+				whitespace = {
+					remove_blankline_trail = false,
+				},
+			})
+		end,
+	},
+	{
+
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("lualine").setup({
+
+				sections = {
+					lualine_a = {
+						{
+							"datetime",
+							style = "%d-%m-%Y %I:%M:%S %p",
+							icon = "🕒",
+						},
+					},
+				},
+			})
+		end,
+	},{
+    "rcarriga/nvim-notify",
+    config = function()
+      require("notify").setup({
+        background_colour = "#000000",
+        enabled = false,
+      })
+    end
+  },
+
+
+}

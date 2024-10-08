@@ -9,11 +9,17 @@ return {
 		bufferline.setup({
 			options = {
 				diagnostics = "nvim_lsp",
-				style_preset = bufferline.style_preset.minimal,
+				offsets = {
+					{
+						filetype = "neo-tree",
+						text = "File Explorer",
+						highlight = "Directory",
+						separator = false,
+					},
+				},
 			},
 		})
 
-		vim.keymap.set("n", "<C-Tab>", ":BufferLineCycleNext", {})
-		vim.keymap.set("n", "<C-Tab>", ":BufferLineCycleNext", {})
+		vim.keymap.set("n", "<leader>t", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
 	end,
 }
