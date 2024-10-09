@@ -12,7 +12,7 @@ return {
 					-- js
 					null_ls.builtins.formatting.prettier,
 
-					null_ls.builtins.diagnostics.eslint_d,
+					-- null_ls.builtins.diagnostics.eslint_d,
 					-- ruby
 					null_ls.builtins.formatting.rubocop,
 					null_ls.builtins.diagnostics.rubocop,

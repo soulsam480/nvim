@@ -9,20 +9,11 @@ return {
 		},
 	},
 	{
-		"sainnhe/gruvbox-material",
-		lazy = false,
-		priority = 1000,
+		"chriskempson/base16-vim",
+
 		config = function()
 			vim.opt.termguicolors = true
-			vim.opt.background = "dark"
-			vim.g.gruvbox_material_enable_italic = true
-			vim.g.gruvbox_material_better_performance = 1
-			vim.g.gruvbox_material_background = "hard"
-			vim.g.gruvbox_material_enable_bold = 1
-			vim.g.gruvbox_material_ui_contrast = "high"
-
-			-- vim.g.background = "dark"
-			vim.cmd([[colorscheme gruvbox-material]])
+			vim.cmd([[colorscheme base16-gruvbox-dark-hard]])
 		end,
 	},
 	{
@@ -58,20 +49,41 @@ return {
 		end,
 	},
 	{
+		"justinhj/battery.nvim",
+		config = function()
+			require("battery").setup({
+				update_rate_seconds = 30,
+				show_status_when_no_battery = true,
+				show_plugged_icon = true,
+				show_unplugged_icon = true,
+				battery_threshold = 25,
+			})
+		end,
+	},
+	{
 
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		dependencies = { "nvim-tree/nvim-web-devicons", "justinhj/battery.nvim" },
 		config = function()
+			local nvimbattery = {
+				function()
+					return require("battery").get_status_line()
+				end,
+				color = { fg = vim.g.base16_gui05, bg = vim.g.base16_gui00 },
+			}
+
 			require("lualine").setup({
-				options = { theme = "gruvbox-material" },
+				options = { theme = "base16" },
 				sections = {
 					lualine_a = {
+						"mode",
 						{
 							"datetime",
-							style = "%d-%m-%Y %I:%M:%S %p",
+							style = "%I:%M:%S %p",
 							icon = "🕒",
 						},
 					},
+					lualine_x = { "filetype", nvimbattery },
 				},
 			})
 		end,
