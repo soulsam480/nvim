@@ -9,10 +9,21 @@ return {
 		},
 	},
 	{
-		"folke/tokyonight.nvim",
+		"sainnhe/gruvbox-material",
 		lazy = false,
 		priority = 1000,
-		opts = {},
+		config = function()
+			vim.opt.termguicolors = true
+			vim.opt.background = "dark"
+			vim.g.gruvbox_material_enable_italic = true
+			vim.g.gruvbox_material_better_performance = 1
+			vim.g.gruvbox_material_background = "hard"
+			vim.g.gruvbox_material_enable_bold = 1
+			vim.g.gruvbox_material_ui_contrast = "high"
+
+			-- vim.g.background = "dark"
+			vim.cmd([[colorscheme gruvbox-material]])
+		end,
 	},
 	{
 		"j-hui/fidget.nvim",
@@ -52,7 +63,7 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("lualine").setup({
-
+				options = { theme = "gruvbox-material" },
 				sections = {
 					lualine_a = {
 						{
@@ -64,15 +75,14 @@ return {
 				},
 			})
 		end,
-	},{
-    "rcarriga/nvim-notify",
-    config = function()
-      require("notify").setup({
-        background_colour = "#000000",
-        enabled = false,
-      })
-    end
-  },
-
-
+	},
+	{
+		"rcarriga/nvim-notify",
+		config = function()
+			require("notify").setup({
+				background_colour = "#000000",
+				enabled = true,
+			})
+		end,
+	},
 }

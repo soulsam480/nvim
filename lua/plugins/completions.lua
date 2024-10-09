@@ -12,11 +12,38 @@ return {
 	{
 		"saadparwaiz1/cmp_luasnip",
 	},
+	{ "hrsh7th/cmp-buffer" },
+	{ "hrsh7th/cmp-path" },
+	{ "hrsh7th/cmp-cmdline" },
 	{
 		"hrsh7th/nvim-cmp",
 		config = function()
 			local cmp = require("cmp")
+
 			require("luasnip.loaders.from_vscode").lazy_load()
+
+			-- `/` cmdline setup.
+			cmp.setup.cmdline("/", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
+
+			-- `:` cmdline setup.
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{
+						name = "cmdline",
+						option = {
+							ignore_cmds = { "Man", "!" },
+						},
+					},
+				}),
+			})
 
 			cmp.setup({
 				snippet = {

@@ -3,7 +3,6 @@ return {
 	version = "*",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	config = function()
-		vim.opt.termguicolors = true
 		local bufferline = require("bufferline")
 
 		bufferline.setup({
@@ -21,5 +20,8 @@ return {
 		})
 
 		vim.keymap.set("n", "<leader>t", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+
+
+		vim.keymap.set("n", "<leader>ty", ":BufferClose<CR>", { noremap = true, silent = true })
 	end,
 }
