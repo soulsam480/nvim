@@ -24,33 +24,16 @@ return {
 		end,
 	},
 	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		opts = {},
-		-- stylua: ignore
-		keys = {
-			{ "<leader>f",  mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-			{ "<leader>ft", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-			{ "r",          mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-			{ "R",          mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-			{ "<c-s>",      mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+			"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
-	},
-	{
-		"nvim-pack/nvim-spectre",
 		config = function()
-			vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
-				desc = "Toggle Spectre",
-			})
-			vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-				desc = "Search current word",
-			})
-			vim.keymap.set("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-				desc = "Search current word",
-			})
-			vim.keymap.set("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-				desc = "Search on current file",
-			})
+			vim.keymap.set("n", "<leader>b", ":Neotree filesystem reveal left<CR>", { silent = true })
 		end,
 	},
 }

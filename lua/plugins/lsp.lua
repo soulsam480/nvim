@@ -20,6 +20,7 @@ return {
 					"emmet_ls",
 					"volar",
 					"solargraph",
+					"gleam",
 				},
 			})
 		end,
@@ -89,6 +90,7 @@ return {
 				"html",
 				"emmet_ls",
 				"volar",
+				"gleam",
 			}
 
 			for _, lsp in ipairs(lsps) do
@@ -116,6 +118,60 @@ return {
 					logLevel = "error",
 					folding = true,
 				},
+			})
+		end,
+	},
+	{
+		{
+			"nvimtools/none-ls.nvim",
+			config = function()
+				local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+				local null_ls = require("null-ls")
+				null_ls.setup({
+					sources = {
+						-- lua
+						null_ls.builtins.formatting.stylua,
+						-- js
+						null_ls.builtins.formatting.prettier,
+
+						-- null_ls.builtins.diagnostics.eslint_d,
+						-- ruby
+						null_ls.builtins.formatting.rubocop,
+						null_ls.builtins.diagnostics.rubocop,
+
+						on_attach = function(client, bufnr)
+							require("utils.formatting").format_on_write(client, bufnr)
+						end,
+					},
+				})
+			end,
+		},
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		config = function()
+			local configs = require("nvim-treesitter.configs")
+
+			configs.setup({
+				ensure_installed = {
+					"lua",
+					"vim",
+					"vimdoc",
+					"query",
+					"javascript",
+					"typescript",
+					"vue",
+					"css",
+					"tsx",
+					"html",
+					"ruby",
+				},
+				auto_install = true,
+				sync_install = true,
+				highlight = { enable = true },
+				indent = { enable = true },
 			})
 		end,
 	},
