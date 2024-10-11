@@ -1,96 +1,75 @@
 return {
+	-- {
+	-- 	"akinsho/bufferline.nvim",
+	-- 	version = "*",
+	-- 	dependencies = "nvim-tree/nvim-web-devicons",
+	-- 	config = function()
+	-- 		local bufferline = require("bufferline")
+	--
+	-- 		bufferline.setup({
+	-- 			options = {
+	-- 				diagnostics = "nvim_lsp",
+	-- 				offsets = {
+	-- 					{
+	-- 						filetype = "neo-tree",
+	-- 						text = "File Explorer",
+	-- 						highlight = "Directory",
+	-- 						separator = false,
+	-- 					},
+	-- 				},
+	-- 			},
+	-- 		})
+	--
+	-- 		vim.keymap.set("n", "<leader>t", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+	--
+	-- 		vim.keymap.set("n", "<leader>ty", ":BufferClose<CR>", { noremap = true, silent = true })
+	-- 	end,
+	-- },
 	{
-		"akinsho/bufferline.nvim",
-		version = "*",
-		dependencies = "nvim-tree/nvim-web-devicons",
+		"niqodea/lasso.nvim",
 		config = function()
-			local bufferline = require("bufferline")
-
-			bufferline.setup({
-				options = {
-					diagnostics = "nvim_lsp",
-					offsets = {
-						{
-							filetype = "neo-tree",
-							text = "File Explorer",
-							highlight = "Directory",
-							separator = false,
-						},
-					},
-				},
+			local lasso = require("lasso")
+			lasso.setup({
+				-- marks_tracker_path = 'custom/path/to/marks/tracker'
 			})
 
-			vim.keymap.set("n", "<leader>t", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+			-- Mark current file
+			vim.keymap.set("n", vim.g.mapleader .. "m", function()
+				lasso.mark_file()
+			end)
 
-			vim.keymap.set("n", "<leader>ty", ":BufferClose<CR>", { noremap = true, silent = true })
-		end,
-	},
-	{
-		"ThePrimeagen/harpoon",
-		branch = "harpoon2",
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-		config = function()
-			-- local harpoon = require("harpoon")
-			--
-			-- -- REQUIRED
-			-- harpoon:setup({
-			-- 	settings = {
-			-- 		save_on_toggle = false,
-			-- 	},
-			-- })
-			-- -- REQUIRED
+			-- Go to marks tracker (editable, use `gf` to go to file under cursor)
+			vim.keymap.set("n", vim.g.mapleader .. "M", function()
+				lasso.open_marks_tracker()
+			end)
 
-			-- vim.keymap.set("n", "<leader>a", function()
-			-- 	harpoon:list():add()
+			-- Jump to n-th marked file (n-th line of marks tracker)
+			vim.keymap.set("n", vim.g.mapleader .. "1", function()
+				lasso.open_marked_file(1)
+			end)
+			vim.keymap.set("n", vim.g.mapleader .. "2", function()
+				lasso.open_marked_file(2)
+			end)
+			vim.keymap.set("n", vim.g.mapleader .. "3", function()
+				lasso.open_marked_file(3)
+			end)
+			vim.keymap.set("n", vim.g.mapleader .. "4", function()
+				lasso.open_marked_file(4)
+			end)
+
+			-- Create or jump to n-th terminal
+			-- vim.keymap.set("n", vim.g.mapleader .. "<F1>", function()
+			-- 	lasso.open_terminal(1)
 			-- end)
-			-- -- vim.keymap.set("n", "<C-e>", function()
-			-- -- 	harpoon.ui:toggle_quick_menu(harpoon:list())
-			-- -- end)
-			--
-			-- -- vim.keymap.set("n", "<C-h>", function()
-			-- -- 	harpoon:list():select(1)
-			-- -- end)
-			-- -- vim.keymap.set("n", "<C-t>", function()
-			-- -- 	harpoon:list():select(2)
-			-- -- end)
-			-- -- vim.keymap.set("n", "<C-n>", function()
-			-- -- 	harpoon:list():select(3)
-			-- -- end)
-			-- -- vim.keymap.set("n", "<C-s>", function()
-			-- -- 	harpoon:list():select(4)
-			-- -- end)
-			--
-			-- -- Toggle previous & next buffers stored within Harpoon list
-			-- vim.keymap.set("n", "<leader>1", function()
-			-- 	harpoon:list():prev()
+			-- vim.keymap.set("n", vim.g.mapleader .. "<F2>", function()
+			-- 	lasso.open_terminal(2)
 			-- end)
-			-- vim.keymap.set("n", "<leader>2", function()
-			-- 	harpoon:list():next()
+			-- vim.keymap.set("n", vim.g.mapleader .. "<F3>", function()
+			-- 	lasso.open_terminal(3)
 			-- end)
-			--
-			-- -- basic telescope configuration
-			-- local conf = require("telescope.config").values
-			-- local function toggle_telescope(harpoon_files)
-			-- 	local file_paths = {}
-			-- 	for _, item in ipairs(harpoon_files.items) do
-			-- 		table.insert(file_paths, item.value)
-			-- 	end
-			--
-			-- 	require("telescope.pickers")
-			-- 		.new({}, {
-			-- 			prompt_title = "Harpoon",
-			-- 			finder = require("telescope.finders").new_table({
-			-- 				results = file_paths,
-			-- 			}),
-			-- 			previewer = conf.file_previewer({}),
-			-- 			sorter = conf.generic_sorter({}),
-			-- 		})
-			-- 		:find()
-			-- end
-			--
-			-- vim.keymap.set("n", "<C-e>", function()
-			-- 	toggle_telescope(harpoon:list())
-			-- end, { desc = "Open harpoon window" })
+			-- vim.keymap.set("n", vim.g.mapleader .. "<F4>", function()
+			-- 	lasso.open_terminal(4)
+			-- end)
 		end,
 	},
 }
