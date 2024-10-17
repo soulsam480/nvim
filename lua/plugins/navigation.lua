@@ -24,16 +24,56 @@ return {
 		end,
 	},
 	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
+		"nvim-tree/nvim-tree.lua",
 		dependencies = {
-			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-			"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 		config = function()
-			vim.keymap.set("n", "<leader>b", ":Neotree filesystem reveal left<CR>", { silent = true })
+			-- disable netrw at the very start of your init.lua
+			vim.g.loaded_netrw = 1
+			vim.g.loaded_netrwPlugin = 1
+
+			vim.opt.termguicolors = true
+
+			require("nvim-tree").setup({
+				sync_root_with_cwd = true,
+				renderer = {
+					full_name = true,
+					group_empty = true,
+					special_files = {},
+					symlink_destination = false,
+					indent_markers = {
+						enable = true,
+					},
+					icons = {
+						git_placement = "signcolumn",
+						show = {
+							file = true,
+							folder = false,
+							folder_arrow = false,
+							git = true,
+						},
+					},
+				},
+				update_focused_file = {
+					enable = true,
+					update_root = true,
+					ignore_list = { "help" },
+				},
+				diagnostics = {
+					enable = true,
+					show_on_dirs = true,
+				},
+				filters = {
+					custom = {
+						"^.git$",
+					},
+				},
+			})
+
+			vim.keymap.set("n", "<leader>pp", ":NvimTreeToggle<CR>", { silent = true, desc = "Open Files" })
+
+			vim.keymap.set("n", "<leader>p", ":NvimTreeToggle<CR>", { silent = true })
 		end,
 	},
 }

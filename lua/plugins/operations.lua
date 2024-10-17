@@ -14,6 +14,7 @@ return {
 	},
 	{
 		"nvim-pack/nvim-spectre",
+		event = "VeryLazy",
 		config = function()
 			vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
 				desc = "Toggle Spectre",
@@ -59,6 +60,7 @@ return {
 	},
 	{
 		"boltlessengineer/bufterm.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("bufterm").setup()
 		end,
