@@ -1,6 +1,12 @@
 return {
 	{
-		"justinhj/battery.nvim",
+		"nvim-lualine/lualine.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"justinhj/battery.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"justinhj/battery.nvim",
+		},
 		config = function()
 			require("battery").setup({
 				update_rate_seconds = 30,
@@ -9,13 +15,7 @@ return {
 				show_unplugged_icon = true,
 				battery_threshold = 25,
 			})
-		end,
-	},
-	{
 
-		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons", "justinhj/battery.nvim" },
-		config = function()
 			local nvimbattery = {
 				function()
 					return require("battery").get_status_line()

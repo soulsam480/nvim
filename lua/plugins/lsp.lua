@@ -1,13 +1,14 @@
 return {
 	{
-		"williamboman/mason.nvim",
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+		},
 		config = function()
 			require("mason").setup()
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
+
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"lua_ls",
@@ -23,11 +24,7 @@ return {
 					"gleam",
 				},
 			})
-		end,
-	},
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
+
 			--  This function gets run when an LSP connects to a particular buffer.
 			local on_attach = function(_, bufnr)
 				-- NOTE: Remember that lua is a real programming language, and as such it is possible
@@ -122,34 +119,33 @@ return {
 		end,
 	},
 	{
-		{
-			"nvimtools/none-ls.nvim",
-			config = function()
-				local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+		"nvimtools/none-ls.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-				local null_ls = require("null-ls")
-				null_ls.setup({
-					sources = {
-						-- lua
-						null_ls.builtins.formatting.stylua,
-						-- js
-						null_ls.builtins.formatting.prettier,
+			local null_ls = require("null-ls")
+			null_ls.setup({
+				sources = {
+					-- lua
+					null_ls.builtins.formatting.stylua,
+					-- js
+					null_ls.builtins.formatting.prettier,
 
-						-- null_ls.builtins.diagnostics.eslint_d,
-						-- ruby
-						null_ls.builtins.formatting.rubocop,
-						null_ls.builtins.diagnostics.rubocop,
+					-- ruby
+					null_ls.builtins.formatting.rubocop,
+					null_ls.builtins.diagnostics.rubocop,
 
-						on_attach = function(client, bufnr)
-							require("utils.formatting").format_on_write(client, bufnr)
-						end,
-					},
-				})
-			end,
-		},
+					on_attach = function(client, bufnr)
+						require("utils.formatting").format_on_write(client, bufnr)
+					end,
+				},
+			})
+		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPre", "BufNewFile" },
 		build = ":TSUpdate",
 		config = function()
 			local configs = require("nvim-treesitter.configs")

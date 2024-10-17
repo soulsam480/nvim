@@ -1,8 +1,6 @@
 return {
 	{
 		"folke/flash.nvim",
-		event = "VeryLazy",
-		opts = {},
 		-- stylua: ignore
 		keys = {
 			{ "<leader>f",  mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
@@ -54,6 +52,12 @@ return {
 					long_message_to_split = true, -- long messages will be sent to a split
 					inc_rename = false, -- enables an input dialog for inc-rename.nvim
 					lsp_doc_border = true, -- add a border to hover docs and signature help
+				},
+				routes = {
+					{
+						view = "notify",
+						filter = { event = "msg_showmode" },
+					},
 				},
 			})
 		end,

@@ -1,6 +1,7 @@
 return {
 	{
 		"echasnovski/mini.pairs",
+		event = "InsertEnter",
 		version = "*",
 		config = function()
 			require("mini.pairs").setup()
@@ -8,6 +9,7 @@ return {
 	},
 	{
 		"echasnovski/mini.comment",
+		event = { "BufReadPre", "BufNewFile" },
 		version = "*",
 		cofig = function()
 			require("mini.comment").setup()
@@ -15,6 +17,7 @@ return {
 	},
 	{
 		"echasnovski/mini.diff",
+		event = { "BufReadPre", "BufNewFile" },
 		version = "*",
 		config = function()
 			require("mini.diff").setup({
@@ -26,6 +29,7 @@ return {
 	},
 	{
 		"echasnovski/mini.cursorword",
+		event = { "BufReadPre", "BufNewFile" },
 		version = "*",
 		config = function()
 			require("mini.cursorword").setup()
@@ -33,6 +37,7 @@ return {
 	},
 	{
 		"echasnovski/mini.indentscope",
+		event = { "BufReadPre", "BufNewFile" },
 		version = "*",
 		config = function()
 			require("mini.indentscope").setup()
@@ -40,6 +45,7 @@ return {
 	},
 	{
 		"echasnovski/mini.tabline",
+		event = { "BufReadPre", "BufNewFile" },
 		version = "*",
 		config = function()
 			require("mini.tabline").setup()
@@ -49,6 +55,7 @@ return {
 	},
 	{
 		"echasnovski/mini.surround",
+		event = { "InsertEnter" },
 		version = "*",
 		config = function()
 			require("mini.surround").setup()
@@ -57,6 +64,7 @@ return {
 	{
 		"echasnovski/mini.clue",
 		version = "*",
+		event = "VeryLazy",
 		config = function()
 			local miniclue = require("mini.clue")
 			miniclue.setup({
