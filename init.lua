@@ -6,7 +6,6 @@ vim.opt.signcolumn = "number"
 vim.opt.list = true
 
 -- this is for experiment
--- vim.o.listchars = "tab:░\\ ,trail:·,extends:»,precedes:«,nbsp:⣿"
 -- vim.o.listchars = "tab:|..,trail:·,extends:»,precedes:«,nbsp:⣿"
 
 vim.opt.listchars = {
@@ -14,3 +13,5 @@ vim.opt.listchars = {
 	trail = "·",
 	eol = "¬",
 }
+
+vim.cmd([[tnoremap <Esc> <C-\><C-n>]])
