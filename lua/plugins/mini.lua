@@ -12,7 +12,17 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		version = "*",
 		cofig = function()
-			require("mini.comment").setup()
+			require("mini.comment").setup({
+				-- -- Toggle comment (like `gcip` - comment inner paragraph) for both
+				-- -- Normal and Visual modes
+				-- comment = "",
+				--
+				-- -- Toggle comment on current line
+				-- comment_line = "/",
+				--
+				-- -- Toggle comment on visual selection
+				-- comment_visual = "/",
+			})
 		end,
 	},
 	{
@@ -45,7 +55,6 @@ return {
 	},
 	{
 		"echasnovski/mini.tabline",
-		event = { "BufReadPre", "BufNewFile" },
 		version = "*",
 		config = function()
 			require("mini.tabline").setup()

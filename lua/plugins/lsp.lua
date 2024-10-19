@@ -21,7 +21,6 @@ return {
 					"emmet_ls",
 					"volar",
 					"solargraph",
-					"gleam",
 				},
 			})
 
@@ -67,7 +66,7 @@ return {
 					require("utils.formatting").format(bufnr)
 				end, { desc = "Format current buffer with LSP" })
 
-				nmap("<leader>i", function()
+				nmap("<leader>ft", function()
 					require("utils.formatting").format(bufnr)
 				end, "Format current buffer with LSP")
 			end
@@ -87,7 +86,6 @@ return {
 				"html",
 				"emmet_ls",
 				"volar",
-				"gleam",
 			}
 
 			for _, lsp in ipairs(lsps) do
@@ -122,7 +120,7 @@ return {
 		"nvimtools/none-ls.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+			-- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 			local null_ls = require("null-ls")
 			null_ls.setup({
