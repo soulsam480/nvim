@@ -80,7 +80,7 @@ return {
 						show = {
 							file = true,
 							folder = false,
-							folder_arrow = false,
+							folder_arrow = true,
 							git = true,
 						},
 					},
@@ -105,5 +105,24 @@ return {
 			{ "<leader>pp", ":NvimTreeToggle<CR>", { silent = true, desc = "Open Files" } },
 			{ "<leader>p", ":NvimTreeFocus<CR>", { silent = true, desc = "Focus Files" } },
 		},
+	},
+	{
+		"stevearc/oil.nvim",
+		keys = {
+			{ "-", "<cmd>Oil<cr>", { desc = "open parent directory" } },
+			{
+				'<leader>-',
+				function() 
+				require("oil").toggle_float() 
+			end,
+				{desc = "open parent directory in floating window"}
+			}
+		},
+		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+		config = function()
+			require("oil").setup({
+				columns = {"icon"},
+			})
+		end,
 	},
 }

@@ -66,14 +66,12 @@ return {
 					require("utils.formatting").format(bufnr)
 				end, { desc = "Format current buffer with LSP" })
 
-				nmap("<leader>ft", function()
+				nmap("<leader>i", function()
 					require("utils.formatting").format(bufnr)
 				end, "Format current buffer with LSP")
 			end
 
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
+			--
 			local lspconfig = require("lspconfig")
 
 			local lsps = {
@@ -91,13 +89,11 @@ return {
 			for _, lsp in ipairs(lsps) do
 				require("lspconfig")[lsp].setup({
 					on_attach = on_attach,
-					capabilities = capabilities,
 				})
 			end
 
 			lspconfig.solargraph.setup({
 				on_attach = on_attach,
-				capabilities = capabilities,
 				init_options = {
 					useBundler = true,
 					bundlerPath = "/Users/sambitsahoo/.rbenv/shims/bundle",
@@ -127,6 +123,7 @@ return {
 				sources = {
 					-- lua
 					null_ls.builtins.formatting.stylua,
+
 					-- js
 					null_ls.builtins.formatting.prettier,
 

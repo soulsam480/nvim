@@ -13,11 +13,6 @@ return {
 		end,
 	},
 	{
-		"j-hui/fidget.nvim",
-		event = "VeryLazy",
-		opts = {},
-	},
-	{
 		"goolord/alpha-nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()

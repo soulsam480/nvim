@@ -12,17 +12,7 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		version = "*",
 		cofig = function()
-			require("mini.comment").setup({
-				-- -- Toggle comment (like `gcip` - comment inner paragraph) for both
-				-- -- Normal and Visual modes
-				-- comment = "",
-				--
-				-- -- Toggle comment on current line
-				-- comment_line = "/",
-				--
-				-- -- Toggle comment on visual selection
-				-- comment_visual = "/",
-			})
+			require("mini.comment").setup({})
 		end,
 	},
 	{
@@ -32,7 +22,8 @@ return {
 		config = function()
 			require("mini.diff").setup({
 				view = {
-					style = "number",
+					signs = { add = "++", change = "~~", delete = "--" },
+					style = "sign",
 				},
 			})
 		end,
@@ -58,8 +49,8 @@ return {
 		version = "*",
 		config = function()
 			require("mini.tabline").setup()
-			vim.keymap.set("n", "<leader>b", ":bnext<CR>", { desc = "Go to next buffer" })
-			vim.keymap.set("n", "<leader>c", ":bdelete<CR>", { desc = "Close current buffer" })
+			vim.keymap.set("n", "<S-Tab>", ":bnext<CR>", { desc = "Go to next buffer" })
+			vim.keymap.set("n", "<leader>cc", ":bdelete<CR>", { desc = "Close current buffer" })
 		end,
 	},
 	{
@@ -105,8 +96,8 @@ return {
 					{ mode = "n", keys = "<C-w>" },
 
 					-- `z` key
-					{ mode = "n", keys = "z" },
-					{ mode = "x", keys = "z" },
+					-- { mode = "n", keys = "z" },
+					-- { mode = "x", keys = "z" },
 				},
 
 				clues = {
