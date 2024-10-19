@@ -66,7 +66,32 @@ return {
 		"boltlessengineer/bufterm.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("bufterm").setup()
+			require("bufterm").setup({
+				remember_mode = false,
+			})
+
+			require("utils.lazygit").setup()
+
+			local term = require("bufterm.terminal")
+			local Terminal = require("bufterm.terminal").Terminal
+			local ui = require("bufterm.ui")
+
+			vim.keymap.set({ "n", "t" }, "<C-`>", function()
+				local recent_term = term.get_recent_term()
+
+				if not recent_term then
+					recent_term = Terminal:new({})
+				end
+
+				if not recent_term.bufnr then
+					recent_term:spawn()
+				end
+
+				ui.toggle_float(recent_term.bufnr)
+				vim.cmd.startinsert()
+			end, {
+				desc = "Toggle Terminal",
+			})
 		end,
 	},
 }
