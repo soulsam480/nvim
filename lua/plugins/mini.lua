@@ -8,12 +8,9 @@ return {
 		end,
 	},
 	{
-		"echasnovski/mini.comment",
+		"numToStr/Comment.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-		version = "*",
-		cofig = function()
-			require("mini.comment").setup({})
-		end,
+		opts = {},
 	},
 	{
 		"echasnovski/mini.diff",

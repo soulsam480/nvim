@@ -84,6 +84,11 @@ return {
 				messages = {
 					enabled = false,
 				},
+				lsp = {
+					signature = {
+						enabled = false,
+					},
+				},
 			})
 		end,
 	},
