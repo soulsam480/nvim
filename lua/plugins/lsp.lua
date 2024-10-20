@@ -25,12 +25,11 @@ return {
 			})
 
 			--  This function gets run when an LSP connects to a particular buffer.
-			local on_attach = function(_, bufnr)
-				-- NOTE: Remember that lua is a real programming language, and as such it is possible
-				-- to define small helper and utility functions so you don't have to repeat yourself
-				-- many times.
+			local on_attach = function(client, bufnr)
+				if client.name == "gleam" then
+					client.server_capabilities.documentFormattingProvider = true
+				end
 				--
-				-- In this case, we create a function that lets us more easily define mappings specific
 				-- for LSP related items. It sets the mode, buffer and description for us each time.
 				local nmap = function(keys, func, desc)
 					if desc then
@@ -92,6 +91,10 @@ return {
 				})
 			end
 
+			lspconfig.gleam.setup({
+				on_attach = on_attach,
+			})
+
 			lspconfig.solargraph.setup({
 				on_attach = on_attach,
 				init_options = {
@@ -108,32 +111,6 @@ return {
 					rename = false,
 					logLevel = "error",
 					folding = true,
-				},
-			})
-		end,
-	},
-	{
-		"nvimtools/none-ls.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			-- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-			local null_ls = require("null-ls")
-			null_ls.setup({
-				sources = {
-					-- lua
-					null_ls.builtins.formatting.stylua,
-
-					-- js
-					null_ls.builtins.formatting.prettier,
-
-					-- ruby
-					null_ls.builtins.formatting.rubocop,
-					null_ls.builtins.diagnostics.rubocop,
-
-					on_attach = function(client, bufnr)
-						require("utils.formatting").format_on_write(client, bufnr)
-					end,
 				},
 			})
 		end,

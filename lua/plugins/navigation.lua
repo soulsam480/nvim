@@ -6,7 +6,6 @@ return {
 			{ "nvim-telescope/telescope.nvim", tag = "0.1.8" },
 		},
 		config = function()
-			-- This is your opts table
 			require("telescope").setup({
 				extensions = {
 					["ui-select"] = {
@@ -14,8 +13,7 @@ return {
 					},
 				},
 			})
-			-- To get ui-select loaded and working with telescope, you need to call
-			-- load_extension, somewhere after setup function:
+
 			require("telescope").load_extension("ui-select")
 		end,
 		keys = {
@@ -111,17 +109,17 @@ return {
 		keys = {
 			{ "-", "<cmd>Oil<cr>", { desc = "open parent directory" } },
 			{
-				'<leader>-',
-				function() 
-				require("oil").toggle_float() 
-			end,
-				{desc = "open parent directory in floating window"}
-			}
+				"<leader>-",
+				function()
+					require("oil").toggle_float()
+				end,
+				{ desc = "open parent directory in floating wIndow" },
+			},
 		},
 		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
 		config = function()
 			require("oil").setup({
-				columns = {"icon"},
+				columns = { "icon" },
 			})
 		end,
 	},

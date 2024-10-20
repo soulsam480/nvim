@@ -3,8 +3,8 @@ return {
 		"folke/flash.nvim",
 		-- stylua: ignore
 		keys = {
-			{ "f",  mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-			{ "ft", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+			{ "<leader>f",  mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+			{ "<leader>ft", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
 			{ "r",          mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
 			{ "R",          mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
 			{ "<c-s>",      mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
@@ -12,21 +12,42 @@ return {
 	},
 	{
 		"nvim-pack/nvim-spectre",
-		event = "VeryLazy",
-		config = function()
-			vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
-				desc = "Toggle Spectre",
-			})
-			vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-				desc = "Search current word",
-			})
-			vim.keymap.set("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-				desc = "Search current word",
-			})
-			vim.keymap.set("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-				desc = "Search on current file",
-			})
-		end,
+		keys = {
+			{
+				"<leader>S",
+				mode = {
+					"n",
+				},
+				'<cmd>lua require("spectre").toggle()<CR>',
+				{
+					desc = "Toggle Spectre",
+				},
+			},
+			{
+				"<leader>sw",
+				mode = { "n" },
+				'<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
+				{
+					desc = "Search current word",
+				},
+			},
+			{
+				"<leader>sw",
+				mode = { "v" },
+				'<esc><cmd>lua require("spectre").open_visual()<CR>',
+				{
+					desc = "Search current word",
+				},
+			},
+			{
+				"<leader>sp",
+				mode = { "n" },
+				'<cmd>lua require("spectre").open_file_search({select_word=true})<CR>',
+				{
+					desc = "Search on current file",
+				},
+			},
+		},
 	},
 	{
 		"folke/noice.nvim",
@@ -58,6 +79,10 @@ return {
 						view = "notify",
 						filter = { event = "msg_showmode" },
 					},
+				},
+				-- FUCKING IRRITATING
+				messages = {
+					enabled = false,
 				},
 			})
 		end,
