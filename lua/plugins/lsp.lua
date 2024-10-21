@@ -21,6 +21,8 @@ return {
 					"emmet_ls",
 					"volar",
 					"solargraph",
+					"svelte",
+					"astro",
 				},
 			})
 
@@ -83,6 +85,8 @@ return {
 				"html",
 				"emmet_ls",
 				"volar",
+				"astro",
+				"svelte",
 			}
 
 			for _, lsp in ipairs(lsps) do

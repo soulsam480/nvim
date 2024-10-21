@@ -1,9 +1,14 @@
 return {
 	{
 		"folke/todo-comments.nvim",
-		event = "VeryLazy",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {},
+		opts = {
+			keywords = {
+				FIX = { alt = { "!" } },
+				NOTE = { alt = { "?" } },
+			},
+		},
 	},
 	{
 		"chriskempson/base16-vim",

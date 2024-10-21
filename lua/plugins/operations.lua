@@ -127,4 +127,14 @@ return {
 			})
 		end,
 	},
+	{
+		"ruifm/gitlinker.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("gitlinker").setup()
+		end,
+	},
 }
