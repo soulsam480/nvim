@@ -59,11 +59,19 @@ return {
 		config = function()
 			require("noice").setup({
 				lsp = {
-					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+					signature = {
+						enabled = false,
+					},
+					hover = {
+						silent = true,
+						enabled = false,
+					},
 					override = {
 						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 						["vim.lsp.util.stylize_markdown"] = true,
-						["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+					},
+					message = {
+						enabled = false,
 					},
 				},
 				-- you can enable a preset for easier configuration
@@ -83,11 +91,6 @@ return {
 				-- FUCKING IRRITATING
 				messages = {
 					enabled = false,
-				},
-				lsp = {
-					signature = {
-						enabled = false,
-					},
 				},
 			})
 		end,

@@ -20,7 +20,7 @@ return {
 				function()
 					return require("battery").get_status_line()
 				end,
-				color = { fg = vim.g.base16_gui05, bg = vim.g.base16_gui00 },
+				color = { fg = vim.g.base16_gui04, bg = vim.g.base16_gui01 },
 			}
 
 			require("lualine").setup({
