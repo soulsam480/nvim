@@ -3,7 +3,7 @@ return {
 		"saghen/blink.cmp",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = "rafamadriz/friendly-snippets",
-		version = "v0.*",
+		version = "v0.3.1",
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
@@ -23,12 +23,15 @@ return {
 				snippet_backward = "<C-p>",
 			},
 			nerd_font_variant = "mono",
-			trigger = { signature_help = { enabled = true } },
+			trigger = { signature_help = {
+				enabled = false,
+			} },
 			windows = {
 				autocomplete = {
 					border = "single",
 				},
 				documentation = {
+					auto_show = true,
 					border = "single",
 				},
 			},

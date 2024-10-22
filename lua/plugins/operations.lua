@@ -60,11 +60,12 @@ return {
 			require("noice").setup({
 				lsp = {
 					signature = {
-						enabled = false,
+						view = nil,
+						enabled = true,
 					},
 					hover = {
-						silent = true,
-						enabled = false,
+						view = nil,
+						enabled = true,
 					},
 					override = {
 						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -74,7 +75,6 @@ return {
 						enabled = false,
 					},
 				},
-				-- you can enable a preset for easier configuration
 				presets = {
 					bottom_search = false, -- use a classic bottom cmdline for search
 					command_palette = true, -- position the cmdline and popupmenu together
@@ -85,7 +85,14 @@ return {
 				routes = {
 					{
 						view = "notify",
-						filter = { event = "msg_showmode" },
+						filter = { event = { "msg_showmode" } },
+					},
+					{
+						filter = {
+							event = "notify",
+							find = "No information available",
+						},
+						opts = { skip = true },
 					},
 				},
 				-- FUCKING IRRITATING

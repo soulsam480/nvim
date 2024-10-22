@@ -20,7 +20,7 @@ return {
 				function()
 					return require("battery").get_status_line()
 				end,
-				color = { fg = vim.g.base16_gui04, bg = vim.g.base16_gui01 },
+				color = { fg = vim.g.base16_gui0B, bg = vim.g.base16_gui01 },
 			}
 
 			require("lualine").setup({
@@ -53,5 +53,15 @@ return {
 				},
 			})
 		end,
+	},
+	{
+		"f-person/git-blame.nvim",
+		event = "VeryLazy",
+		opts = {
+			enabled = true,
+			message_template = " <summary> • <date> • <author> • <<sha>>",
+			date_format = "%m-%d-%Y %H:%M:%S",
+			virtual_text_column = 1,
+		},
 	},
 }
