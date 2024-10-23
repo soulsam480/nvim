@@ -11,10 +11,10 @@ return {
 		},
 	},
 	{
-		"chriskempson/base16-vim",
+		"tinted-theming/base16-vim",
 		config = function()
 			vim.opt.termguicolors = true
-			vim.cmd([[colorscheme base16-gruvbox-dark-hard]])
+			vim.cmd.colorscheme("base16-gruvbox-dark-hard")
 		end,
 	},
 	{

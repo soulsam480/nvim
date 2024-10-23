@@ -51,7 +51,22 @@ return {
 					},
 					lualine_x = { "filetype", nvimbattery },
 				},
+				tabline = {
+					lualine_a = { "buffers" },
+					lualine_b = {},
+					lualine_c = {},
+					lualine_x = {},
+					lualine_y = {},
+					lualine_z = {},
+				},
+				extensions = {
+					"nvim-tree",
+					"oil",
+				},
 			})
+
+			vim.keymap.set("n", "<S-Tab>", "<cmd>:bnext<CR>", { desc = "Go to next buffer" })
+			vim.keymap.set("n", "<leader>cc", "<cmd>:bdelete<CR>", { desc = "Close current buffer" })
 		end,
 	},
 	{

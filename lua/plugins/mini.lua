@@ -15,6 +15,9 @@ return {
 	{
 		"echasnovski/mini.diff",
 		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"chriskempson/base16-vim",
+		},
 		version = "*",
 		config = function()
 			require("mini.diff").setup({
@@ -23,6 +26,10 @@ return {
 					style = "sign",
 				},
 			})
+
+			vim.api.nvim_set_hl(0, "MiniDiffSignAdd", { fg = "#" .. vim.g.base16_gui0B })
+			vim.api.nvim_set_hl(0, "MiniDiffSignDelete", { fg = "#" .. vim.g.base16_gui0E })
+			vim.api.nvim_set_hl(0, "MiniDiffSignChange", { fg = "#" .. vim.g.base16_gui09 })
 		end,
 	},
 	{
@@ -39,15 +46,6 @@ return {
 		version = "*",
 		config = function()
 			require("mini.indentscope").setup()
-		end,
-	},
-	{
-		"echasnovski/mini.tabline",
-		version = "*",
-		config = function()
-			require("mini.tabline").setup()
-			vim.keymap.set("n", "<S-Tab>", "<cmd>:bnext<CR>", { desc = "Go to next buffer" })
-			vim.keymap.set("n", "<leader>cc", "<cmd>:bdelete<CR>", { desc = "Close current buffer" })
 		end,
 	},
 	{
