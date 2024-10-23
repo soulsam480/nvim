@@ -65,11 +65,11 @@ return {
 					},
 					hover = {
 						view = nil,
-						enabled = false,
+						enabled = true,
 					},
-					documentation = {
-						view = nil,
-					},
+					-- documentation = {
+					-- 	view = nil,
+					-- },
 					override = {
 						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 						["vim.lsp.util.stylize_markdown"] = true,
@@ -103,6 +103,9 @@ return {
 					enabled = false,
 				},
 			})
+
+			-- keep the same as blink.cmp
+			vim.api.nvim_set_hl(0, "NoicePopupBorder", { link = "Pmenu" })
 		end,
 	},
 	{

@@ -40,6 +40,7 @@ return {
 				},
 			})
 
+			-- keep border style same across
 			vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { link = "Pmenu" })
 			vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelpBorder", { link = "Pmenu" })
 		end,
