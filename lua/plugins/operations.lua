@@ -61,11 +61,14 @@ return {
 				lsp = {
 					signature = {
 						view = nil,
-						enabled = true,
+						enabled = false,
 					},
 					hover = {
 						view = nil,
-						enabled = true,
+						enabled = false,
+					},
+					documentation = {
+						view = nil,
 					},
 					override = {
 						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -132,6 +135,9 @@ return {
 			end, {
 				desc = "Toggle Terminal",
 			})
+
+			vim.api.nvim_command("autocmd filetype bufterm setlocal nonumber") -- no numbers
+			vim.api.nvim_command("autocmd filetype bufterm setlocal signcolumn=no") -- no sign column
 		end,
 	},
 	{
