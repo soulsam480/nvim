@@ -54,16 +54,23 @@ return {
 					lualine_x = { "filetype", nvimbattery },
 				},
 				tabline = {
-					lualine_a = { "buffers" },
-					-- lualine_b = {},
-					-- lualine_c = {},
-					-- lualine_x = {},
-					-- lualine_y = {},
-					-- lualine_z = {},
+					lualine_a = {
+						"buffers",
+					},
+					lualine_z = {
+						function()
+							return require("nvim-treesitter").statusline({
+								indicator_size = 70,
+								type_patterns = { "class", "function", "method" },
+								separator = " -> ",
+							})
+						end,
+					},
 				},
 				extensions = {
 					"nvim-tree",
 					"oil",
+					"quickfix",
 				},
 			})
 

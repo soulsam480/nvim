@@ -8,11 +8,6 @@ return {
 		end,
 	},
 	{
-		"numToStr/Comment.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {},
-	},
-	{
 		"echasnovski/mini.diff",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {

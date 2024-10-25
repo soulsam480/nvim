@@ -138,9 +138,6 @@ return {
 			end, {
 				desc = "Toggle Terminal",
 			})
-
-			vim.api.nvim_command("autocmd filetype bufterm setlocal nonumber") -- no numbers
-			vim.api.nvim_command("autocmd filetype bufterm setlocal signcolumn=no") -- no sign column
 		end,
 	},
 	{
@@ -155,6 +152,11 @@ return {
 	},
 	{
 		"windwp/nvim-ts-autotag",
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {},
+	},
+	{
+		"numToStr/Comment.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {},
 	},
