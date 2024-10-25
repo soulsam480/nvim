@@ -26,6 +26,6 @@ require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 	},
-	install = { colorscheme = { "base16-gruvbox-dark-hard" } },
+	install = { colorscheme = { "base16-ayu-dark" } },
 	checker = { enabled = true },
 })
