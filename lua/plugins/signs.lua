@@ -26,8 +26,6 @@ return {
 			require("lualine").setup({
 				options = {
 					theme = "base16",
-					component_separators = { left = "", right = "" },
-					section_separators = { left = "", right = "" },
 				},
 				sections = {
 					lualine_a = {
@@ -57,11 +55,11 @@ return {
 				},
 				tabline = {
 					lualine_a = { "buffers" },
-					lualine_b = {},
-					lualine_c = {},
-					lualine_x = {},
-					lualine_y = {},
-					lualine_z = {},
+					-- lualine_b = {},
+					-- lualine_c = {},
+					-- lualine_x = {},
+					-- lualine_y = {},
+					-- lualine_z = {},
 				},
 				extensions = {
 					"nvim-tree",

@@ -47,6 +47,8 @@ return {
 							"!**/.DS_Store",
 							"-g",
 							"!**/.vite-inspect",
+							"-g",
+							"!**/coverage",
 						},
 					},
 				},
