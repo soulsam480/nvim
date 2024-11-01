@@ -8,6 +8,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
+			"smartpde/telescope-recent-files",
 		},
 		config = function()
 			require("telescope").setup({
@@ -49,12 +50,23 @@ return {
 							"!**/.vite-inspect",
 							"-g",
 							"!**/coverage",
+							"-g",
+							"!**/package-lock.json",
+							"-g",
+							"!**/yarn.lock",
+							"-g",
+							"!**/CHANGELOG.md",
+							"-g",
+							"!**/vendor",
+							"-g",
+							"!**/tmp",
 						},
 					},
 				},
 			})
 
 			require("telescope").load_extension("ui-select")
+			require("telescope").load_extension("recent_files")
 		end,
 		keys = {
 			{
@@ -88,6 +100,13 @@ return {
 					builtin.help_tags()
 				end,
 				{ desc = "Telescope help tags" },
+			},
+			{
+				"<leader>tt",
+				function()
+					require("telescope").extensions.recent_files.pick()
+				end,
+				{ desc = "Telescope find recent files" },
 			},
 		},
 	},
@@ -161,6 +180,12 @@ return {
 			require("oil").setup({
 				columns = { "icon" },
 				delete_to_trash = false,
+				view_options = {
+					-- show_hidden = true,
+					is_hidden_file = function(name, bufnr)
+						return vim.startswith(name, ".git")
+					end,
+				},
 			})
 		end,
 	},

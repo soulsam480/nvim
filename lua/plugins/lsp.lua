@@ -5,6 +5,17 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+			"b0o/schemastore.nvim",
+		},
+		opts = {
+			-- Disable eslint formatting as it's slow and timing out on big projects
+			-- taken from
+			-- https://github.com/LazyVim/LazyVim/pull/4225/files
+			setup = {
+				eslint = function()
+					return
+				end,
+			},
 		},
 		config = function()
 			require("mason").setup()
@@ -23,6 +34,7 @@ return {
 					"solargraph",
 					"svelte",
 					"astro",
+					"jsonls",
 				},
 			})
 
@@ -115,6 +127,20 @@ return {
 					rename = false,
 					logLevel = "error",
 					folding = true,
+				},
+			})
+
+			require("lspconfig").jsonls.setup({
+				settings = {
+					json = {
+						schemas = require("schemastore").json.schemas({
+							ignore = {
+								".eslintrc",
+								"package.json",
+							},
+						}),
+						validate = { enable = true },
+					},
 				},
 			})
 		end,

@@ -3,7 +3,7 @@ return {
 		"saghen/blink.cmp",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = "rafamadriz/friendly-snippets",
-		version = "v0.*",
+		version = "v0.4.1",
 		config = function()
 			require("blink.cmp").setup({
 				keymap = {
