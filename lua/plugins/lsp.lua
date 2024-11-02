@@ -24,7 +24,6 @@ return {
 				ensure_installed = {
 					"lua_ls",
 					"vtsls",
-					"eslint",
 					"cssls",
 					"tailwindcss",
 					"marksman",
@@ -90,7 +89,6 @@ return {
 			local lsps = {
 				"lua_ls",
 				"vtsls",
-				"eslint",
 				"cssls",
 				"tailwindcss",
 				"marksman",
@@ -181,5 +179,10 @@ return {
 				},
 			})
 		end,
+	},
+	{
+		"esmuellert/nvim-eslint",
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {},
 	},
 }
