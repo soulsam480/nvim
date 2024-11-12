@@ -73,9 +73,6 @@ return {
 					"quickfix",
 				},
 			})
-
-			vim.keymap.set("n", "<S-Tab>", "<cmd>:bnext<CR>", { desc = "Go to next buffer" })
-			vim.keymap.set("n", "<leader>cc", "<cmd>:bdelete<CR>", { desc = "Close current buffer" })
 		end,
 	},
 	{

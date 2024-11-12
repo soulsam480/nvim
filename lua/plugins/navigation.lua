@@ -11,6 +11,8 @@ return {
 			"smartpde/telescope-recent-files",
 		},
 		config = function()
+			local actions = require("telescope.actions")
+
 			require("telescope").setup({
 				extensions = {
 					["ui-select"] = {
@@ -18,6 +20,16 @@ return {
 					},
 				},
 				pickers = {
+					buffers = {
+						theme = "dropdown",
+						previewer = false,
+						mappings = {
+							n = {
+								["<Tab>"] = actions.move_selection_next,
+								["<S-Tab>"] = actions.move_selection_previous,
+							},
+						},
+					},
 					find_files = {
 						find_command = {
 							"rg",
@@ -60,6 +72,10 @@ return {
 							"!**/vendor",
 							"-g",
 							"!**/tmp",
+							"-g",
+							"!**/.svelte-kit",
+							"-g",
+							"!**/.vercel",
 						},
 					},
 				},
@@ -75,7 +91,20 @@ return {
 					local builtin = require("telescope.builtin")
 					builtin.find_files()
 				end,
-				{ desc = "Telescope find files" },
+				desc = "Telescope find files",
+			},
+			-- https://github.com/radlinskii/dotfiles/blob/main/nvim_config/lua/radlinskii/plugins/telescope.lua
+			{
+				"<S-Tab>",
+				function()
+					local builtin = require("telescope.builtin")
+
+					builtin.buffers({
+						sort_lastused = true,
+						sort_mru = true,
+					})
+				end,
+				desc = "Open buffers",
 			},
 			{
 				"<leader>fg",
@@ -83,30 +112,21 @@ return {
 					local builtin = require("telescope.builtin")
 					builtin.live_grep()
 				end,
-				{ desc = "Telescope live grep" },
+				desc = "Telescope live grep",
 			},
 			{
-				"<leader>fb",
-				function()
-					local builtin = require("telescope.builtin")
-					builtin.buffers()
-				end,
-				{ desc = "Telescope buffers" },
-			},
-			{
-				"<leader>fh",
-				function()
-					local builtin = require("telescope.builtin")
-					builtin.help_tags()
-				end,
-				{ desc = "Telescope help tags" },
-			},
-			{
-				"<leader>tt",
+				"<leader>fr",
 				function()
 					require("telescope").extensions.recent_files.pick()
 				end,
-				{ desc = "Telescope find recent files" },
+				desc = "Telescope find recent files",
+			},
+			{
+				"<leader>fd",
+				function()
+					require("telescope.builtin").diagnostics({ bufnr = 0 })
+				end,
+				desc = "Open diagnostics for this file",
 			},
 		},
 	},
@@ -182,7 +202,7 @@ return {
 				delete_to_trash = false,
 				view_options = {
 					-- show_hidden = true,
-					is_hidden_file = function(name, bufnr)
+					is_hidden_file = function(name)
 						return vim.startswith(name, ".git")
 					end,
 				},
