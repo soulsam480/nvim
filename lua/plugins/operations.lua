@@ -174,6 +174,7 @@ return {
 	},
 	{
 		"gregorias/coerce.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		tag = "v3.0.0",
 		config = true,
 	},

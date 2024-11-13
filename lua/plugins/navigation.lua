@@ -14,6 +14,9 @@ return {
 			local actions = require("telescope.actions")
 
 			require("telescope").setup({
+				defaults = {
+					path_display = { "smart" },
+				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
@@ -21,6 +24,7 @@ return {
 				},
 				pickers = {
 					buffers = {
+						file_ignore_patterns = { "term:" },
 						theme = "dropdown",
 						previewer = false,
 						mappings = {
@@ -212,12 +216,12 @@ return {
 	{
 		"rmagatti/auto-session",
 		lazy = false,
-		---enables autocomplete for opts
-		---@module "auto-session"
-		---@type AutoSession.Config
 		opts = {
+			bypass_save_filetypes = { "BufTerm", "zsh" },
 			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-			-- log_level = 'debug',
+			session_lens = {
+				load_on_setup = false,
+			},
 		},
 	},
 }

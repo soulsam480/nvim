@@ -13,7 +13,7 @@ return {
 			json = { "prettierd" },
 			yaml = { "prettierd" },
 			ruby = { "rubocop" },
-			erb = { "rubocop" },
+			eruby = { "rubocop" },
 		},
 		format_on_save = {
 			lsp_fallback = true,
