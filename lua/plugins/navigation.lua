@@ -80,6 +80,8 @@ return {
 							"!**/.svelte-kit",
 							"-g",
 							"!**/.vercel",
+							"-g",
+							"!**/.vinxi",
 						},
 					},
 				},
@@ -114,9 +116,9 @@ return {
 				"<leader>fg",
 				function()
 					local builtin = require("telescope.builtin")
-					builtin.live_grep()
+					builtin.git_status()
 				end,
-				desc = "Telescope live grep",
+				desc = "Telescope changed files",
 			},
 			{
 				"<leader>fr",
