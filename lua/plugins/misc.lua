@@ -14,7 +14,7 @@ return {
 		"tinted-theming/base16-vim",
 		config = function()
 			vim.opt.termguicolors = true
-			vim.cmd.colorscheme("base16-ayu-dark")
+			vim.cmd.colorscheme("base16-oxocarbon-dark")
 		end,
 	},
 	{

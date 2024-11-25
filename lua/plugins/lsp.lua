@@ -12,9 +12,7 @@ return {
 			-- taken from
 			-- https://github.com/LazyVim/LazyVim/pull/4225/files
 			setup = {
-				eslint = function()
-					return
-				end,
+				eslint = function() end,
 			},
 		},
 		config = function()
@@ -34,6 +32,7 @@ return {
 					"svelte",
 					"astro",
 					"jsonls",
+					"biome",
 				},
 			})
 
@@ -141,6 +140,12 @@ return {
 					},
 				},
 			})
+
+			if require("utils.linter").get_enabled_linter() == "biome" then
+				lspconfig.biome.setup({
+					on_attach = on_attach,
+				})
+			end
 		end,
 	},
 	{
@@ -181,7 +186,8 @@ return {
 		end,
 	},
 	{
-		"esmuellert/nvim-eslint",
+		"soulsam480/nvim-eslint",
+		branch = "lazy-init",
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {},
 	},

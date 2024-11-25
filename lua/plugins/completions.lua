@@ -2,7 +2,7 @@ return {
 	{
 		"saghen/blink.cmp",
 		event = { "BufReadPre", "BufNewFile" },
-		dependencies = "rafamadriz/friendly-snippets",
+		dependencies = { "rafamadriz/friendly-snippets" },
 		version = "v0.*",
 		config = function()
 			require("blink.cmp").setup({

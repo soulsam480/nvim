@@ -178,4 +178,49 @@ return {
 		tag = "v3.0.0",
 		config = true,
 	},
+	{
+		"jiaoshijie/undotree",
+		dependencies = "nvim-lua/plenary.nvim",
+		config = true,
+		opts = {
+
+			ignore_filetype = {
+				"undotree",
+				"undotreeDiff",
+				"qf",
+				"TelescopePrompt",
+				"spectre_panel",
+				"tsplayground",
+				"BufTerm",
+				"oil",
+			},
+			window = {
+				winblend = 30,
+			},
+			keymaps = {
+				["<Down>"] = "move_next",
+				["<Up>"] = "move_prev",
+				["gj"] = "move2parent",
+				["J"] = "move_change_next",
+				["K"] = "move_change_prev",
+				["<cr>"] = "action_enter",
+				["p"] = "enter_diffbuf",
+				["q"] = "quit",
+			},
+		},
+		keys = { -- load the plugin only when using it's keybinding:
+			{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+		},
+	},
+	{
+		"rmagatti/auto-session",
+		lazy = false,
+		opts = {
+			bypass_save_filetypes = { "BufTerm", "zsh" },
+			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+			session_lens = {
+				load_on_setup = false,
+			},
+		},
+	},
 }
