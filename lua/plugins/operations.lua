@@ -63,6 +63,7 @@ return {
 	},
 	{
 		"folke/noice.nvim",
+		tag = "v4.7.0",
 		event = "VeryLazy",
 		dependencies = {
 			"MunifTanjim/nui.nvim",

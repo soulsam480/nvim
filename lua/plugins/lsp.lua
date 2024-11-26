@@ -141,7 +141,7 @@ return {
 				},
 			})
 
-			if require("utils.linter").get_enabled_linter() == "biome" then
+			if require("utils.linter").has_linter("biome") then
 				lspconfig.biome.setup({
 					on_attach = on_attach,
 				})
@@ -185,9 +185,9 @@ return {
 			})
 		end,
 	},
+	{ "soulsam480/nvim-eslint", branch = "lazy-init", event = { "BufReadPre", "BufNewFile" }, opts = {} },
 	{
-		"soulsam480/nvim-eslint",
-		branch = "lazy-init",
+		"soulsam480/nvim-oxlint",
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {},
 	},

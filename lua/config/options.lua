@@ -18,3 +18,5 @@ vim.opt.listchars = {
 vim.cmd([[tnoremap <Esc> <C-\><C-n>]])
 
 vim.api.nvim_set_option("clipboard", "")
+
+vim.lsp.set_log_level("INFO")

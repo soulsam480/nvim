@@ -19,12 +19,14 @@ return {
 		config = function()
 			local lint = require("lint")
 
+			local js_linters = { "cspell" }
+
 			lint.linters_by_ft = {
-				javascript = { "cspell" },
-				typescript = { "cspell" },
-				typescriptreact = { "cspell" },
-				javascriptreact = { "cspell" },
-				svelte = { "eslint" },
+				javascript = js_linters,
+				typescript = js_linters,
+				typescriptreact = js_linters,
+				javascriptreact = js_linters,
+				svelte = js_linters,
 			}
 
 			local lint_au_group = vim.api.nvim_create_augroup("lint", { clear = true })
