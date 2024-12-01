@@ -13,24 +13,7 @@ return {
 			-- table.insert(js_formatters, "deno_fmt")
 		end
 
-		require("conform").setup({
-			formatters = {
-				-- NOTE: the trick here is making conform run echo command but it's actually running eslint fix all command to format
-				-- it only works when .eslintformat file is present in root
-				eslint_format = {
-					meta = {
-						url = "",
-						description = "Eslint lsp formatting. add .eslintformat file to enable",
-					},
-					command = function(_, ctx)
-						vim.api.nvim_buf_call(ctx.buf, function()
-							vim.cmd("EslintFixAll")
-						end)
-
-						return "echo"
-					end,
-				},
-			},
+		local options = {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				javascript = js_formatters,
@@ -53,6 +36,8 @@ return {
 				async = false,
 				timeout_ms = 15000 * 4,
 			},
-		})
+		}
+
+		require("conform").setup(options)
 	end,
 }
