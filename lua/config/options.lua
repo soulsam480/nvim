@@ -19,4 +19,5 @@ vim.cmd([[tnoremap <Esc> <C-\><C-n>]])
 
 vim.api.nvim_set_option("clipboard", "")
 
+vim.diagnostic.config({ virtual_text = false })
 vim.lsp.set_log_level("INFO")

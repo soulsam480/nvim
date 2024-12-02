@@ -87,7 +87,6 @@ return {
 
 			local lsps = {
 				"lua_ls",
-				"vtsls",
 				"cssls",
 				"tailwindcss",
 				"marksman",
@@ -106,6 +105,25 @@ return {
 
 			lspconfig.gleam.setup({
 				on_attach = on_attach,
+			})
+
+			lspconfig.vtsls.setup({
+				on_attach = on_attach,
+				settings = {
+					typescript = {
+						preferences = {
+							importModuleSpecifier = "non-relative",
+						},
+					},
+					vtsls = {
+						experimental = {
+							completion = {
+								enableServerSideFuzzyMatch = true,
+							},
+						},
+						autoUseWorkspaceTsdk = true,
+					},
+				},
 			})
 
 			lspconfig.solargraph.setup({

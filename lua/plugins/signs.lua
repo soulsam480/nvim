@@ -26,6 +26,8 @@ return {
 			require("lualine").setup({
 				options = {
 					theme = "base16",
+					component_separators = "",
+					section_separators = { left = "", right = "" },
 				},
 				sections = {
 					lualine_a = {
@@ -36,21 +38,8 @@ return {
 							icon = "🕒",
 						},
 					},
-					lualine_c = {
-						{
-							"filename",
-							file_status = true,
-							newfile_status = true,
-							path = 3,
-							shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-							symbols = {
-								modified = "[+]", -- Text to show when the file is modified.
-								readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-								unnamed = "[No Name]", -- Text to show for unnamed buffers.
-								newfile = "[New]", -- Text to show for newly created file before first write
-							},
-						},
-					},
+					lualine_b = { "branch", "diff" },
+					lualine_c = {},
 					lualine_x = { "filetype", nvimbattery },
 				},
 				tabline = {
@@ -65,6 +54,32 @@ return {
 								separator = " -> ",
 							})
 						end,
+					},
+				},
+				winbar = {
+					lualine_a = {
+						{
+							"diagnostics",
+							symbols = { error = " ", warn = " ", info = " " },
+							color = { bg = vim.g.base16_gui01 },
+						},
+						{
+							"filename",
+							file_status = true,
+							newfile_status = true,
+							path = 3,
+							shorting_target = 100, -- Shortens path to leave 40 spaces in the window
+							symbols = {
+								modified = "[+]", -- Text to show when the file is modified.
+								readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+								unnamed = "[No Name]", -- Text to show for unnamed buffers.
+								newfile = "[New]", -- Text to show for newly created file before first write
+							},
+							color = {
+								bg = vim.g.base16_gui01,
+								fg = vim.g.base16_gui0D,
+							},
+						},
 					},
 				},
 				extensions = {
@@ -83,6 +98,23 @@ return {
 			message_template = " <summary> • <date> • <author> • <<sha>>",
 			date_format = "%r %m-%d-%Y %H:%M:%S",
 			virtual_text_column = 1,
+			set_extmark_options = {
+				priority = 0,
+			},
 		},
+	},
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "BufReadPre",
+		priority = 1000,
+		config = function()
+			require("tiny-inline-diagnostic").setup({
+				options = {
+					show_source = true,
+					multilines = true,
+				},
+				preset = "nonerdfont",
+			})
+		end,
 	},
 }

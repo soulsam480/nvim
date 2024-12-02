@@ -185,20 +185,20 @@ return {
 			})
 		end,
 		keys = {
-			{ "<leader>pp", ":NvimTreeToggle<CR>", { silent = true, desc = "Open Files" } },
-			{ "<leader>p", ":NvimTreeFocus<CR>", { silent = true, desc = "Focus Files" } },
+			{ "<leader>pp", ":NvimTreeToggle<CR>", desc = "Open Files" },
+			{ "<leader>p", ":NvimTreeFocus<CR>", desc = "Focus Files" },
 		},
 	},
 	{
 		"stevearc/oil.nvim",
 		keys = {
-			{ "-", "<cmd>Oil<cr>", { desc = "open parent directory" } },
+			{ "-", "<cmd>Oil<cr>", desc = "open parent directory" },
 			{
 				"<leader>-",
 				function()
 					require("oil").toggle_float()
 				end,
-				{ desc = "open parent directory in floating wIndow" },
+				desc = "open parent directory in floating wIndow",
 			},
 		},
 		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
