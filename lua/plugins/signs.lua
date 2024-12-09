@@ -113,8 +113,23 @@ return {
 					show_source = true,
 					multilines = true,
 				},
-				preset = "nonerdfont",
+				preset = "amongus",
 			})
+		end,
+	},
+	{
+		"svampkorg/moody.nvim",
+		event = { "ModeChanged", "BufWinEnter", "WinEnter" },
+		config = function()
+			vim.api.nvim_set_hl(0, "NormalMoody", { fg = "#" .. vim.g.base16_gui0D }) -- blue
+			vim.api.nvim_set_hl(0, "InsertMoody", { fg = "#" .. vim.g.base16_gui0B }) -- green
+			vim.api.nvim_set_hl(0, "VisualMoody", { fg = "#" .. vim.g.base16_gui0E }) -- pink
+			vim.api.nvim_set_hl(0, "CommandMoody", { fg = "#" .. vim.g.base16_gui08 }) -- maroon
+			vim.api.nvim_set_hl(0, "OperatorMoody", { fg = "#" .. vim.g.base16_gui08 }) -- maroon
+			vim.api.nvim_set_hl(0, "ReplaceMoody", { fg = "#" .. vim.g.base16_gui09 }) -- red
+			vim.api.nvim_set_hl(0, "SelectMoody", { fg = "#" .. vim.g.base16_gui0E }) -- pink
+			vim.api.nvim_set_hl(0, "TerminalMoody", { fg = "#" .. vim.g.base16_gui05 }) -- mauve
+			vim.api.nvim_set_hl(0, "TerminalNormalMoody", { fg = "#" .. vim.g.base16_gui05 }) -- mauve
 		end,
 	},
 }

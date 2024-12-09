@@ -111,8 +111,16 @@ return {
 				on_attach = on_attach,
 				settings = {
 					typescript = {
+						updateImportsOnFileMove = {
+							enabled = "always",
+						},
 						preferences = {
 							importModuleSpecifier = "non-relative",
+						},
+					},
+					javascript = {
+						updateImportsOnFileMove = {
+							enabled = "always",
 						},
 					},
 					vtsls = {
