@@ -13,8 +13,37 @@ return {
 	{
 		"tinted-theming/base16-vim",
 		config = function()
-			vim.opt.termguicolors = true
+			vim.g.tinted_colorspace = 256
 			vim.cmd.colorscheme("base16-oxocarbon-dark")
+
+			vim.api.nvim_set_hl(0, "NormalMoody", { fg = "#" .. vim.g.tinted_gui0B }) -- blue
+			vim.api.nvim_set_hl(0, "InsertMoody", { fg = "#" .. vim.g.tinted_gui0D }) -- green
+			vim.api.nvim_set_hl(0, "VisualMoody", { fg = "#" .. vim.g.tinted_gui0E }) -- pink
+			vim.api.nvim_set_hl(0, "CommandMoody", { fg = "#" .. vim.g.tinted_gui08 }) -- maroon
+			vim.api.nvim_set_hl(0, "OperatorMoody", { fg = "#" .. vim.g.tinted_gui08 }) -- maroon
+			vim.api.nvim_set_hl(0, "ReplaceMoody", { fg = "#" .. vim.g.tinted_gui09 }) -- red
+			vim.api.nvim_set_hl(0, "SelectMoody", { fg = "#" .. vim.g.tinted_gui0E }) -- pink
+			vim.api.nvim_set_hl(0, "TerminalMoody", { fg = "#" .. vim.g.tinted_gui05 }) -- mauve
+			vim.api.nvim_set_hl(0, "TerminalNormalMoody", { fg = "#" .. vim.g.tinted_gui05 }) -- mauve
+
+			-- TODO: remove once lua line migrates to new version of base16
+
+			vim.g.base16_gui00 = vim.g.tinted_gui00
+			vim.g.base16_gui01 = vim.g.tinted_gui01
+			vim.g.base16_gui02 = vim.g.tinted_gui02
+			vim.g.base16_gui03 = vim.g.tinted_gui03
+			vim.g.base16_gui04 = vim.g.tinted_gui04
+			vim.g.base16_gui05 = vim.g.tinted_gui05
+			vim.g.base16_gui06 = vim.g.tinted_gui06
+			vim.g.base16_gui07 = vim.g.tinted_gui07
+			vim.g.base16_gui08 = vim.g.tinted_gui08
+			vim.g.base16_gui09 = vim.g.tinted_gui09
+			vim.g.base16_gui0A = vim.g.tinted_gui0A
+			vim.g.base16_gui0B = vim.g.tinted_gui0B
+			vim.g.base16_gui0C = vim.g.tinted_gui0C
+			vim.g.base16_gui0D = vim.g.tinted_gui0D
+			vim.g.base16_gui0E = vim.g.tinted_gui0E
+			vim.g.base16_gui0F = vim.g.tinted_gui0F
 		end,
 	},
 	{

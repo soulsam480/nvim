@@ -24,13 +24,13 @@ return {
 				},
 			})
 
-			vim.api.nvim_set_hl(0, "MiniDiffSignAdd", { fg = "#" .. vim.g.base16_gui0B })
-			vim.api.nvim_set_hl(0, "MiniDiffSignDelete", { fg = "#" .. vim.g.base16_gui0E })
-			vim.api.nvim_set_hl(0, "MiniDiffSignChange", { fg = "#" .. vim.g.base16_gui09 })
+			vim.api.nvim_set_hl(0, "MiniDiffSignAdd", { fg = "#" .. vim.g.tinted_gui0B })
+			vim.api.nvim_set_hl(0, "MiniDiffSignDelete", { fg = "#" .. vim.g.tinted_gui0E })
+			vim.api.nvim_set_hl(0, "MiniDiffSignChange", { fg = "#" .. vim.g.tinted_gui09 })
 
-			vim.api.nvim_set_hl(0, "MiniDiffOverAdd", { fg = "#" .. vim.g.base16_gui0B })
-			vim.api.nvim_set_hl(0, "MiniDiffOverDelete", { fg = "#" .. vim.g.base16_gui0E })
-			vim.api.nvim_set_hl(0, "MiniDiffOverChange", { fg = "#" .. vim.g.base16_gui09 })
+			vim.api.nvim_set_hl(0, "MiniDiffOverAdd", { fg = "#" .. vim.g.tinted_gui0B })
+			vim.api.nvim_set_hl(0, "MiniDiffOverDelete", { fg = "#" .. vim.g.tinted_gui0E })
+			vim.api.nvim_set_hl(0, "MiniDiffOverChange", { fg = "#" .. vim.g.tinted_gui09 })
 
 			vim.keymap.set("n", "<leader>gd", function()
 				require("mini.diff").toggle_overlay()

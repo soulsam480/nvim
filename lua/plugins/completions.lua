@@ -33,19 +33,19 @@ return {
 					["<C-p>"] = { "snippet_backward", "fallback" },
 				},
 				nerd_font_variant = "mono",
-				accept = { auto_brackets = { enabled = true } },
-				trigger = { signature_help = {
-					enabled = true,
-				} },
-				windows = {
-					autocomplete = {
+				completion = {
+					accept = { auto_brackets = { enabled = true } },
+					menu = {
 						border = "rounded",
 					},
 					documentation = {
 						auto_show = true,
 						border = "rounded",
 					},
-					signature = {
+				},
+				signature = {
+					enabled = true,
+					window = {
 						border = "rounded",
 					},
 				},

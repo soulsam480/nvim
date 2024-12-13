@@ -99,15 +99,18 @@ return {
 
 			for _, lsp in ipairs(lsps) do
 				require("lspconfig")[lsp].setup({
+					capablities = require("blink.cmp").get_lsp_capabilities(),
 					on_attach = on_attach,
 				})
 			end
 
 			lspconfig.gleam.setup({
+				capablities = require("blink.cmp").get_lsp_capabilities(),
 				on_attach = on_attach,
 			})
 
 			lspconfig.vtsls.setup({
+				capablities = require("blink.cmp").get_lsp_capabilities(),
 				on_attach = on_attach,
 				settings = {
 					typescript = {
@@ -135,6 +138,7 @@ return {
 			})
 
 			lspconfig.solargraph.setup({
+				capablities = require("blink.cmp").get_lsp_capabilities(),
 				on_attach = on_attach,
 				init_options = {
 					useBundler = true,
@@ -154,6 +158,7 @@ return {
 			})
 
 			require("lspconfig").jsonls.setup({
+				capablities = require("blink.cmp").get_lsp_capabilities(),
 				settings = {
 					json = {
 						schemas = require("schemastore").json.schemas({
@@ -169,6 +174,7 @@ return {
 
 			if require("utils.linter").has_linter("biome") then
 				lspconfig.biome.setup({
+					capablities = require("blink.cmp").get_lsp_capabilities(),
 					on_attach = on_attach,
 				})
 			end

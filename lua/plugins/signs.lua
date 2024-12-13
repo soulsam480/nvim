@@ -20,7 +20,7 @@ return {
 				function()
 					return require("battery").get_status_line()
 				end,
-				color = { fg = vim.g.base16_gui0B, bg = vim.g.base16_gui01 },
+				color = { fg = vim.g.tinted_gui0B, bg = vim.g.tinted_gui01 },
 			}
 
 			require("lualine").setup({
@@ -61,7 +61,7 @@ return {
 						{
 							"diagnostics",
 							symbols = { error = " ", warn = " ", info = " " },
-							color = { bg = vim.g.base16_gui01 },
+							color = { bg = vim.g.tinted_gui01 },
 						},
 						{
 							"filename",
@@ -76,8 +76,8 @@ return {
 								newfile = "[New]", -- Text to show for newly created file before first write
 							},
 							color = {
-								bg = vim.g.base16_gui01,
-								fg = vim.g.base16_gui0D,
+								bg = vim.g.tinted_gui01,
+								fg = vim.g.tinted_gui0D,
 							},
 						},
 					},
@@ -120,16 +120,5 @@ return {
 	{
 		"svampkorg/moody.nvim",
 		event = { "ModeChanged", "BufWinEnter", "WinEnter" },
-		config = function()
-			vim.api.nvim_set_hl(0, "NormalMoody", { fg = "#" .. vim.g.base16_gui0D }) -- blue
-			vim.api.nvim_set_hl(0, "InsertMoody", { fg = "#" .. vim.g.base16_gui0B }) -- green
-			vim.api.nvim_set_hl(0, "VisualMoody", { fg = "#" .. vim.g.base16_gui0E }) -- pink
-			vim.api.nvim_set_hl(0, "CommandMoody", { fg = "#" .. vim.g.base16_gui08 }) -- maroon
-			vim.api.nvim_set_hl(0, "OperatorMoody", { fg = "#" .. vim.g.base16_gui08 }) -- maroon
-			vim.api.nvim_set_hl(0, "ReplaceMoody", { fg = "#" .. vim.g.base16_gui09 }) -- red
-			vim.api.nvim_set_hl(0, "SelectMoody", { fg = "#" .. vim.g.base16_gui0E }) -- pink
-			vim.api.nvim_set_hl(0, "TerminalMoody", { fg = "#" .. vim.g.base16_gui05 }) -- mauve
-			vim.api.nvim_set_hl(0, "TerminalNormalMoody", { fg = "#" .. vim.g.base16_gui05 }) -- mauve
-		end,
 	},
 }
