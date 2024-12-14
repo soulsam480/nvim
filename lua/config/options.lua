@@ -6,13 +6,14 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep:|,foldclose:]]
 vim.opt.smoothscroll = true
 vim.opt.breakindent = true
 
--- this is for experiment
--- vim.o.listchars = "tab:|..,trail:·,extends:»,precedes:«,nbsp:⣿"
-
 vim.opt.listchars = {
 	tab = "|..",
 	trail = "·",
+	space = ".",
 	eol = "¬",
+	extends = "»",
+	precedes = "«",
+	nbsp = "⣿",
 }
 
 vim.cmd([[tnoremap <Esc> <C-\><C-n>]])

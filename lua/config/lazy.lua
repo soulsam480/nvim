@@ -27,6 +27,6 @@ require("lazy").setup({
 		{ import = "plugins" },
 	},
 	dev = { path = "~/projects/personal" },
-	install = { colorscheme = { "base16-oxocarbon-dark" } },
+	install = { colorscheme = { "base16-equilibrium-dark" } },
 	checker = { enabled = true },
 })

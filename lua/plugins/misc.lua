@@ -14,10 +14,10 @@ return {
 		"tinted-theming/base16-vim",
 		config = function()
 			vim.g.tinted_colorspace = 256
-			vim.cmd.colorscheme("base16-oxocarbon-dark")
+			vim.cmd.colorscheme("base16-equilibrium-dark")
 
-			vim.api.nvim_set_hl(0, "NormalMoody", { fg = "#" .. vim.g.tinted_gui0B }) -- blue
-			vim.api.nvim_set_hl(0, "InsertMoody", { fg = "#" .. vim.g.tinted_gui0D }) -- green
+			vim.api.nvim_set_hl(0, "NormalMoody", { fg = "#" .. vim.g.tinted_gui0D }) -- blue
+			vim.api.nvim_set_hl(0, "InsertMoody", { fg = "#" .. vim.g.tinted_gui0B }) -- green
 			vim.api.nvim_set_hl(0, "VisualMoody", { fg = "#" .. vim.g.tinted_gui0E }) -- pink
 			vim.api.nvim_set_hl(0, "CommandMoody", { fg = "#" .. vim.g.tinted_gui08 }) -- maroon
 			vim.api.nvim_set_hl(0, "OperatorMoody", { fg = "#" .. vim.g.tinted_gui08 }) -- maroon
