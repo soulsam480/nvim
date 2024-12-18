@@ -105,20 +105,34 @@ return {
 	},
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "BufReadPre",
+		event = "LSPAttach",
 		priority = 1000,
 		config = function()
 			require("tiny-inline-diagnostic").setup({
 				options = {
+					throttle = 50,
 					show_source = true,
 					multilines = true,
 				},
-				preset = "amongus",
+				preset = "simple",
 			})
 		end,
 	},
 	{
 		"svampkorg/moody.nvim",
 		event = { "ModeChanged", "BufWinEnter", "WinEnter" },
+		opts = {
+			blends = {
+				normal = 0.3,
+				insert = 0.3,
+				visual = 0.35,
+				command = 0.3,
+				operator = 0.3,
+				replace = 0.3,
+				select = 0.3,
+				terminal = 0.3,
+				terminal_n = 0.3,
+			},
+		},
 	},
 }

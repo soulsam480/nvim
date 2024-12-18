@@ -4,7 +4,8 @@ return {
 	},
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.8",
+		branch = "master",
+		-- tag = "0.1.8",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
@@ -89,6 +90,7 @@ return {
 
 			require("telescope").load_extension("ui-select")
 			require("telescope").load_extension("recent_files")
+			require("telescope").load_extension("neoclip")
 		end,
 		keys = {
 			{

@@ -31,33 +31,25 @@ return {
 					"n",
 				},
 				'<cmd>lua require("spectre").toggle()<CR>',
-				{
-					desc = "Toggle Spectre",
-				},
+				desc = "Toggle Spectre",
 			},
 			{
 				"<leader>sw",
 				mode = { "n" },
 				'<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
-				{
-					desc = "Search current word",
-				},
+				desc = "Search current word",
 			},
 			{
 				"<leader>sw",
 				mode = { "v" },
 				'<esc><cmd>lua require("spectre").open_visual()<CR>',
-				{
-					desc = "Search current word",
-				},
+				desc = "Search current word",
 			},
 			{
 				"<leader>sp",
 				mode = { "n" },
 				'<cmd>lua require("spectre").open_file_search({select_word=true})<CR>',
-				{
-					desc = "Search on current file",
-				},
+				desc = "Search on current file",
 			},
 		},
 	},
@@ -214,14 +206,33 @@ return {
 		},
 	},
 	{
-		"rmagatti/auto-session",
-		lazy = false,
-		opts = {
-			bypass_save_filetypes = { "BufTerm", "zsh" },
-			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-			session_lens = {
-				load_on_setup = false,
+		"AckslD/nvim-neoclip.lua",
+		dependencies = {
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		config = function()
+			require("neoclip").setup()
+		end,
+		keys = {
+			{
+				"<leader>fp",
+				mode = { "n" },
+				function()
+					require("telescope").extensions.neoclip.default()
+				end,
+				desc = "Open yank register",
 			},
 		},
 	},
+	-- {
+	-- 	"rmagatti/auto-session",
+	-- 	lazy = false,
+	-- 	opts = {
+	-- 		bypass_save_filetypes = { "BufTerm", "zsh" },
+	-- 		suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+	-- 		session_lens = {
+	-- 			load_on_setup = false,
+	-- 		},
+	-- 	},
+	-- },
 }
