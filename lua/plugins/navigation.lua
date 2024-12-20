@@ -1,6 +1,7 @@
 return {
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
+		event = "VeryLazy",
 	},
 	{
 		"nvim-telescope/telescope.nvim",

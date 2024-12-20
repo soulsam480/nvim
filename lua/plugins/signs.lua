@@ -6,6 +6,7 @@ return {
 			"justinhj/battery.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"justinhj/battery.nvim",
+			{ "AndreM222/copilot-lualine" },
 		},
 		config = function()
 			require("battery").setup({
@@ -40,7 +41,7 @@ return {
 					},
 					lualine_b = { "branch", "diff" },
 					lualine_c = {},
-					lualine_x = { "filetype", nvimbattery },
+					lualine_x = { "copilot", "filetype", nvimbattery },
 				},
 				tabline = {
 					lualine_a = {

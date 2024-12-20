@@ -211,7 +211,15 @@ return {
 			{ "nvim-telescope/telescope.nvim" },
 		},
 		config = function()
-			require("neoclip").setup()
+			require("neoclip").setup({
+				keys = {
+					telescope = {
+						i = {
+							paste = "<cr>",
+						},
+					},
+				},
+			})
 		end,
 		keys = {
 			{
@@ -224,6 +232,7 @@ return {
 			},
 		},
 	},
+	{ "chrisgrieser/nvim-spider", event = { "BufReadPre", "BufNewFile" } },
 	-- {
 	-- 	"rmagatti/auto-session",
 	-- 	lazy = false,
