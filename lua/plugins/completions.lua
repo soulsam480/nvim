@@ -32,34 +32,33 @@ return {
 
 			require("blink.cmp").setup({
 				sources = {
-					-- providers = {
-					-- 	copilot = {
-					-- 		name = "copilot",
-					-- 		module = "blink-cmp-copilot",
-					-- 		score_offset = 100,
-					-- 		async = true,
-					-- 		transform_items = function(_, items)
-					-- 			local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-					-- 			local kind_idx = #CompletionItemKind + 1
-					--
-					-- 			CompletionItemKind[kind_idx] = "Copilot"
-					--
-					-- 			for _, item in ipairs(items) do
-					-- 				item.kind = kind_idx
-					-- 			end
-					--
-					-- 			return items
-					-- 		end,
-					-- 	},
-					-- },
-					completion = {
-						enabled_providers = {
-							"lsp",
-							"path",
-							"snippets",
-							"buffer",
-							-- "copilot"
+					cmdline = {},
+					providers = {
+						copilot = {
+							name = "copilot",
+							module = "blink-cmp-copilot",
+							score_offset = 100,
+							async = true,
+							transform_items = function(_, items)
+								local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+								local kind_idx = #CompletionItemKind + 1
+
+								CompletionItemKind[kind_idx] = "Copilot"
+
+								for _, item in ipairs(items) do
+									item.kind = kind_idx
+								end
+
+								return items
+							end,
 						},
+					},
+					default = {
+						"lsp",
+						"path",
+						"buffer",
+						"snippets",
+						"copilot",
 					},
 				},
 				keymap = {
@@ -88,7 +87,6 @@ return {
 					["<C-n>"] = { "snippet_forward", "fallback" },
 					["<C-p>"] = { "snippet_backward", "fallback" },
 				},
-				nerd_font_variant = "mono",
 				completion = {
 					accept = { auto_brackets = { enabled = true } },
 					menu = {
@@ -108,7 +106,9 @@ return {
 					},
 					documentation = {
 						auto_show = true,
-						border = "rounded",
+						window = {
+							border = "rounded",
+						},
 					},
 				},
 				signature = {
@@ -116,6 +116,9 @@ return {
 					window = {
 						border = "rounded",
 					},
+				},
+				appearance = {
+					nerd_font_variant = "mono",
 				},
 			})
 
