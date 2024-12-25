@@ -84,6 +84,10 @@ return {
 							"!**/.vercel",
 							"-g",
 							"!**/.vinxi",
+							"-g",
+							"!**/.venv",
+							"-g",
+							"!**/__pycache__",
 						},
 					},
 				},
@@ -189,7 +193,7 @@ return {
 		end,
 		keys = {
 			{ "<leader>pp", ":NvimTreeToggle<CR>", desc = "Open Files" },
-			{ "<leader>p", ":NvimTreeFocus<CR>", desc = "Focus Files" },
+			{ "<leader>p",  ":NvimTreeFocus<CR>",  desc = "Focus Files" },
 		},
 	},
 	{

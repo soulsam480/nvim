@@ -18,6 +18,11 @@ local oxlint_config_files = {
 	".oxlintrc.json",
 }
 
+
+local prettier_config_files = {
+	".prettierrc",
+}
+
 local check_files = function(files)
 	local cwd = vim.fn.getcwd() -- Get the current working directory
 
@@ -60,6 +65,10 @@ M.has_linter = function(linter)
 
 	if linter == "biome" then
 		return check_files(biome_config_files)
+	end
+
+	if linter == "prettier" then
+		return check_files(prettier_config_files)
 	end
 end
 

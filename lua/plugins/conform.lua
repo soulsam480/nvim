@@ -4,10 +4,10 @@ return {
 	config = function()
 		local js_formatters = {}
 
-		if require("utils.linter").has_linter("biome") then
-			table.insert(js_formatters, "biome")
-		else
+		if require("utils.linter").has_linter("prettier") and not require("utils.linter").has_linter("biome") then
 			table.insert(js_formatters, "prettierd")
+		else
+			table.insert(js_formatters, "biome")
 		end
 
 		require("conform").setup({

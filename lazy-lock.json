@@ -4,7 +4,7 @@
   "base16-vim": { "branch": "main", "commit": "42d6031f416c54d1a31a0dcf814b28cbc114c245" },
   "battery.nvim": { "branch": "main", "commit": "5b0fc97f8ae29ddd2668eced7f352337d5d07f52" },
   "blink-cmp-copilot": { "branch": "main", "commit": "c5c5cbce5748d21073f1d5348a92ebe6ce63f387" },
-  "blink.cmp": { "branch": "main", "commit": "a9a0f96c6a1029884e37dfd74a88a075b40366dd" },
+  "blink.cmp": { "branch": "main", "commit": "5f442681df24fe705d1ee7ce5b4d435aa4b4dee4" },
   "bufterm.nvim": { "branch": "main", "commit": "7aae848dff66a24425b4dcaf0567c4620edf45be" },
   "coerce.nvim": { "branch": "main", "commit": "3e253701345a56d627306343faf89b2e61bbeb1e" },
   "conform.nvim": { "branch": "master", "commit": "339b3e4519ec49312d34fcfa275aa15bfaa67025" },
