@@ -18,6 +18,9 @@ local oxlint_config_files = {
 	".oxlintrc.json",
 }
 
+local eslint_format_files = {
+	".eslintformat"
+}
 
 local prettier_config_files = {
 	".prettierrc",
@@ -69,6 +72,10 @@ M.has_linter = function(linter)
 
 	if linter == "prettier" then
 		return check_files(prettier_config_files)
+	end
+
+	if linter == 'eslint-format' then
+		return check_files(eslint_format_files)
 	end
 end
 
