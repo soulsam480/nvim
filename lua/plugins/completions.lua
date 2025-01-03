@@ -58,7 +58,7 @@ return {
 						"path",
 						"buffer",
 						"snippets",
-						"copilot",
+						-- "copilot",
 					},
 				},
 				keymap = {

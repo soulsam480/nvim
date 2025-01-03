@@ -27,8 +27,8 @@ return {
 						end)
 
 						return "echo"
-					end
-				}
+					end,
+				},
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
@@ -42,6 +42,7 @@ return {
 				yaml = js_formatters,
 				ruby = { "rubocop" },
 				eruby = { "rubocop" },
+				markdown = { "deno_fmt" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
