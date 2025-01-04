@@ -21,6 +21,9 @@ return {
 			{
 				"onsails/lspkind.nvim",
 			},
+			{
+				"xzbdmw/colorful-menu.nvim"
+			}
 		},
 		version = "v0.*",
 		config = function()
@@ -40,7 +43,8 @@ return {
 							score_offset = 100,
 							async = true,
 							transform_items = function(_, items)
-								local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+								local CompletionItemKind = require("blink.cmp.types")
+								    .CompletionItemKind
 								local kind_idx = #CompletionItemKind + 1
 
 								CompletionItemKind[kind_idx] = "Copilot"
@@ -52,29 +56,19 @@ return {
 								return items
 							end,
 						},
+						snippets = {
+							score_offset = 0
+						}
 					},
 					default = {
 						"lsp",
 						"path",
 						"buffer",
 						"snippets",
-						-- "copilot",
+						"copilot",
 					},
 				},
 				keymap = {
-					-- show = "<C-space>",
-					-- hide = "<C-e>",
-					-- accept = "<Tab>",
-					-- select_prev = { "<Up>", "<C-n>" },
-					-- select_next = { "<Down>", "<C-p>" },
-					--
-					-- show_documentation = "<C-space>",
-					-- hide_documentation = "<C-space>",
-					-- scroll_documentation_up = "<C-b>",
-					-- scroll_documentation_down = "<C-f>",
-					--
-					-- snippet_forward = "<C-n>",
-					-- snippet_backward = "<C-p>",
 					preset = "default",
 					["<Tab>"] = { "select_and_accept" },
 
@@ -88,6 +82,9 @@ return {
 					["<C-p>"] = { "snippet_backward", "fallback" },
 				},
 				completion = {
+					keyword = {
+						range = "full",
+					},
 					accept = { auto_brackets = { enabled = true } },
 					menu = {
 						border = "rounded",
@@ -96,9 +93,54 @@ return {
 								kind_icon = {
 									ellipsis = false,
 									text = function(ctx)
-										return require("lspkind").symbolic(ctx.kind, {
-											mode = "symbol",
-										})
+										return require("lspkind").symbolic(
+											ctx.kind, {
+												mode = "symbol",
+											})
+									end,
+								},
+								label = {
+									width = { fill = true, max = 60 },
+									text = function(ctx)
+										local highlights_info =
+										    require("colorful-menu").highlights(
+											    ctx.item, vim.bo.filetype)
+										if highlights_info ~= nil then
+											return highlights_info.text
+										else
+											return ctx.label
+										end
+									end,
+									highlight = function(ctx)
+										local highlights_info =
+										    require("colorful-menu").highlights(
+											    ctx.item, vim.bo.filetype)
+										local highlights = {}
+										if highlights_info ~= nil then
+											for _, info in ipairs(highlights_info.highlights) do
+												table.insert(highlights,
+													{
+														info.range
+														    [1],
+														info.range
+														    [2],
+														group =
+														    ctx.deprecated and
+														    "BlinkCmpLabelDeprecated" or
+														    info[1],
+													})
+											end
+										end
+										for _, idx in ipairs(ctx.label_matched_indices) do
+											table.insert(highlights,
+												{
+													idx,
+													idx + 1,
+													group =
+													"BlinkCmpLabelMatch"
+												})
+										end
+										return highlights
 									end,
 								},
 							},
@@ -118,7 +160,7 @@ return {
 					},
 				},
 				appearance = {
-					nerd_font_variant = "mono",
+					nerd_font_variant = "Nerd Font Mono",
 				},
 			})
 

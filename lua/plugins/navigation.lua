@@ -215,9 +215,9 @@ return {
 				delete_to_trash = false,
 				view_options = {
 					-- show_hidden = true,
-					is_hidden_file = function(name)
-						return vim.startswith(name, ".git")
-					end,
+					-- is_hidden_file = function(name)
+					-- 	return vim.startswith(name, ".git")
+					-- end,
 					lsp_file_methods = {
 						-- Enable or disable LSP file operations
 						enabled = true,
