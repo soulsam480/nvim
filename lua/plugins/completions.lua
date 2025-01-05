@@ -5,17 +5,6 @@ return {
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 			{
-				"zbirenbaum/copilot.lua",
-				cmd = "Copilot",
-				event = "InsertEnter",
-				config = function()
-					require("copilot").setup({
-						suggestion = { enabled = false },
-						panel = { enabled = false },
-					})
-				end,
-			},
-			{
 				"giuxtaposition/blink-cmp-copilot",
 			},
 			{
@@ -23,7 +12,7 @@ return {
 			},
 			{
 				"xzbdmw/colorful-menu.nvim"
-			}
+			},
 		},
 		version = "v0.*",
 		config = function()
@@ -37,25 +26,6 @@ return {
 				sources = {
 					cmdline = {},
 					providers = {
-						copilot = {
-							name = "copilot",
-							module = "blink-cmp-copilot",
-							score_offset = 100,
-							async = true,
-							transform_items = function(_, items)
-								local CompletionItemKind = require("blink.cmp.types")
-								    .CompletionItemKind
-								local kind_idx = #CompletionItemKind + 1
-
-								CompletionItemKind[kind_idx] = "Copilot"
-
-								for _, item in ipairs(items) do
-									item.kind = kind_idx
-								end
-
-								return items
-							end,
-						},
 						snippets = {
 							score_offset = 0
 						}
@@ -65,7 +35,8 @@ return {
 						"path",
 						"buffer",
 						"snippets",
-						"copilot",
+						-- "copilot",
+						-- "minuet"
 					},
 				},
 				keymap = {
@@ -83,7 +54,7 @@ return {
 				},
 				completion = {
 					keyword = {
-						range = "full",
+						range = "prefix",
 					},
 					accept = { auto_brackets = { enabled = true } },
 					menu = {
@@ -160,7 +131,8 @@ return {
 					},
 				},
 				appearance = {
-					nerd_font_variant = "Nerd Font Mono",
+					use_nvim_cmp_as_default = true,
+					nerd_font_variant = "mono",
 				},
 			})
 

@@ -119,21 +119,21 @@ return {
 			})
 		end,
 	},
-	{
-		"svampkorg/moody.nvim",
-		event = { "ModeChanged", "BufWinEnter", "WinEnter" },
-		opts = {
-			blends = {
-				normal = 0.3,
-				insert = 0.3,
-				visual = 0.35,
-				command = 0.3,
-				operator = 0.3,
-				replace = 0.3,
-				select = 0.3,
-				terminal = 0.3,
-				terminal_n = 0.3,
-			},
-		},
-	},
+	-- {
+	-- 	"svampkorg/moody.nvim",
+	-- 	event = { "ModeChanged", "BufWinEnter", "WinEnter" },
+	-- 	opts = {
+	-- 		blends = {
+	-- 			normal = 0.3,
+	-- 			insert = 0.3,
+	-- 			visual = 0.35,
+	-- 			command = 0.3,
+	-- 			operator = 0.3,
+	-- 			replace = 0.3,
+	-- 			select = 0.3,
+	-- 			terminal = 0.3,
+	-- 			terminal_n = 0.3,
+	-- 		},
+	-- 	},
+	-- },
 }
