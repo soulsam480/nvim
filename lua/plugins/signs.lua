@@ -112,8 +112,23 @@ return {
 			require("tiny-inline-diagnostic").setup({
 				options = {
 					throttle = 50,
-					show_source = true,
 					multilines = true,
+					show_all_diags_on_cursorline = true,
+					format = function(diagnostic)
+						local message = diagnostic.message .. " [" .. diagnostic.source
+
+						local rule_name = diagnostic.user_data
+							and diagnostic.user_data.lsp
+							and diagnostic.user_data.lsp.code
+
+						if rule_name then
+							message = message .. "]" .. " (" .. rule_name .. ")"
+						else
+							message = message .. "]"
+						end
+
+						return message
+					end,
 				},
 				preset = "simple",
 			})
