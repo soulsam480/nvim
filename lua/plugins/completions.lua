@@ -5,38 +5,24 @@ return {
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 			{
-				"giuxtaposition/blink-cmp-copilot",
-			},
-			{
-				"onsails/lspkind.nvim",
-			},
-			{
-				"xzbdmw/colorful-menu.nvim"
+				"xzbdmw/colorful-menu.nvim",
 			},
 		},
 		version = "v0.*",
 		config = function()
-			require("lspkind").setup({
-				symbol_map = {
-					Copilot = "",
-				},
-			})
-
 			require("blink.cmp").setup({
 				sources = {
 					cmdline = {},
 					providers = {
 						snippets = {
-							score_offset = 0
-						}
+							score_offset = 0,
+						},
 					},
 					default = {
 						"lsp",
 						"path",
 						"buffer",
 						"snippets",
-						-- "copilot",
-						-- "minuet"
 					},
 				},
 				keymap = {
@@ -54,65 +40,17 @@ return {
 				},
 				completion = {
 					keyword = {
-						range = "prefix",
+						range = "full",
 					},
 					accept = { auto_brackets = { enabled = true } },
 					menu = {
 						border = "rounded",
 						draw = {
+							-- columns = { { "kind_icon" }, { "label", gap = 1 } },
 							components = {
-								kind_icon = {
-									ellipsis = false,
-									text = function(ctx)
-										return require("lspkind").symbolic(
-											ctx.kind, {
-												mode = "symbol",
-											})
-									end,
-								},
 								label = {
-									width = { fill = true, max = 60 },
-									text = function(ctx)
-										local highlights_info =
-										    require("colorful-menu").highlights(
-											    ctx.item, vim.bo.filetype)
-										if highlights_info ~= nil then
-											return highlights_info.text
-										else
-											return ctx.label
-										end
-									end,
-									highlight = function(ctx)
-										local highlights_info =
-										    require("colorful-menu").highlights(
-											    ctx.item, vim.bo.filetype)
-										local highlights = {}
-										if highlights_info ~= nil then
-											for _, info in ipairs(highlights_info.highlights) do
-												table.insert(highlights,
-													{
-														info.range
-														    [1],
-														info.range
-														    [2],
-														group =
-														    ctx.deprecated and
-														    "BlinkCmpLabelDeprecated" or
-														    info[1],
-													})
-											end
-										end
-										for _, idx in ipairs(ctx.label_matched_indices) do
-											table.insert(highlights,
-												{
-													idx,
-													idx + 1,
-													group =
-													"BlinkCmpLabelMatch"
-												})
-										end
-										return highlights
-									end,
+									text = require("colorful-menu").blink_components_text,
+									highlight = require("colorful-menu").blink_components_highlight,
 								},
 							},
 						},
@@ -133,6 +71,34 @@ return {
 				appearance = {
 					use_nvim_cmp_as_default = true,
 					nerd_font_variant = "mono",
+					kind_icons = {
+						Text = "",
+						Method = "",
+						Function = "",
+						Constructor = "",
+						Field = "",
+						Variable = "",
+						Class = "",
+						Interface = "",
+						Module = "",
+						Property = "",
+						Unit = "",
+						Value = "",
+						Enum = "",
+						Keyword = "",
+						Snippet = "",
+						Color = "",
+						File = "",
+						Reference = "",
+						Folder = "",
+						EnumMember = "",
+						Constant = "",
+						Struct = "",
+						Event = "",
+						Operator = "",
+						TypeParameter = "",
+						Copilot = "",
+					},
 				},
 			})
 
