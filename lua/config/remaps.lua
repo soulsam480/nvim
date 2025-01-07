@@ -6,4 +6,4 @@ vim.cmd([[
 
 vim.keymap.set("n", "<C-c>", "<cmd>:bdelete<CR>", { desc = "Close current buffer" })
 
-vim.keymap.set("n", "<C-cc>", "<cmd>%bd<CR>", { desc = "Close all open buffers" })
+vim.keymap.set("n", "<leader>cc", "<cmd>%bd<CR>", { desc = "Close all open buffers" })
