@@ -8,8 +8,8 @@ return {
 				"xzbdmw/colorful-menu.nvim",
 			},
 			{
-				'saghen/blink.compat',
-				version = '*',
+				"saghen/blink.compat",
+				version = "*",
 				lazy = true,
 				opts = {},
 			},
@@ -18,7 +18,7 @@ return {
 				config = function()
 					require("supermaven-nvim").setup({
 						isable_keymaps = true,
-						disable_inline_completion = true
+						disable_inline_completion = true,
 					})
 				end,
 			},
@@ -33,13 +33,12 @@ return {
 							score_offset = 0,
 						},
 						supermaven = {
-							name = 'supermaven', -- IMPORTANT: use the same name as you would for nvim-cmp
-							module = 'blink.compat.source',
+							name = "supermaven", -- IMPORTANT: use the same name as you would for nvim-cmp
+							module = "blink.compat.source",
 							score_offset = 100,
 							async = true,
 							transform_items = function(_, items)
-								local CompletionItemKind = require("blink.cmp.types")
-								    .CompletionItemKind
+								local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
 								local kind_idx = #CompletionItemKind + 1
 								CompletionItemKind[kind_idx] = "Supermaven"
 								for _, item in ipairs(items) do
@@ -54,7 +53,7 @@ return {
 						"path",
 						"buffer",
 						"snippets",
-						"supermaven"
+						"supermaven",
 					},
 				},
 				keymap = {
@@ -71,9 +70,9 @@ return {
 					["<C-p>"] = { "snippet_backward", "fallback" },
 				},
 				completion = {
-					ghost_text = {
-						enabled = true
-					},
+					-- ghost_text = {
+					-- 	enabled = true
+					-- },
 					keyword = {
 						range = "full",
 					},
@@ -84,10 +83,8 @@ return {
 							columns = { { "kind_icon" }, { "label", gap = 1 } },
 							components = {
 								label = {
-									text = require("colorful-menu")
-									    .blink_components_text,
-									highlight = require("colorful-menu")
-									    .blink_components_highlight,
+									text = require("colorful-menu").blink_components_text,
+									highlight = require("colorful-menu").blink_components_highlight,
 								},
 							},
 						},
@@ -135,7 +132,7 @@ return {
 						Operator = "",
 						TypeParameter = "",
 						Copilot = "",
-						Supermaven = ""
+						Supermaven = "",
 					},
 				},
 			})
