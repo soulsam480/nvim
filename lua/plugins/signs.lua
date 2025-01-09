@@ -17,10 +17,17 @@ return {
 				battery_threshold = 25,
 			})
 
+			require("utils.fta").setup()
+
 			local nvimbattery = {
 				function()
 					return require("battery").get_status_line()
 				end,
+				color = { fg = vim.g.tinted_gui0B, bg = vim.g.tinted_gui01 },
+			}
+
+			local fta = {
+				require("utils.fta").get_lualine_component(),
 				color = { fg = vim.g.tinted_gui0B, bg = vim.g.tinted_gui01 },
 			}
 
@@ -41,7 +48,7 @@ return {
 					},
 					lualine_b = { "branch", "diff" },
 					lualine_c = {},
-					lualine_x = { "copilot", "filetype", nvimbattery },
+					lualine_x = { fta, "filetype", nvimbattery },
 				},
 				tabline = {
 					lualine_a = {

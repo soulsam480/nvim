@@ -30,7 +30,14 @@ return {
 					cmdline = {},
 					providers = {
 						snippets = {
-							score_offset = 0,
+							score_offset = 7,
+						},
+						lsp = {
+							score_offset = 10,
+						},
+						path = { score_offset = 9 },
+						buffer = {
+							score_offset = 8,
 						},
 						supermaven = {
 							name = "supermaven", -- IMPORTANT: use the same name as you would for nvim-cmp
