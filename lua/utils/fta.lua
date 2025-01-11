@@ -2,7 +2,7 @@
 local M = {}
 
 -- Cache to store FTA scores
-M.scores = {}
+M.stats = {}
 
 -- Debounce timer
 local timer = nil
@@ -16,6 +16,7 @@ local supported_filetypes = {
 }
 
 -- Function to run fta-cli and get the score
+-- Function to run fta-cli and get the score
 local function get_fta_score(file_path)
 	-- Don't process empty or invalid file paths
 	if not file_path or file_path == "" then
@@ -23,24 +24,34 @@ local function get_fta_score(file_path)
 	end
 
 	-- Run bunx fta-cli and capture output
-	local cmd = string.format('bunx fta-cli --json "%s"', file_path)
+	local cmd = string.format('bunx fta-cli --json "%s" 2>/dev/null', file_path)
 	local handle = io.popen(cmd)
 
 	if not handle then
 		return nil
 	end
 
-	local output = handle:read("*a")
-	handle:close()
+	-- Use pcall to safely read from handle
+	local success, output = pcall(function()
+		local result = handle:read("*a")
+		handle:close()
+		return result
+	end)
 
-	-- Parse JSON output
-	local success, parsed = pcall(vim.json.decode, output)
-
-	if not success or not parsed[1] then
+	-- If reading failed, ensure handle is closed and return nil
+	if not success then
+		pcall(handle.close, handle)
 		return nil
 	end
 
-	return parsed[1].fta_score
+	-- Parse JSON output with error handling
+	local parse_success, parsed = pcall(vim.json.decode, output)
+
+	if not parse_success or not parsed then
+		return nil
+	end
+
+	return parsed[1]
 end
 
 -- Function to get current buffer file path
@@ -76,7 +87,7 @@ function M.update_score()
 		0,
 		vim.schedule_wrap(function()
 			-- Get and cache the score
-			M.scores[file_path] = get_fta_score(file_path)
+			M.stats[file_path] = get_fta_score(file_path)
 			-- Force lualine update
 			vim.cmd("redrawstatus")
 		end)
@@ -98,11 +109,11 @@ function M.get_lualine_component()
 			return "FTA: No File"
 		end
 
-		local score = M.scores[file_path]
+		local score = M.stats[file_path]
 
 		if score then
-			return string.format("FTA: %.2f", score)
-		elseif M.scores[file_path] == nil then
+			return string.format("FTA: %.2f", score.fta_score)
+		elseif M.stats[file_path] == nil then
 			return "FTA: calculating..."
 		else
 			return "FTA: N/A"
@@ -116,11 +127,23 @@ function M.setup()
 	local group = vim.api.nvim_create_augroup("FTAScore", { clear = true })
 
 	-- Add autocommands for JavaScript/TypeScript files
-	vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufWritePost", "TextChanged", "TextChangedI" }, {
+	vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufWritePost", "InsertLeave" }, {
 		pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },
 		callback = M.update_score,
 		group = group,
 	})
+
+	vim.api.nvim_create_user_command("FtaOpen", function()
+		local file_path = get_current_file()
+
+		if not file_path then
+			return "FTA: No File"
+		end
+
+		local score = M.stats[file_path]
+
+		require("utils.float_with_json").create_float_with_json(score)
+	end, { desc = "Show FTA results for the current file" })
 end
 
 return M

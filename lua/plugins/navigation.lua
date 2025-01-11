@@ -36,6 +36,9 @@ return {
 							},
 						},
 					},
+					colorscheme = {
+						enable_preview = true,
+					},
 					find_files = {
 						find_command = {
 							"rg",
@@ -193,7 +196,7 @@ return {
 		end,
 		keys = {
 			{ "<leader>pp", ":NvimTreeToggle<CR>", desc = "Open Files" },
-			{ "<leader>p",  ":NvimTreeFocus<CR>",  desc = "Focus Files" },
+			{ "<leader>p", ":NvimTreeFocus<CR>", desc = "Focus Files" },
 		},
 	},
 	{
@@ -231,7 +234,6 @@ return {
 			})
 		end,
 	},
-
 	{
 		"niqodea/lasso.nvim",
 		event = { "BufReadPre", "BufNewFile" },
@@ -270,4 +272,26 @@ return {
 			end, { desc = "Lasso: go to 5th mark" })
 		end,
 	},
+	-- {
+	-- 	"aaronik/treewalker.nvim",
+	-- 	config = function()
+	-- 		vim.keymap.set({ "n", "v" }, "<C-u>", function()
+	-- 			if vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] then
+	-- 				vim.cmd(":Treewalker Up")
+	-- 			end
+	-- 		end, {
+	-- 			silent = true,
+	-- 			desc = "[T]reewalker [u]p",
+	-- 		})
+	--
+	-- 		vim.keymap.set({ "n", "v" }, "<C-d>", function()
+	-- 			if vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] then
+	-- 				vim.cmd(":Treewalker Down")
+	-- 			end
+	-- 		end, {
+	-- 			silent = true,
+	-- 			desc = "[T]reewalker down",
+	-- 		})
+	-- 	end,
+	-- },
 }

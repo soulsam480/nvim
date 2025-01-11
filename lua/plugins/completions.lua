@@ -60,7 +60,7 @@ return {
 						"path",
 						"buffer",
 						"snippets",
-						"supermaven",
+						-- "supermaven",
 					},
 				},
 				keymap = {

@@ -28,7 +28,7 @@ return {
 
 			local fta = {
 				require("utils.fta").get_lualine_component(),
-				color = { fg = vim.g.tinted_gui0B, bg = vim.g.tinted_gui01 },
+				color = { fg = vim.g.tinted_gui08, bg = vim.g.tinted_gui01, gui = "bold" },
 			}
 
 			require("lualine").setup({
@@ -142,21 +142,14 @@ return {
 			})
 		end,
 	},
-	-- {
-	-- 	"svampkorg/moody.nvim",
-	-- 	event = { "ModeChanged", "BufWinEnter", "WinEnter" },
-	-- 	opts = {
-	-- 		blends = {
-	-- 			normal = 0.3,
-	-- 			insert = 0.3,
-	-- 			visual = 0.35,
-	-- 			command = 0.3,
-	-- 			operator = 0.3,
-	-- 			replace = 0.3,
-	-- 			select = 0.3,
-	-- 			terminal = 0.3,
-	-- 			terminal_n = 0.3,
-	-- 		},
-	-- 	},
-	-- },
+	{
+		"rasulomaroff/reactive.nvim",
+		opts = {
+			builtin = {
+				cursorline = true,
+				cursor = true,
+				modemsg = true,
+			},
+		},
+	},
 }
