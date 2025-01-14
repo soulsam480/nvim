@@ -60,7 +60,7 @@ return {
 						"path",
 						"buffer",
 						"snippets",
-						-- "supermaven",
+						"supermaven",
 					},
 				},
 				keymap = {
@@ -77,13 +77,13 @@ return {
 					["<C-p>"] = { "snippet_backward", "fallback" },
 				},
 				completion = {
-					-- ghost_text = {
-					-- 	enabled = true
-					-- },
+					ghost_text = {
+						enabled = true,
+					},
 					keyword = {
 						range = "full",
 					},
-					accept = { auto_brackets = { enabled = true } },
+					accept = { auto_brackets = { enabled = false } },
 					menu = {
 						border = "rounded",
 						draw = {
@@ -100,6 +100,12 @@ return {
 						auto_show = true,
 						window = {
 							border = "rounded",
+						},
+					},
+					list = {
+						selection = {
+							preselect = false,
+							auto_insert = false,
 						},
 					},
 				},
@@ -147,6 +153,7 @@ return {
 			-- keep border style same across
 			vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { link = "Pmenu" })
 			vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelpBorder", { link = "Pmenu" })
+			vim.api.nvim_set_hl(0, "BlinkCmpGhostText", { link = "VirtText" })
 		end,
 	},
 }

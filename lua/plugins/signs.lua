@@ -115,7 +115,7 @@ return {
 		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "LSPAttach",
 		priority = 1000,
-		commit = "867902d5974a18c156c918ab8addbf091719de27",
+		-- commit = "867902d5974a18c156c918ab8addbf091719de27",
 		config = function()
 			require("tiny-inline-diagnostic").setup({
 				options = {
