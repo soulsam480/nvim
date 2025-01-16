@@ -27,7 +27,6 @@ return {
 		config = function()
 			require("blink.cmp").setup({
 				sources = {
-					cmdline = {},
 					providers = {
 						snippets = {
 							score_offset = 7,
@@ -65,7 +64,7 @@ return {
 				},
 				keymap = {
 					preset = "default",
-					["<Tab>"] = { "select_and_accept" },
+					["<Tab>"] = { "accept", "fallback" },
 
 					["<Up>"] = { "select_prev", "fallback" },
 					["<Down>"] = { "select_next", "fallback" },
@@ -104,7 +103,7 @@ return {
 					},
 					list = {
 						selection = {
-							preselect = false,
+							preselect = true,
 							auto_insert = false,
 						},
 					},

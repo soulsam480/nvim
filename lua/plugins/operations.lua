@@ -55,7 +55,7 @@ return {
 	},
 	{
 		"folke/noice.nvim",
-		tag = "v4.7.0",
+		-- tag = "v4.*",
 		event = "VeryLazy",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
@@ -94,6 +94,7 @@ return {
 					{
 						view = "notify",
 						filter = { event = { "msg_showmode" } },
+						opts = { skip = true },
 					},
 					{
 						filter = {
@@ -102,10 +103,16 @@ return {
 						},
 						opts = { skip = true },
 					},
+					{
+						filter = {
+							event = "msg_show",
+							find = "%f[%a]written%f[%A]",
+						},
+						opts = { skip = true },
+					},
 				},
-				-- FUCKING IRRITATING
-				messages = {
-					enabled = false,
+				popupmenu = {
+					backend = "cmp",
 				},
 			})
 

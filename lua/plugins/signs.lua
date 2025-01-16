@@ -31,6 +31,12 @@ return {
 				color = { fg = vim.g.tinted_gui08, bg = vim.g.tinted_gui01, gui = "bold" },
 			}
 
+			local noice_search = {
+				require("noice").api.status.search.get,
+				cond = require("noice").api.status.search.has,
+				color = { fg = "#ff9e64" },
+			}
+
 			require("lualine").setup({
 				options = {
 					theme = "base16",
@@ -48,7 +54,12 @@ return {
 					},
 					lualine_b = { "branch", "diff" },
 					lualine_c = {},
-					lualine_x = { fta, "filetype", nvimbattery },
+					lualine_x = {
+						noice_search,
+						fta,
+						"filetype",
+						nvimbattery,
+					},
 				},
 				tabline = {
 					lualine_a = {
@@ -81,7 +92,7 @@ return {
 								modified = "[+]", -- Text to show when the file is modified.
 								readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
 								unnamed = "[No Name]", -- Text to show for unnamed buffers.
-								newfile = "[New]", -- Text to show for newly created file before first write
+								newfile = "[New File]", -- Text to show for newly created file before first write
 							},
 							color = {
 								bg = vim.g.tinted_gui01,
