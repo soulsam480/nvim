@@ -1,6 +1,6 @@
-vim.keymap.set({ "n", "v", "^V" }, "<leader>y", '"+y', { noremap = true, desc = "Copy to clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { noremap = true, desc = "Copy to clipboard" })
 
-vim.keymap.set({ "n", "v", "^V" }, "<leader>yy", '"+yy', { noremap = true, desc = "Copy line to clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>yy", '"+yy', { noremap = true, desc = "Copy line to clipboard" })
 
 vim.keymap.set("n", "<C-c>", "<cmd>:bdelete<CR>", { desc = "Close current buffer" })
 
