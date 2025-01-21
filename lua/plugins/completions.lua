@@ -44,7 +44,8 @@ return {
 							score_offset = 100,
 							async = true,
 							transform_items = function(_, items)
-								local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+								local CompletionItemKind = require("blink.cmp.types")
+								    .CompletionItemKind
 								local kind_idx = #CompletionItemKind + 1
 								CompletionItemKind[kind_idx] = "Supermaven"
 								for _, item in ipairs(items) do
@@ -60,6 +61,7 @@ return {
 						"buffer",
 						"snippets",
 						"supermaven",
+						"codecompanion",
 					},
 				},
 				keymap = {
@@ -89,8 +91,10 @@ return {
 							columns = { { "kind_icon" }, { "label", gap = 1 } },
 							components = {
 								label = {
-									text = require("colorful-menu").blink_components_text,
-									highlight = require("colorful-menu").blink_components_highlight,
+									text = require("colorful-menu")
+									    .blink_components_text,
+									highlight = require("colorful-menu")
+									    .blink_components_highlight,
 								},
 							},
 						},
