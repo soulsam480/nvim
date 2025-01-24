@@ -6,18 +6,18 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		config = function()
-			require('codecompanion').setup({
+			require("codecompanion").setup({
 				adapters = {
 
-					ollama = function()
-						return require("codecompanion.adapters").extend("ollama", {
-							schema = {
-								model = {
-									default = "llama3.2:3b",
-								},
-							},
-						})
-					end,
+					-- ollama = function()
+					-- 	return require("codecompanion.adapters").extend("ollama", {
+					-- 		schema = {
+					-- 			model = {
+					-- 				default = "llama3.2:3b",
+					-- 			},
+					-- 		},
+					-- 	})
+					-- end,
 					anthropic = function()
 						return require("codecompanion.adapters").extend("anthropic", {
 							env = {
@@ -32,6 +32,6 @@ return {
 					agent = { adapter = "ollama" },
 				},
 			})
-		end
-	}
+		end,
+	},
 }

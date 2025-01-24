@@ -157,8 +157,6 @@ return {
 			vim.g.loaded_netrw = 1
 			vim.g.loaded_netrwPlugin = 1
 
-			vim.opt.termtinted_guicolors = true
-
 			require("nvim-tree").setup({
 				sync_root_with_cwd = true,
 				renderer = {
