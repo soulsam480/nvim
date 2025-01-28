@@ -95,7 +95,6 @@ return {
 				"marksman",
 				"html",
 				"emmet_language_server",
-				"volar",
 				"astro",
 				"svelte",
 				"ruff_lsp"
@@ -116,6 +115,7 @@ return {
 			lspconfig.vtsls.setup({
 				capablities = require("blink.cmp").get_lsp_capabilities(),
 				on_attach = on_attach,
+				filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 				settings = {
 					typescript = {
 						updateImportsOnFileMove = {
@@ -131,6 +131,9 @@ return {
 						},
 					},
 					vtsls = {
+						tsserver = {
+							globalPlugins = {}
+						},
 						experimental = {
 							completion = {
 								enableServerSideFuzzyMatch = true,
@@ -139,7 +142,22 @@ return {
 						autoUseWorkspaceTsdk = true,
 					},
 				},
+				before_init = function(_, config)
+					local vuePluginConfig = {
+						name = "@vue/typescript-plugin",
+						location = require("mason-registry").get_package(
+							    "vue-language-server"):get_install_path()
+						    .. "/node_modules/@vue/language-server",
+						languages = { "vue" },
+						configNamespace = "typescript",
+						enableForWorkspaceTypeScriptVersions = true,
+					}
+					table.insert(config.settings.vtsls.tsserver.globalPlugins,
+						vuePluginConfig)
+				end,
 			})
+
+			lspconfig.volar.setup({})
 
 			lspconfig.solargraph.setup({
 				capablities = require("blink.cmp").get_lsp_capabilities(),
