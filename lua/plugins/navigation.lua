@@ -11,6 +11,10 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
 			"smartpde/telescope-recent-files",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+			},
 		},
 		config = function()
 			local actions = require("telescope.actions")
@@ -23,6 +27,7 @@ return {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
 					},
+					fzf = {},
 				},
 				pickers = {
 					buffers = {
@@ -96,6 +101,7 @@ return {
 				},
 			})
 
+			require("telescope").load_extension("fzf")
 			require("telescope").load_extension("ui-select")
 			require("telescope").load_extension("recent_files")
 			require("telescope").load_extension("neoclip")

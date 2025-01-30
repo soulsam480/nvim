@@ -1,24 +1,30 @@
--- this will add Terminal to the list (not starting job yet)
-local Terminal = require("bufterm.terminal").Terminal
-local ui = require("bufterm.ui")
+local Terminal = require("toggleterm.terminal").Terminal
 
 local M = {}
 
 M.setup = function()
 	local lazygit = Terminal:new({
+		name = "LazyGit",
 		cmd = "lazygit",
-		buflisted = false,
-		termlisted = false, -- set this option to false if you treat this terminal as single independent terminal
+		dir = "git_dir",
+		direction = "float",
+		float_opts = {
+			border = "double",
+		},
+		-- function to run on opening the terminal
+		on_open = function(term)
+			vim.cmd("startinsert!")
+			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+		end,
+		-- function to run on closing the terminal
+		on_close = function(term)
+			vim.cmd("startinsert!")
+		end,
 	})
 
 	vim.keymap.set("n", "<leader>g", function()
-		-- spawn terminal (terminal won't be spawned if self.jobid is valid)
-		lazygit:spawn()
-		-- open floating window
-		ui.toggle_float(lazygit.bufnr)
-	end, {
-		desc = "Open LazyGit",
-	})
+		lazygit:toggle()
+	end, { noremap = true, silent = true, desc = "Open LazyGit" })
 end
 
 return M

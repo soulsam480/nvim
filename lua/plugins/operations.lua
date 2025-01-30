@@ -121,36 +121,23 @@ return {
 		end,
 	},
 	{
-		"boltlessengineer/bufterm.nvim",
-		event = "VeryLazy",
+		"akinsho/toggleterm.nvim",
+		version = "*",
 		config = function()
-			require("bufterm").setup({
-				remember_mode = false,
-			})
-
+			require("toggleterm").setup({})
 			require("utils.lazygit").setup()
-
-			local term = require("bufterm.terminal")
-			local Terminal = require("bufterm.terminal").Terminal
-			local ui = require("bufterm.ui")
-
-			vim.keymap.set({ "n", "t" }, "<C-`>", function()
-				local recent_term = term.get_recent_term()
-
-				if not recent_term then
-					recent_term = Terminal:new({})
-				end
-
-				if not recent_term.bufnr then
-					recent_term:spawn()
-				end
-
-				ui.toggle_float(recent_term.bufnr)
-				vim.cmd.startinsert()
-			end, {
-				desc = "Toggle Terminal",
-			})
 		end,
+		keys = {
+			{
+				"<C-`>",
+				mode = {
+					"n",
+					"t",
+				},
+				"<cmd>:ToggleTerm direction=float name=Terminal<CR>",
+				desc = "Toggle Terminal",
+			},
+		},
 	},
 	{
 		"ruifm/gitlinker.nvim",
