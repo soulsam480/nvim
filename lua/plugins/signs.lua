@@ -46,11 +46,7 @@ return {
 				sections = {
 					lualine_a = {
 						"mode",
-						{
-							"datetime",
-							style = "%I:%M:%S %p",
-							icon = "🕒",
-						},
+						require("utils.now_playing").now_playing_component,
 					},
 					lualine_b = { "branch", "diff" },
 					lualine_c = {},
