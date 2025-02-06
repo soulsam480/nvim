@@ -46,7 +46,14 @@ return {
 				sections = {
 					lualine_a = {
 						"mode",
-						require("utils.now_playing").now_playing_component,
+						{
+							require("utils.now_playing").now_playing_component,
+
+							color = {
+								bg = vim.g.tinted_gui01,
+								fg = vim.g.tinted_gui0D,
+							},
+						},
 					},
 					lualine_b = { "branch", "diff" },
 					lualine_c = {},
@@ -130,7 +137,7 @@ return {
 					multilines = true,
 					show_all_diags_on_cursorline = true,
 					format = function(diagnostic)
-						local message = diagnostic.message .. " [" .. diagnostic.source
+						local message = diagnostic.message .. " [" .. (diagnostic.source or "")
 
 						local rule_name = diagnostic.user_data
 							and diagnostic.user_data.lsp
@@ -145,7 +152,7 @@ return {
 						return message
 					end,
 				},
-				preset = "simple",
+				preset = "ghost",
 			})
 		end,
 	},
