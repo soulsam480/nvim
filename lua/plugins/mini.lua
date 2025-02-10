@@ -20,7 +20,7 @@ return {
 			minidiff.setup({
 				view = {
 					signs = { add = "++", change = "~~", delete = "--" },
-					style = "sign",
+					style = "number",
 				},
 			})
 
@@ -115,3 +115,4 @@ return {
 		end,
 	},
 }
+
