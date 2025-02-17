@@ -134,7 +134,7 @@ return {
 					"n",
 					"t",
 				},
-				"<cmd>:ToggleTerm direction=float name=Terminal<CR>",
+				"<cmd>:1ToggleTerm direction=float name=Terminal<CR>",
 				desc = "Toggle Terminal",
 			},
 		},
