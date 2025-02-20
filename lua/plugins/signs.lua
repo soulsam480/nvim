@@ -45,10 +45,10 @@ return {
 				},
 				sections = {
 					lualine_a = {
-						"mode",
+						{ "mode", separator = { left = "", right = "" } },
 						{
 							require("utils.now_playing").now_playing_component,
-
+							separator = { left = "", right = "" },
 							color = {
 								bg = vim.g.tinted_gui01,
 								fg = vim.g.tinted_gui0D,
@@ -71,24 +71,17 @@ return {
 				},
 				tabline = {
 					lualine_a = {
-						"buffers",
-					},
-					lualine_z = {
-						function()
-							return require("nvim-treesitter").statusline({
-								indicator_size = 70,
-								type_patterns = { "class", "function", "method" },
-								separator = " -> ",
-							})
-						end,
+						{ "buffers" },
 					},
 				},
 				winbar = {
+
 					lualine_a = {
 						{
 							"diagnostics",
 							symbols = { error = " ", warn = " ", info = " " },
 							color = { bg = vim.g.tinted_gui01 },
+							separator = { left = "", right = "" },
 						},
 						{
 							"filename",
@@ -103,8 +96,22 @@ return {
 								newfile = "[New File]", -- Text to show for newly created file before first write
 							},
 							color = {
-								bg = vim.g.tinted_gui01,
-								fg = vim.g.tinted_gui0D,
+								bg = vim.g.tinted_gui02,
+								fg = vim.g.tinted_gui06,
+							},
+							separator = { left = "", right = "" },
+						},
+						{
+							function()
+								return require("nvim-treesitter").statusline({
+									indicator_size = 70,
+									type_patterns = { "class", "function", "method" },
+									separator = " -> ",
+								})
+							end,
+							color = {
+								bg = vim.g.tinted_gui00,
+								fg = vim.g.tinted_gui0A,
 							},
 						},
 					},
