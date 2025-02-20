@@ -29,7 +29,6 @@ return {
 					"html",
 					"emmet_language_server",
 					"volar",
-					"solargraph",
 					"svelte",
 					"astro",
 					"jsonls",
