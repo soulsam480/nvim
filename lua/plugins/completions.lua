@@ -44,8 +44,7 @@ return {
 							score_offset = 100,
 							async = true,
 							transform_items = function(_, items)
-								local CompletionItemKind = require("blink.cmp.types")
-								    .CompletionItemKind
+								local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
 								local kind_idx = #CompletionItemKind + 1
 								CompletionItemKind[kind_idx] = "Supermaven"
 								for _, item in ipairs(items) do
@@ -54,22 +53,21 @@ return {
 								return items
 							end,
 						},
-						minuet = {
-							name = 'minuet',
-							module = 'minuet.blink',
-							score_offset = 100,
-							async = true,
-							transform_items = function(_, items)
-								local CompletionItemKind = require("blink.cmp.types")
-								    .CompletionItemKind
-								local kind_idx = #CompletionItemKind + 1
-								CompletionItemKind[kind_idx] = "Copilot"
-								for _, item in ipairs(items) do
-									item.kind = kind_idx
-								end
-								return items
-							end,
-						},
+						-- minuet = {
+						-- 	name = "minuet",
+						-- 	module = "minuet.blink",
+						-- 	score_offset = 100,
+						-- 	async = true,
+						-- 	transform_items = function(_, items)
+						-- 		local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+						-- 		local kind_idx = #CompletionItemKind + 1
+						-- 		CompletionItemKind[kind_idx] = "Copilot"
+						-- 		for _, item in ipairs(items) do
+						-- 			item.kind = kind_idx
+						-- 		end
+						-- 		return items
+						-- 	end,
+						-- },
 					},
 					default = {
 						"lsp",
@@ -96,7 +94,7 @@ return {
 				},
 				completion = {
 					ghost_text = {
-						enabled = true,
+						enabled = false,
 					},
 					keyword = {
 						range = "full",
@@ -108,10 +106,12 @@ return {
 							columns = { { "kind_icon" }, { "label", gap = 1 } },
 							components = {
 								label = {
-									text = require("colorful-menu")
-									    .blink_components_text,
-									highlight = require("colorful-menu")
-									    .blink_components_highlight,
+									text = function(ctx)
+										return require("colorful-menu").blink_components_text(ctx)
+									end,
+									highlight = function(ctx)
+										return require("colorful-menu").blink_components_highlight(ctx)
+									end,
 								},
 							},
 						},
@@ -127,6 +127,16 @@ return {
 							preselect = true,
 							auto_insert = false,
 						},
+					},
+				},
+				cmdline = {
+					completion = {
+						menu = { auto_show = true },
+					},
+					keymap = {
+						["<Tab>"] = { "accept", "fallback" },
+						["<Up>"] = { "select_prev", "fallback" },
+						["<Down>"] = { "select_next", "fallback" },
 					},
 				},
 				signature = {
