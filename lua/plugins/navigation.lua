@@ -151,6 +151,13 @@ return {
 				end,
 				desc = "Open diagnostics for this file",
 			},
+			{
+				"<leader>fl",
+				function()
+					require("telescope.builtin").live_grep()
+				end,
+				desc = "Telescipe live grep",
+			},
 		},
 	},
 	{

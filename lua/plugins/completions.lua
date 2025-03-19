@@ -75,7 +75,6 @@ return {
 						"buffer",
 						"snippets",
 						"supermaven",
-						"codecompanion",
 						-- 'minuet'
 					},
 				},
