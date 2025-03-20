@@ -160,7 +160,7 @@ return {
 				init_options = {
 					useBundler = true,
 					bundlerPath = "/Users/sambitsahoo/.rbenv/shims/bundle",
-					formatting = true,
+					formatting = false,
 					diagnostics = true,
 					autoformat = false,
 					completion = true,
