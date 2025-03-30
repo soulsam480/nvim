@@ -33,6 +33,7 @@ return {
 					"astro",
 					"jsonls",
 					"biome",
+					"elixirls"
 				},
 			})
 
@@ -57,8 +58,10 @@ return {
 				nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 				nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 				nmap("<lader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-				nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-				nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+				nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols,
+					"[D]ocument [S]ymbols")
+				nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols,
+					"[W]orkspace [S]ymbols")
 
 				-- See `:help K` for why this keymap
 				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -95,6 +98,7 @@ return {
 				"astro",
 				"svelte",
 				"ruff_lsp",
+				"elixirls"
 			}
 
 			for _, lsp in ipairs(lsps) do
@@ -142,8 +146,9 @@ return {
 				before_init = function(_, config)
 					local vuePluginConfig = {
 						name = "@vue/typescript-plugin",
-						location = require("mason-registry").get_package("vue-language-server"):get_install_path()
-							.. "/node_modules/@vue/language-server",
+						location = require("mason-registry").get_package("vue-language-server")
+						    :get_install_path()
+						    .. "/node_modules/@vue/language-server",
 						languages = { "vue" },
 						configNamespace = "typescript",
 						enableForWorkspaceTypeScriptVersions = true,

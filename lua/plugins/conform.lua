@@ -44,6 +44,7 @@ return {
 				eruby = { "rubocop" },
 				markdown = { "deno_fmt" },
 				vue = { "deno_fmt" },
+				elixir = { "mix" }
 			},
 			format_on_save = {
 				lsp_fallback = true,
