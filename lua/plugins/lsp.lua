@@ -91,7 +91,6 @@ return {
 			local lsps = {
 				"lua_ls",
 				"cssls",
-				"tailwindcss",
 				"marksman",
 				"html",
 				"emmet_language_server",
@@ -221,6 +220,19 @@ return {
 					on_attach = on_attach,
 				})
 			end
+
+			require("lspconfig").tailwindcss.setup({
+				capablities = require("blink.cmp").get_lsp_capabilities(),
+				on_attach = on_attach,
+				settings = {
+					tailwindCSS = {
+						experimental = {
+							configFile = require("utils.tailwind").has_tailwind_v4() and "css/styles.css"
+								or "tailwind.config.mjs",
+						},
+					},
+				},
+			})
 		end,
 	},
 	{
