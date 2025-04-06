@@ -126,6 +126,13 @@ return {
 		config = function()
 			require("toggleterm").setup({})
 			require("utils.lazygit").setup()
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "zsh",
+				callback = function()
+					vim.b.miniindentscope_disable = true
+				end,
+			})
 		end,
 		keys = {
 			{

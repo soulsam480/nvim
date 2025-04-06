@@ -61,7 +61,8 @@ M.setup = function()
 				term:persist_mode()
 
 				vim.api.nvim_buf_set_option(term.bufnr, "modifiable", false)
-				vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+				vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>",
+					{ noremap = true, silent = true })
 			end,
 			on_exit = function()
 				specterm = nil
