@@ -20,7 +20,26 @@ vim.cmd([[tnoremap <Esc> <C-\><C-n>]])
 
 vim.api.nvim_set_option("clipboard", "")
 
-vim.diagnostic.config({ virtual_text = false, underline = true, signs = true })
+vim.diagnostic.config({
+	virtual_lines = {
+		virt_text_pos = "eol",
+		format = function(diagnostic)
+			local message = diagnostic.message .. " [" .. (diagnostic.source or "")
+
+			local rule_name = diagnostic.user_data and diagnostic.user_data.lsp and diagnostic.user_data.lsp.code
+
+			if rule_name then
+				message = message .. "]" .. " (" .. rule_name .. ")"
+			else
+				message = message .. "]"
+			end
+
+			return message
+		end,
+	},
+	underline = true,
+	signs = true,
+})
 -- vim.lsp.set_log_level("INFO")
 --
 vim.g.lazyvim_blink_main = true

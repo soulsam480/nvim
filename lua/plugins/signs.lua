@@ -6,7 +6,6 @@ return {
 			"justinhj/battery.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"justinhj/battery.nvim",
-			{ "AndreM222/copilot-lualine" },
 		},
 		config = function()
 			require("battery").setup({
@@ -131,43 +130,43 @@ return {
 			enabled = true,
 			message_template = " <summary> • <date> • <author> • <<sha>>",
 			date_format = "%r %m-%d-%Y %H:%M:%S",
-			virtual_text_column = 1,
-			set_extmark_options = {
-				priority = 0,
-			},
+			virtual_text_column = 2,
+			-- set_extmark_options = {
+			-- 	priority = 1,
+			-- },
 		},
 	},
-	{
-		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "LSPAttach",
-		priority = 1000,
-		-- commit = "867902d5974a18c156c918ab8addbf091719de27",
-		config = function()
-			require("tiny-inline-diagnostic").setup({
-				options = {
-					throttle = 50,
-					multilines = true,
-					show_all_diags_on_cursorline = true,
-					format = function(diagnostic)
-						local message = diagnostic.message .. " [" .. (diagnostic.source or "")
-
-						local rule_name = diagnostic.user_data
-							and diagnostic.user_data.lsp
-							and diagnostic.user_data.lsp.code
-
-						if rule_name then
-							message = message .. "]" .. " (" .. rule_name .. ")"
-						else
-							message = message .. "]"
-						end
-
-						return message
-					end,
-				},
-				preset = "ghost",
-			})
-		end,
-	},
+	-- {
+	-- 	"rachartier/tiny-inline-diagnostic.nvim",
+	-- 	event = "LSPAttach",
+	-- 	priority = 1000,
+	-- 	-- commit = "867902d5974a18c156c918ab8addbf091719de27",
+	-- 	config = function()
+	-- 		require("tiny-inline-diagnostic").setup({
+	-- 			options = {
+	-- 				throttle = 50,
+	-- 				multilines = true,
+	-- 				show_all_diags_on_cursorline = true,
+	-- 				format = function(diagnostic)
+	-- 					local message = diagnostic.message .. " [" .. (diagnostic.source or "")
+	--
+	-- 					local rule_name = diagnostic.user_data
+	-- 						and diagnostic.user_data.lsp
+	-- 						and diagnostic.user_data.lsp.code
+	--
+	-- 					if rule_name then
+	-- 						message = message .. "]" .. " (" .. rule_name .. ")"
+	-- 					else
+	-- 						message = message .. "]"
+	-- 					end
+	--
+	-- 					return message
+	-- 				end,
+	-- 			},
+	-- 			preset = "ghost",
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		"rasulomaroff/reactive.nvim",
 		event = { "BufReadPre", "BufNewFile" },
