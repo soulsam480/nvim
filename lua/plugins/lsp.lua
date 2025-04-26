@@ -33,7 +33,9 @@ return {
 					"astro",
 					"jsonls",
 					"biome",
-					"elixirls"
+					"elixirls",
+					"ruff",
+					"pylsp"
 				},
 			})
 
@@ -96,7 +98,7 @@ return {
 				"emmet_language_server",
 				"astro",
 				"svelte",
-				"ruff_lsp",
+				"ruff",
 				"elixirls"
 			}
 
@@ -209,6 +211,8 @@ return {
 							mccabe = {
 								enabled = false,
 							},
+							pyflakes = { enabled = false },
+							pylint = { enabled = false },
 						},
 					},
 				},
@@ -227,8 +231,9 @@ return {
 				settings = {
 					tailwindCSS = {
 						experimental = {
-							configFile = require("utils.tailwind").has_tailwind_v4() and "css/styles.css"
-								or "tailwind.config.mjs",
+							configFile = require("utils.tailwind").has_tailwind_v4() and
+							    "css/styles.css"
+							    or "tailwind.config.mjs",
 						},
 					},
 				},
