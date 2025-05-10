@@ -1,11 +1,11 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		version = "v1.0.0",
+		-- version = "v1.0.0",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			"mason-org/mason.nvim",
+			"mason-org/mason-lspconfig.nvim",
 			"b0o/schemastore.nvim",
 		},
 		opts = {
@@ -37,6 +37,11 @@ return {
 					"ruff",
 					"pylsp"
 				},
+				automatic_enable = {
+					exclude = {
+						"biome",
+					}
+				},
 			})
 
 			--  This function gets run when an LSP connects to a particular buffer.
@@ -44,6 +49,7 @@ return {
 				if client.name == "gleam" then
 					client.server_capabilities.documentFormattingProvider = true
 				end
+
 				--
 				-- for LSP related items. It sets the mode, buffer and description for us each time.
 				local nmap = function(keys, func, desc)
@@ -87,82 +93,64 @@ return {
 				end, "Format current buffer with LSP")
 			end
 
-			--
-			local lspconfig = require("lspconfig")
-
-			local lsps = {
-				"lua_ls",
-				"cssls",
-				"marksman",
-				"html",
-				"emmet_language_server",
-				"astro",
-				"svelte",
-				"ruff",
-				"elixirls"
-			}
-
-			for _, lsp in ipairs(lsps) do
-				require("lspconfig")[lsp].setup({
-					capablities = require("blink.cmp").get_lsp_capabilities(),
-					on_attach = on_attach,
-				})
-			end
-
-			lspconfig.gleam.setup({
-				capablities = require("blink.cmp").get_lsp_capabilities(),
-				on_attach = on_attach,
+			vim.lsp.config('*', {
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
 
-			lspconfig.vtsls.setup({
-				capablities = require("blink.cmp").get_lsp_capabilities(),
-				on_attach = on_attach,
-				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-				settings = {
-					typescript = {
-						updateImportsOnFileMove = {
-							enabled = "always",
-						},
-						preferences = {
-							importModuleSpecifier = "non-relative",
-						},
-					},
-					javascript = {
-						updateImportsOnFileMove = {
-							enabled = "always",
-						},
-					},
-					vtsls = {
-						tsserver = {
-							globalPlugins = {},
-						},
-						experimental = {
-							completion = {
-								enableServerSideFuzzyMatch = true,
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(ev)
+					local client = vim.lsp.get_client_by_id(ev.data.client_id)
+					on_attach(client, ev.buf)
+				end
+			})
+
+			vim.lsp.config("vtsls", {
+				{
+					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+					settings = {
+						typescript = {
+							updateImportsOnFileMove = {
+								enabled = "always",
+							},
+							preferences = {
+								importModuleSpecifier = "non-relative",
 							},
 						},
-						autoUseWorkspaceTsdk = true,
+						javascript = {
+							updateImportsOnFileMove = {
+								enabled = "always",
+							},
+						},
+						vtsls = {
+							tsserver = {
+								globalPlugins = {},
+							},
+							experimental = {
+								completion = {
+									enableServerSideFuzzyMatch = true,
+								},
+							},
+							autoUseWorkspaceTsdk = true,
+						},
 					},
-				},
-				before_init = function(_, config)
-					local vuePluginConfig = {
-						name = "@vue/typescript-plugin",
-						location = require("mason-registry").get_package("vue-language-server")
-						    :get_install_path()
-						    .. "/node_modules/@vue/language-server",
-						languages = { "vue" },
-						configNamespace = "typescript",
-						enableForWorkspaceTypeScriptVersions = true,
-					}
-					table.insert(config.settings.vtsls.tsserver.globalPlugins, vuePluginConfig)
-				end,
+					before_init = function(_, config)
+						local vuePluginConfig = {
+							name = "@vue/typescript-plugin",
+							location = require("mason-registry").get_package(
+								    "vue-language-server")
+							    :get_install_path()
+							    .. "/node_modules/@vue/language-server",
+							languages = { "vue" },
+							configNamespace = "typescript",
+							enableForWorkspaceTypeScriptVersions = true,
+						}
+						table.insert(config.settings.vtsls.tsserver.globalPlugins,
+							vuePluginConfig)
+					end,
+				}
 			})
 
-			lspconfig.volar.setup({})
-
-			lspconfig.solargraph.setup({
-				capablities = require("blink.cmp").get_lsp_capabilities(),
-				on_attach = on_attach,
+			vim.lsp.config("solargraph", {
 				init_options = {
 					useBundler = true,
 					bundlerPath = "/Users/sambitsahoo/.rbenv/shims/bundle",
@@ -180,9 +168,9 @@ return {
 				},
 			})
 
-			require("lspconfig").jsonls.setup({
-				capablities = require("blink.cmp").get_lsp_capabilities(),
-				on_attach = on_attach,
+			vim.lsp.enable("solargraph")
+
+			vim.lsp.config("jsonls", {
 				settings = {
 					json = {
 						schemas = require("schemastore").json.schemas({
@@ -196,9 +184,7 @@ return {
 				},
 			})
 
-			require("lspconfig").pylsp.setup({
-				capablities = require("blink.cmp").get_lsp_capabilities(),
-				on_attach = on_attach,
+			vim.lsp.config("pylsp", {
 				settings = {
 					pylsp = {
 						plugins = {
@@ -219,15 +205,10 @@ return {
 			})
 
 			if require("utils.linter").has_linter("biome") then
-				lspconfig.biome.setup({
-					capablities = require("blink.cmp").get_lsp_capabilities(),
-					on_attach = on_attach,
-				})
+				vim.lsp.config("biome", {})
 			end
 
-			require("lspconfig").tailwindcss.setup({
-				capablities = require("blink.cmp").get_lsp_capabilities(),
-				on_attach = on_attach,
+			vim.lsp.config("tailwindcss", {
 				settings = {
 					tailwindCSS = {
 						experimental = {
@@ -238,6 +219,9 @@ return {
 					},
 				},
 			})
+
+			vim.lsp.config("gleam", {})
+			vim.lsp.enable("gleam")
 		end,
 	},
 	{
