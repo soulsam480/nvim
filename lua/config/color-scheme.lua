@@ -1,5 +1,5 @@
 local M = {}
 
-M.scheme = "base16-horizon-dark"
+M.scheme = "base16-chalk"
 
 return M

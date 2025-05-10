@@ -57,6 +57,7 @@ return {
 					lualine_b = { "branch", "diff" },
 					lualine_c = {},
 					lualine_x = {
+						require("nvim-lightbulb").get_status_text(),
 						{
 							require("noice").api.statusline.mode.get,
 							cond = require("noice").api.statusline.mode.has,
@@ -131,42 +132,8 @@ return {
 			message_template = " <summary> • <date> • <author> • <<sha>>",
 			date_format = "%r %m-%d-%Y %H:%M:%S",
 			virtual_text_column = 2,
-			-- set_extmark_options = {
-			-- 	priority = 1,
-			-- },
 		},
 	},
-	-- {
-	-- 	"rachartier/tiny-inline-diagnostic.nvim",
-	-- 	event = "LSPAttach",
-	-- 	priority = 1000,
-	-- 	-- commit = "867902d5974a18c156c918ab8addbf091719de27",
-	-- 	config = function()
-	-- 		require("tiny-inline-diagnostic").setup({
-	-- 			options = {
-	-- 				throttle = 50,
-	-- 				multilines = true,
-	-- 				show_all_diags_on_cursorline = true,
-	-- 				format = function(diagnostic)
-	-- 					local message = diagnostic.message .. " [" .. (diagnostic.source or "")
-	--
-	-- 					local rule_name = diagnostic.user_data
-	-- 						and diagnostic.user_data.lsp
-	-- 						and diagnostic.user_data.lsp.code
-	--
-	-- 					if rule_name then
-	-- 						message = message .. "]" .. " (" .. rule_name .. ")"
-	-- 					else
-	-- 						message = message .. "]"
-	-- 					end
-	--
-	-- 					return message
-	-- 				end,
-	-- 			},
-	-- 			preset = "ghost",
-	-- 		})
-	-- 	end,
-	-- },
 	{
 		"rasulomaroff/reactive.nvim",
 		event = { "BufReadPre", "BufNewFile" },
@@ -187,4 +154,18 @@ return {
 			position = "top-right",
 		},
 	},
+	{
+		"kosayoda/nvim-lightbulb",
+		event = "LspAttach",
+		config = function()
+			require("nvim-lightbulb").setup({
+				sign = {
+					enabled = true,
+				},
+				autocmd = {
+					enabled = true,
+				}
+			})
+		end
+	}
 }
