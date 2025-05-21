@@ -35,12 +35,13 @@ return {
 					"biome",
 					"elixirls",
 					"ruff",
-					"pylsp"
+					"pylsp",
 				},
 				automatic_enable = {
 					exclude = {
 						"biome",
-					}
+						"vtsls",
+					},
 				},
 			})
 
@@ -66,10 +67,8 @@ return {
 				nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 				nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 				nmap("<lader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-				nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols,
-					"[D]ocument [S]ymbols")
-				nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols,
-					"[W]orkspace [S]ymbols")
+				nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+				nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
 				-- See `:help K` for why this keymap
 				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -93,7 +92,7 @@ return {
 				end, "Format current buffer with LSP")
 			end
 
-			vim.lsp.config('*', {
+			vim.lsp.config("*", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
 
@@ -101,54 +100,57 @@ return {
 				callback = function(ev)
 					local client = vim.lsp.get_client_by_id(ev.data.client_id)
 					on_attach(client, ev.buf)
-				end
+				end,
 			})
 
 			vim.lsp.config("vtsls", {
-				{
-					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-					settings = {
-						typescript = {
-							updateImportsOnFileMove = {
-								enabled = "always",
-							},
-							preferences = {
-								importModuleSpecifier = "non-relative",
-							},
+				filetypes = {
+					"javascript",
+					"javascriptreact",
+					"javascript.jsx",
+					"typescript",
+					"typescriptreact",
+					"typescript.tsx",
+				},
+				settings = {
+					typescript = {
+						updateImportsOnFileMove = {
+							enabled = "always",
 						},
-						javascript = {
-							updateImportsOnFileMove = {
-								enabled = "always",
-							},
-						},
-						vtsls = {
-							tsserver = {
-								globalPlugins = {},
-							},
-							experimental = {
-								completion = {
-									enableServerSideFuzzyMatch = true,
-								},
-							},
-							autoUseWorkspaceTsdk = true,
+						preferences = {
+							importModuleSpecifier = "non-relative",
 						},
 					},
-					before_init = function(_, config)
-						local vuePluginConfig = {
-							name = "@vue/typescript-plugin",
-							location = require("mason-registry").get_package(
-								    "vue-language-server")
-							    :get_install_path()
-							    .. "/node_modules/@vue/language-server",
-							languages = { "vue" },
-							configNamespace = "typescript",
-							enableForWorkspaceTypeScriptVersions = true,
-						}
-						table.insert(config.settings.vtsls.tsserver.globalPlugins,
-							vuePluginConfig)
-					end,
-				}
+					javascript = {
+						updateImportsOnFileMove = {
+							enabled = "always",
+						},
+					},
+					vtsls = {
+						tsserver = {
+							globalPlugins = {},
+						},
+						experimental = {
+							completion = {
+								enableServerSideFuzzyMatch = true,
+							},
+						},
+						autoUseWorkspaceTsdk = true,
+					},
+				},
+				-- before_init = function(_, config)
+				-- 	local vuePluginConfig = {
+				-- 		name = "@vue/typescript-plugin",
+				-- 		location = vim.fn.exepath("vue-language-server"),
+				-- 		languages = { "vue" },
+				-- 		configNamespace = "typescript",
+				-- 		enableForWorkspaceTypeScriptVersions = true,
+				-- 	}
+				-- 	table.insert(config.settings.vtsls.tsserver.globalPlugins, vuePluginConfig)
+				-- end
 			})
+
+			vim.lsp.enable("vtsls")
 
 			vim.lsp.config("solargraph", {
 				init_options = {
@@ -206,15 +208,15 @@ return {
 
 			if require("utils.linter").has_linter("biome") then
 				vim.lsp.config("biome", {})
+				vim.lsp.enable("biome")
 			end
 
 			vim.lsp.config("tailwindcss", {
 				settings = {
 					tailwindCSS = {
 						experimental = {
-							configFile = require("utils.tailwind").has_tailwind_v4() and
-							    "css/styles.css"
-							    or "tailwind.config.mjs",
+							configFile = require("utils.tailwind").has_tailwind_v4() and "css/styles.css"
+								or "tailwind.config.mjs",
 						},
 					},
 				},
