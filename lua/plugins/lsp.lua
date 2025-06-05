@@ -30,7 +30,6 @@ return {
 					"emmet_language_server",
 					"vue_ls",
 					"svelte",
-					"astro",
 					"jsonls",
 					"biome",
 					"elixirls",
@@ -67,10 +66,8 @@ return {
 				nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 				nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 				nmap("<lader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-				nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols,
-					"[D]ocument [S]ymbols")
-				nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols,
-					"[W]orkspace [S]ymbols")
+				nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+				nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
 				-- See `:help K` for why this keymap
 				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -103,11 +100,13 @@ return {
 					local client = vim.lsp.get_client_by_id(ev.data.client_id)
 					on_attach(client, ev.buf)
 				end,
-
 			})
 
-			local vue_language_server_path = vim.fn.expand '$MASON/packages' ..
-			    '/vue-language-server' .. '/node_modules/@vue/language-server'
+			local vue_language_server_path = vim.fn.expand("$MASON/packages")
+				.. "/vue-language-server"
+				.. "/node_modules/@vue/language-server"
+
+			local astro_ts_plugin_path = io.popen("npm root -g"):read("*a"):gsub("\n", "") .. "/@astrojs/ts-plugin"
 
 			vim.lsp.config("vtsls", {
 				filetypes = {
@@ -117,7 +116,7 @@ return {
 					"typescript",
 					"typescriptreact",
 					"typescript.tsx",
-					"vue"
+					"vue",
 				},
 				settings = {
 					typescript = {
@@ -135,7 +134,15 @@ return {
 					},
 					vtsls = {
 						tsserver = {
-							globalPlugins = {},
+							globalPlugins = {
+								{
+									name = "@astrojs/ts-plugin",
+									languages = { "astro" },
+									configNamespace = "typescript",
+									enableForWorkspaceTypeScriptVersions = true,
+									location = astro_ts_plugin_path,
+								},
+							},
 						},
 						experimental = {
 							completion = {
@@ -154,7 +161,7 @@ return {
 						enableForWorkspaceTypeScriptVersions = true,
 					}
 					table.insert(config.settings.vtsls.tsserver.globalPlugins, vuePluginConfig)
-				end
+				end,
 			})
 
 			vim.lsp.enable("vtsls")
@@ -222,16 +229,16 @@ return {
 				settings = {
 					tailwindCSS = {
 						experimental = {
-							configFile = require("utils.tailwind").has_tailwind_v4() and
-							    "css/styles.css"
-							    or "tailwind.config.mjs",
+							configFile = require("utils.tailwind").get_tailwind_config_file(),
 						},
 					},
 				},
 			})
 
-			-- vim.lsp.config("gleam", {})
 			vim.lsp.enable("gleam")
+
+			-- vim.lsp.config("astro", {})
+			vim.lsp.enable("astro")
 		end,
 	},
 	{

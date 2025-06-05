@@ -141,7 +141,14 @@ return {
 					"n",
 					"t",
 				},
-				"<cmd>:1ToggleTerm direction=float name=Terminal<CR>",
+				function()
+					if vim.bo.filetype == "toggleterm" then
+						vim.cmd("close")
+						return
+					end
+
+					vim.cmd("1ToggleTerm direction=float name=Terminal")
+				end,
 				desc = "Toggle Terminal",
 			},
 		},

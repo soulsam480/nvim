@@ -21,16 +21,17 @@ return {
 
 			require("telescope").setup({
 				defaults = {
-					path_display = { "smart" },
+					-- path_display = { "smart" },
 				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
 					},
-					fzf = {},
+					-- fzf = {},
 				},
 				pickers = {
 					buffers = {
+						path_display = { "smart" },
 						file_ignore_patterns = { "term:" },
 						theme = "dropdown",
 						previewer = false,

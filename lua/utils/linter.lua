@@ -19,37 +19,37 @@ local oxlint_config_files = {
 }
 
 local eslint_format_files = {
-	".eslintformat"
+	".eslintformat",
 }
 
 local prettier_config_files = {
 	".prettierrc",
 }
 
-local check_files = function(files)
+M.check_files = function(files)
 	local cwd = vim.fn.getcwd() -- Get the current working directory
 
 	for _, config_file in ipairs(files) do
 		local file_path = cwd .. "/" .. config_file
 		if vim.loop.fs_stat(file_path) then
-			return true
+			return config_file
 		end
 	end
 
-	return false
+	return nil
 end
 
 -- Function to check if any of the ESLint config files exist in the root of the project
 M.get_enabled_linter = function()
-	if check_files(eslint_config_files) then
+	if M.check_files(eslint_config_files) then
 		return true
 	end
 
-	if check_files(biome_config_files) then
+	if M.check_files(biome_config_files) then
 		return true
 	end
 
-	if check_files(oxlint_config_files) then
+	if M.check_files(oxlint_config_files) then
 		return true
 	end
 
@@ -59,23 +59,23 @@ end
 -- function to check if there's a linter config for provided
 M.has_linter = function(linter)
 	if linter == "oxlint" then
-		return check_files(oxlint_config_files)
+		return M.check_files(oxlint_config_files)
 	end
 
 	if linter == "eslint" then
-		return check_files(eslint_config_files)
+		return M.check_files(eslint_config_files)
 	end
 
 	if linter == "biome" then
-		return check_files(biome_config_files)
+		return M.check_files(biome_config_files)
 	end
 
 	if linter == "prettier" then
-		return check_files(prettier_config_files)
+		return M.check_files(prettier_config_files)
 	end
 
-	if linter == 'eslint-format' then
-		return check_files(eslint_format_files)
+	if linter == "eslint-format" then
+		return M.check_files(eslint_format_files)
 	end
 end
 

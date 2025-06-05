@@ -1,5 +1,11 @@
 local M = {}
 
+local tailwind_config_files = {
+	"tailwind.config.js",
+	"tailwind.config.cjs",
+	"tailwind.config.mjs",
+}
+
 M.has_tailwind_v4 = function()
 	local root = vim.fn.getcwd() -- Get the current working directory
 
@@ -25,6 +31,14 @@ M.has_tailwind_v4 = function()
 	local dev_deps = dependencies.devDependencies or {}
 
 	return deps["@tailwindcss/vite"] ~= nil or dev_deps["@tailwindcss/vite"] ~= nil
+end
+
+M.get_tailwind_config_file = function()
+	if M.has_tailwind_v4() then
+		return "css/styles.css"
+	end
+
+	return require("utils.linter").check_files(tailwind_config_files)
 end
 
 return M
