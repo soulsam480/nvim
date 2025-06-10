@@ -51,3 +51,5 @@ vim.opt.guicursor = {
 }
 
 vim.opt.showmode = false
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"

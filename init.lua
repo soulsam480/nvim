@@ -1,5 +1,5 @@
-require("config.lazy")
 require("config.options")
+require("config.lazy")
 require("config.autocmds")
 require("config.usercmds")
 require("config.linter.biome-fix-all")
