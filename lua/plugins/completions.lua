@@ -22,7 +22,7 @@ return {
 					})
 				end,
 			},
-			{ "Kaiser-Yang/blink-cmp-avante" },
+			-- { "Kaiser-Yang/blink-cmp-avante" },
 		},
 		version = "v0.*",
 		config = function()
@@ -54,14 +54,14 @@ return {
 								return items
 							end,
 						},
-						avante = {
-							module = "blink-cmp-avante",
-							name = "Avante",
-							opts = {},
-						},
+						-- avante = {
+						-- 	module = "blink-cmp-avante",
+						-- 	name = "Avante",
+						-- 	opts = {},
+						-- },
 					},
 					default = {
-						"avante",
+						-- "avante",
 						"lsp",
 						"path",
 						"buffer",
