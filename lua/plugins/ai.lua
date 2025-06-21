@@ -1,43 +1,66 @@
 return {
-	-- {
-	-- 	"yetone/avante.nvim",
-	-- 	event = "VeryLazy",
-	-- 	version = false,
-	-- 	build = "make",
-	-- 	opts = {
-	-- 		provider = "gemini",
-	-- 	},
-	-- 	dependencies = {
-	-- 		"nvim-treesitter/nvim-treesitter",
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		"nvim-telescope/telescope.nvim",
-	-- 		"nvim-tree/nvim-web-devicons",
-	-- 		{
-	-- 			-- support for image pasting
-	-- 			"HakonHarnes/img-clip.nvim",
-	-- 			event = "VeryLazy",
-	-- 			opts = {
-	-- 				-- recommended settings
-	-- 				default = {
-	-- 					embed_image_as_base64 = false,
-	-- 					prompt_for_file_name = false,
-	-- 					drag_and_drop = {
-	-- 						insert_mode = true,
-	-- 					},
-	-- 					-- required for Windows users
-	-- 					use_absolute_path = true,
-	-- 				},
-	-- 			},
-	-- 		},
-	-- 		{
-	-- 			-- Make sure to set this up properly if you have lazy=true
-	-- 			"MeanderingProgrammer/render-markdown.nvim",
-	-- 			opts = {
-	-- 				file_types = { "markdown", "Avante" },
-	-- 			},
-	-- 			ft = { "markdown", "Avante" },
-	-- 		},
-	-- 	},
-	-- },
+	{
+		"olimorris/codecompanion.nvim",
+		opts = {},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"ravitemer/mcphub.nvim",
+			{
+				"OXY2DEV/markview.nvim",
+				lazy = false,
+				opts = {
+					preview = {
+						filetypes = { "markdown", "codecompanion" },
+						ignore_buftypes = {},
+					},
+				},
+			},
+			{
+				"ravitemer/mcphub.nvim",
+				build = "npm install -g mcp-hub@latest",
+				config = function()
+					require("mcphub").setup()
+				end,
+			},
+		},
+		config = function()
+			require("codecompanion").setup({
+				extensions = {
+					mcphub = {
+						callback = "mcphub.extensions.codecompanion",
+						opts = {
+							make_vars = true,
+							make_slash_commands = true,
+							show_result_in_chat = true,
+						},
+					},
+				},
+				strategies = {
+					chat = {
+						adapter = "gemini",
+					},
+					inline = {
+						adapter = "gemini",
+					},
+					cmd = {
+						adapter = "gemini",
+					},
+				},
+			})
+		end,
+		keys = {
+			{
+				"<leader>ai",
+				"<cmd>CodeCompanionChat Toggle<cr>",
+				desc = "Toggle AI Chat",
+			},
+			{
+				"<leader>aa",
+				":'<,'>CodeCompanionChat Add<CR>",
+				mode = "x",
+				desc = "Add selection to Chat",
+			},
+		},
+	},
 }
