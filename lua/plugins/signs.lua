@@ -17,6 +17,7 @@ return {
 			})
 
 			require("utils.fta").setup()
+			require("utils.codecompanion"):init({})
 
 			local nvimbattery = {
 				function()
@@ -34,6 +35,11 @@ return {
 				require("noice").api.status.search.get,
 				cond = require("noice").api.status.search.has,
 				color = { fg = "#ff9e64" },
+			}
+
+			local codecompanion = {
+				require("utils.codecompanion"):update_status(),
+				color = { fg = vim.g.tinted_gui0B, bg = vim.g.tinted_gui01 },
 			}
 
 			require("lualine").setup({
@@ -57,6 +63,7 @@ return {
 					lualine_b = { "branch", "diff" },
 					lualine_c = {},
 					lualine_x = {
+						codecompanion,
 						require("nvim-lightbulb").get_status_text(),
 						{
 							require("noice").api.statusline.mode.get,

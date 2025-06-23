@@ -10,6 +10,7 @@ return {
 			table.insert(js_formatters, "eslint_format")
 		else
 			table.insert(js_formatters, "biome")
+			table.insert(js_formatters, "deno_fmt")
 		end
 
 		require("conform").setup({
@@ -44,6 +45,7 @@ return {
 				eruby = { "rubocop" },
 				markdown = { "deno_fmt" },
 				vue = { "deno_fmt" },
+				-- sql = { "sqruff" }
 				-- elixir = { "mix" }
 			},
 			format_on_save = {

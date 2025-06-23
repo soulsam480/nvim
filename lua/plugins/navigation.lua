@@ -46,6 +46,7 @@ return {
 						enable_preview = true,
 					},
 					find_files = {
+						previewer = false,
 						find_command = {
 							"rg",
 							"--no-ignore",
@@ -141,7 +142,10 @@ return {
 			{
 				"<leader>fr",
 				function()
-					require("telescope").extensions.recent_files.pick()
+					require("telescope").extensions.recent_files.pick(
+						{
+							previewer = false
+						})
 				end,
 				desc = "Telescope find recent files",
 			},
@@ -209,7 +213,7 @@ return {
 		end,
 		keys = {
 			{ "<leader>pp", ":NvimTreeToggle<CR>", desc = "Open Files" },
-			{ "<leader>p", ":NvimTreeFocus<CR>", desc = "Focus Files" },
+			{ "<leader>p",  ":NvimTreeFocus<CR>",  desc = "Focus Files" },
 		},
 	},
 	{

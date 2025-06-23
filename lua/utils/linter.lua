@@ -24,6 +24,7 @@ local eslint_format_files = {
 
 local prettier_config_files = {
 	".prettierrc",
+	".prettierrc.cjs",
 }
 
 M.check_files = function(files)
