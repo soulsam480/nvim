@@ -10,7 +10,7 @@ return {
 			table.insert(js_formatters, "eslint_format")
 		else
 			table.insert(js_formatters, "biome")
-			table.insert(js_formatters, "deno_fmt")
+			-- table.insert(js_formatters, "deno_fmt")
 		end
 
 		require("conform").setup({

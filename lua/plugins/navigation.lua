@@ -18,16 +18,30 @@ return {
 		},
 		config = function()
 			local actions = require("telescope.actions")
+			local previewers = require("telescope.previewers")
+
+			local new_maker = function(filepath, bufnr, opts)
+				opts = opts or {}
+
+				filepath = vim.fn.expand(filepath)
+
+				-- we need to return nil if file path contains env or secrets
+				if filepath:match("env") or filepath:match("secrets") then
+					return nil
+				else
+					previewers.buffer_previewer_maker(filepath, bufnr, opts)
+				end
+			end
 
 			require("telescope").setup({
 				defaults = {
 					-- path_display = { "smart" },
+					buffer_previewer_maker = new_maker,
 				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
 					},
-					-- fzf = {},
 				},
 				pickers = {
 					buffers = {
@@ -46,7 +60,7 @@ return {
 						enable_preview = true,
 					},
 					find_files = {
-						previewer = false,
+						-- previewer = false,
 						find_command = {
 							"rg",
 							"--no-ignore",
@@ -142,10 +156,9 @@ return {
 			{
 				"<leader>fr",
 				function()
-					require("telescope").extensions.recent_files.pick(
-						{
-							previewer = false
-						})
+					require("telescope").extensions.recent_files.pick({
+						previewer = false,
+					})
 				end,
 				desc = "Telescope find recent files",
 			},
@@ -213,7 +226,7 @@ return {
 		end,
 		keys = {
 			{ "<leader>pp", ":NvimTreeToggle<CR>", desc = "Open Files" },
-			{ "<leader>p",  ":NvimTreeFocus<CR>",  desc = "Focus Files" },
+			{ "<leader>p", ":NvimTreeFocus<CR>", desc = "Focus Files" },
 		},
 	},
 	{
@@ -251,64 +264,4 @@ return {
 			})
 		end,
 	},
-	{
-		"niqodea/lasso.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			local lasso = require("lasso")
-			lasso.setup({
-				-- marks_tracker_path = 'custom/path/to/marks/tracker'
-			})
-
-			-- Mark current file
-			vim.keymap.set("n", vim.g.mapleader .. "m", function()
-				lasso.mark_file()
-			end, { desc = "Lasso: mark current file" })
-
-			-- Go to marks tracker (editable, use `gf` to go to file under cursor)
-			vim.keymap.set("n", vim.g.mapleader .. "M", function()
-				lasso.open_marks_tracker()
-			end, { desc = "Lasso: open marks" })
-
-			-- Jump to n-th marked file (n-th line of marks tracker)
-			vim.keymap.set("n", vim.g.mapleader .. "1", function()
-				lasso.open_marked_file(1)
-			end, { desc = "Lasso: go to 1st mark" })
-			vim.keymap.set("n", vim.g.mapleader .. "2", function()
-				lasso.open_marked_file(2)
-			end, { desc = "Lasso: go to 2nd mark" })
-			vim.keymap.set("n", vim.g.mapleader .. "3", function()
-				lasso.open_marked_file(3)
-			end, { desc = "Lasso: go to 3rd mark" })
-			vim.keymap.set("n", vim.g.mapleader .. "4", function()
-				lasso.open_marked_file(4)
-			end, { desc = "Lasso: go to 4th mark" })
-
-			vim.keymap.set("n", vim.g.mapleader .. "5", function()
-				lasso.open_marked_file(5)
-			end, { desc = "Lasso: go to 5th mark" })
-		end,
-	},
-	-- {
-	-- 	"aaronik/treewalker.nvim",
-	-- 	config = function()
-	-- 		vim.keymap.set({ "n", "v" }, "<C-u>", function()
-	-- 			if vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] then
-	-- 				vim.cmd(":Treewalker Up")
-	-- 			end
-	-- 		end, {
-	-- 			silent = true,
-	-- 			desc = "[T]reewalker [u]p",
-	-- 		})
-	--
-	-- 		vim.keymap.set({ "n", "v" }, "<C-d>", function()
-	-- 			if vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] then
-	-- 				vim.cmd(":Treewalker Down")
-	-- 			end
-	-- 		end, {
-	-- 			silent = true,
-	-- 			desc = "[T]reewalker down",
-	-- 		})
-	-- 	end,
-	-- },
 }

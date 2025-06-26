@@ -1,8 +1,6 @@
 return {
-
 	{
-		"Jufralice/codecompanion.nvim",
-		branch = "improve_insert_edit_into_file_tool_prompt_llm_version",
+		"olimorris/codecompanion.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
@@ -22,17 +20,16 @@ return {
 				"ravitemer/mcphub.nvim",
 				build = "npm install -g mcp-hub@latest",
 				opts = {},
-				event = "VeryLazy"
+				event = "VeryLazy",
 			},
 		},
 		event = "VeryLazy",
 		config = function()
-			require("mcphub").setup()
+			require("mcphub").setup({})
 
 			require("codecompanion").setup({
 				opts = {
 					system_prompt = require("utils.system_prompt"),
-
 				},
 				extensions = {
 					mcphub = {
@@ -45,20 +42,20 @@ return {
 					},
 					history = {
 						enabled = true,
-					}
+					},
 				},
 				strategies = {
 					chat = {
 						adapter = "gemini",
-						model = "gemini-2.0-flash"
+						model = "gemini-2.0-flash",
 					},
 					inline = {
 						adapter = "gemini",
-						model = "gemini-2.0-flash"
+						model = "gemini-2.0-flash",
 					},
 					cmd = {
 						adapter = "gemini",
-						model = "gemini-2.0-flash"
+						model = "gemini-2.0-flash",
 					},
 				},
 			})

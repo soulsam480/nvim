@@ -241,15 +241,4 @@ return {
 		},
 	},
 	{ "chrisgrieser/nvim-spider", event = { "BufReadPre", "BufNewFile" } },
-	-- {
-	-- 	"rmagatti/auto-session",
-	-- 	lazy = false,
-	-- 	opts = {
-	-- 		bypass_save_filetypes = { "BufTerm", "zsh" },
-	-- 		suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-	-- 		session_lens = {
-	-- 			load_on_setup = false,
-	-- 		},
-	-- 	},
-	-- },
 }
