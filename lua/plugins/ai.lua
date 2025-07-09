@@ -4,8 +4,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			"ravitemer/mcphub.nvim",
-			"ravitemer/codecompanion-history.nvim",
+			{ "ravitemer/codecompanion-history.nvim", event = "VeryLazy" },
 			{
 				"OXY2DEV/markview.nvim",
 				lazy = false,
@@ -19,6 +18,11 @@ return {
 			{
 				"ravitemer/mcphub.nvim",
 				build = "npm install -g mcp-hub@latest",
+				opts = {},
+				event = "VeryLazy",
+			},
+			{
+				"franco-ruggeri/codecompanion-spinner.nvim",
 				opts = {},
 				event = "VeryLazy",
 			},
