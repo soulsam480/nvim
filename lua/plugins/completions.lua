@@ -24,9 +24,10 @@ return {
 			},
 			-- { "Kaiser-Yang/blink-cmp-avante" },
 		},
-		version = "v0.*",
+		version = "1.*",
 		config = function()
 			require("blink.cmp").setup({
+				fuzzy = { implementation = "lua" },
 				sources = {
 					providers = {
 						snippets = {
@@ -54,14 +55,8 @@ return {
 								return items
 							end,
 						},
-						-- avante = {
-						-- 	module = "blink-cmp-avante",
-						-- 	name = "Avante",
-						-- 	opts = {},
-						-- },
 					},
 					default = {
-						-- "avante",
 						"lsp",
 						"path",
 						"buffer",

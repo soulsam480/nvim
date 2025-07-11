@@ -91,9 +91,9 @@ return {
 				end, "Format current buffer with LSP")
 			end
 
-			vim.lsp.config("*", {
-				capabilities = require("blink.cmp").get_lsp_capabilities(),
-			})
+			-- vim.lsp.config("*", {
+			-- 	capabilities = require("blink.cmp").get_lsp_capabilities(),
+			-- })
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(ev)
@@ -239,6 +239,7 @@ return {
 
 			-- vim.lsp.config("astro", {})
 			vim.lsp.enable("astro")
+			vim.lsp.enable("rust_analyzer")
 		end,
 	},
 	{
