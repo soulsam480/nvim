@@ -4,6 +4,19 @@ local function get_bime_binary()
 	return cwd .. "/" .. "node_modules/.bin/biome"
 end
 
+local function find_biome_config()
+	local cwd = vim.fn.getcwd()
+
+	local config_path = cwd .. "/biome.jsonc"
+
+	-- Check if biome.jsonc exists and is readable in the current working directory
+	if vim.fn.filereadable(config_path) == 1 then
+		return config_path
+	end
+
+	return nil
+end
+
 vim.api.nvim_create_user_command("BiomeFixAll", function()
 	local bufnr = vim.api.nvim_get_current_buf()
 	local bufname = vim.api.nvim_buf_get_name(bufnr)
@@ -16,7 +29,18 @@ vim.api.nvim_create_user_command("BiomeFixAll", function()
 	-- Save the current buffer to ensure changes aren't lost
 	vim.cmd("write")
 
-	local biome_cmd = { get_bime_binary(), "lint", "--write", "--unsafe", bufname }
+	local biome_cmd = { get_bime_binary(), "lint", "--write", "--unsafe" }
+
+	-- Add --config flag if biome.jsonc is found
+	local config_file = find_biome_config()
+	if config_file then
+		table.insert(biome_cmd, "--config-path")
+		table.insert(biome_cmd, config_file)
+	end
+
+	vim.notify(vim.inspect(biome_cmd), vim.log.levels.INFO)
+
+	table.insert(biome_cmd, bufname) -- Always add the buffer name as the last argument
 
 	-- Run Biome CLI
 	vim.fn.jobstart(biome_cmd, {
