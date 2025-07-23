@@ -1,3 +1,4 @@
+vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.signcolumn = "number"
 vim.opt.list = true
@@ -26,7 +27,8 @@ vim.diagnostic.config({
 		format = function(diagnostic)
 			local message = diagnostic.message .. " [" .. (diagnostic.source or "")
 
-			local rule_name = diagnostic.user_data and diagnostic.user_data.lsp and diagnostic.user_data.lsp.code
+			local rule_name = diagnostic.user_data and diagnostic.user_data.lsp and
+			diagnostic.user_data.lsp.code
 
 			if rule_name then
 				message = message .. "]" .. " (" .. rule_name .. ")"

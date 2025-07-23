@@ -42,6 +42,9 @@ return {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
 					},
+					recent_files = {
+						only_cwd = true
+					}
 				},
 				pickers = {
 					buffers = {
@@ -228,7 +231,7 @@ return {
 		end,
 		keys = {
 			{ "<leader>pp", ":NvimTreeToggle<CR>", desc = "Open Files" },
-			{ "<leader>p", ":NvimTreeFocus<CR>", desc = "Focus Files" },
+			{ "<leader>p",  ":NvimTreeFocus<CR>",  desc = "Focus Files" },
 		},
 	},
 	{

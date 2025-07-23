@@ -1,7 +1,7 @@
 return {
 	{
 		"nvim-lualine/lualine.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "VeryLazy" },
 		dependencies = {
 			"justinhj/battery.nvim",
 			"nvim-tree/nvim-web-devicons",
@@ -16,18 +16,11 @@ return {
 				battery_threshold = 25,
 			})
 
-			require("utils.fta").setup()
-
 			local nvimbattery = {
 				function()
 					return require("battery").get_status_line()
 				end,
 				color = { fg = vim.g.tinted_gui0B, bg = vim.g.tinted_gui01 },
-			}
-
-			local fta = {
-				require("utils.fta").get_lualine_component(),
-				color = { fg = vim.g.tinted_gui08, bg = vim.g.tinted_gui01, gui = "bold" },
 			}
 
 			local noice_search = {
@@ -41,18 +34,12 @@ return {
 					theme = "base16",
 					component_separators = "",
 					section_separators = { left = "", right = "" },
+					refresh = { statusline = 1000 }
 				},
 				sections = {
 					lualine_a = {
 						{ "mode", separator = { left = "", right = "" } },
-						{
-							require("utils.now_playing").now_playing_component,
-							separator = { left = "", right = "" },
-							color = {
-								bg = vim.g.tinted_gui01,
-								fg = vim.g.tinted_gui0D,
-							},
-						},
+
 					},
 					lualine_b = { "branch", "diff" },
 					lualine_c = {},
@@ -64,7 +51,6 @@ return {
 							color = { fg = "#ff9e64" },
 						},
 						noice_search,
-						fta,
 						"filetype",
 						nvimbattery,
 					},
