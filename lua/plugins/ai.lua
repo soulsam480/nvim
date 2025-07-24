@@ -51,15 +51,15 @@ return {
 				strategies = {
 					chat = {
 						adapter = "gemini",
-						model = "gemini-2.0-flash",
+						model = "gemini-2.5-pro",
 					},
 					inline = {
 						adapter = "gemini",
-						model = "gemini-2.0-flash",
+						model = "gemini-2.5-pro",
 					},
 					cmd = {
 						adapter = "gemini",
-						model = "gemini-2.0-flash",
+						model = "gemini-2.5-pro",
 					},
 				},
 			})

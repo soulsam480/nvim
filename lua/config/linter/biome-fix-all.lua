@@ -38,8 +38,6 @@ vim.api.nvim_create_user_command("BiomeFixAll", function()
 		table.insert(biome_cmd, config_file)
 	end
 
-	vim.notify(vim.inspect(biome_cmd), vim.log.levels.INFO)
-
 	table.insert(biome_cmd, bufname) -- Always add the buffer name as the last argument
 
 	-- Run Biome CLI

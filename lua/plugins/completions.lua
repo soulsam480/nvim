@@ -17,12 +17,11 @@ return {
 				"supermaven-inc/supermaven-nvim",
 				config = function()
 					require("supermaven-nvim").setup({
-						isable_keymaps = true,
+						disable_keymaps = true,
 						disable_inline_completion = true,
 					})
 				end,
 			},
-			-- { "Kaiser-Yang/blink-cmp-avante" },
 		},
 		version = "1.*",
 		config = function()
@@ -46,13 +45,16 @@ return {
 							score_offset = 100,
 							async = true,
 							transform_items = function(_, items)
-								local CompletionItemKind = require("blink.cmp.types")
-								    .CompletionItemKind
+								local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+
 								local kind_idx = #CompletionItemKind + 1
+
 								CompletionItemKind[kind_idx] = "Supermaven"
+
 								for _, item in ipairs(items) do
 									item.kind = kind_idx
 								end
+
 								return items
 							end,
 						},
@@ -93,12 +95,10 @@ return {
 							components = {
 								label = {
 									text = function(ctx)
-										return require("colorful-menu")
-										    .blink_components_text(ctx)
+										return require("colorful-menu").blink_components_text(ctx)
 									end,
 									highlight = function(ctx)
-										return require("colorful-menu")
-										    .blink_components_highlight(ctx)
+										return require("colorful-menu").blink_components_highlight(ctx)
 									end,
 								},
 							},

@@ -35,6 +35,8 @@ return {
 					"elixirls",
 					"ruff",
 					"pylsp",
+					"rust_analyzer",
+					"astro",
 				},
 				automatic_enable = {
 					exclude = {
@@ -66,10 +68,8 @@ return {
 				nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 				nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 				nmap("<lader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-				nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols,
-					"[D]ocument [S]ymbols")
-				nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols,
-					"[W]orkspace [S]ymbols")
+				nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+				nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
 				-- See `:help K` for why this keymap
 				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -105,11 +105,10 @@ return {
 			})
 
 			local vue_language_server_path = vim.fn.expand("$MASON/packages")
-			    .. "/vue-language-server"
-			    .. "/node_modules/@vue/language-server"
+				.. "/vue-language-server"
+				.. "/node_modules/@vue/language-server"
 
-			local astro_ts_plugin_path = io.popen("npm root -g"):read("*a"):gsub("\n", "") ..
-			    "/@astrojs/ts-plugin"
+			local astro_ts_plugin_path = io.popen("npm root -g"):read("*a"):gsub("\n", "") .. "/@astrojs/ts-plugin"
 
 			vim.lsp.config("vtsls", {
 				filetypes = {
@@ -240,9 +239,9 @@ return {
 
 			vim.lsp.enable("gleam")
 
-			-- vim.lsp.config("astro", {})
 			vim.lsp.enable("astro")
 			vim.lsp.enable("rust_analyzer")
+			vim.lsp.enable("jdtls")
 		end,
 	},
 	{
