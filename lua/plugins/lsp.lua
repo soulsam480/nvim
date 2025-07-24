@@ -171,7 +171,10 @@ return {
 			vim.lsp.config("solargraph", {
 				init_options = {
 					useBundler = true,
-					bundlerPath = "/Users/sambitsahoo/.rbenv/shims/bundle",
+					bundlerPath = "~/.local/share/mise/shims/bundler",
+					checkGemVersion = true,
+					rename = false,
+					logLevel = "error",
 					formatting = false,
 					diagnostics = true,
 					autoformat = false,
@@ -179,9 +182,6 @@ return {
 					definitions = true,
 					references = true,
 					symbols = true,
-					checkGemVersion = true,
-					rename = false,
-					logLevel = "error",
 					folding = true,
 				},
 			})
@@ -242,6 +242,16 @@ return {
 			vim.lsp.enable("astro")
 			vim.lsp.enable("rust_analyzer")
 			vim.lsp.enable("jdtls")
+
+			vim.lsp.config("ctags_lsp", {
+				cmd = { "ctags-lsp" },
+				filetypes = { "ruby" },
+				root_dir = function()
+					return vim.fn.getcwd()
+				end,
+			})
+
+			vim.lsp.enable("ctags_lsp")
 		end,
 	},
 	{

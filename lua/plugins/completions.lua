@@ -8,19 +8,14 @@ return {
 				"xzbdmw/colorful-menu.nvim",
 			},
 			{
-				"saghen/blink.compat",
-				version = "*",
-				lazy = true,
-				opts = {},
+				"supermaven-inc/supermaven-nvim",
+				opts = {
+					disable_keymaps = true,
+					disable_inline_completion = true,
+				},
 			},
 			{
-				"supermaven-inc/supermaven-nvim",
-				config = function()
-					require("supermaven-nvim").setup({
-						disable_keymaps = true,
-						disable_inline_completion = true,
-					})
-				end,
+				"huijiro/blink-cmp-supermaven",
 			},
 		},
 		version = "1.*",
@@ -41,22 +36,9 @@ return {
 						},
 						supermaven = {
 							name = "supermaven", -- IMPORTANT: use the same name as you would for nvim-cmp
-							module = "blink.compat.source",
+							module = "blink-cmp-supermaven",
 							score_offset = 100,
 							async = true,
-							transform_items = function(_, items)
-								local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-
-								local kind_idx = #CompletionItemKind + 1
-
-								CompletionItemKind[kind_idx] = "Supermaven"
-
-								for _, item in ipairs(items) do
-									item.kind = kind_idx
-								end
-
-								return items
-							end,
 						},
 					},
 					default = {
