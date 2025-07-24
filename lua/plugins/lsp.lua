@@ -169,6 +169,7 @@ return {
 			vim.lsp.enable("vtsls")
 
 			vim.lsp.config("solargraph", {
+				cmd = { "bundle", "exec", "solargraph", "stdio" },
 				init_options = {
 					useBundler = true,
 					bundlerPath = "~/.local/share/mise/shims/bundler",
