@@ -88,6 +88,7 @@ return {
 			notify.setup({
 				background_colour = "#000000",
 				enabled = true,
+				timeout = 1000,
 			})
 		end,
 	},

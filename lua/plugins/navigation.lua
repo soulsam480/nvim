@@ -11,9 +11,12 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
 			"smartpde/telescope-recent-files",
+			-- {
+			-- 	"nvim-telescope/telescope-fzf-native.nvim",
+			-- 	build = "make",
+			-- },
 			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build = "make",
+				"natecraddock/telescope-zf-native.nvim",
 			},
 		},
 		config = function()
@@ -43,8 +46,8 @@ return {
 						require("telescope.themes").get_dropdown({}),
 					},
 					recent_files = {
-						only_cwd = true
-					}
+						only_cwd = true,
+					},
 				},
 				pickers = {
 					buffers = {
@@ -122,7 +125,8 @@ return {
 				},
 			})
 
-			require("telescope").load_extension("fzf")
+			-- require("telescope").load_extension("fzf")
+			require("telescope").load_extension("zf-native")
 			require("telescope").load_extension("ui-select")
 			require("telescope").load_extension("recent_files")
 			require("telescope").load_extension("neoclip")
@@ -231,7 +235,7 @@ return {
 		end,
 		keys = {
 			{ "<leader>pp", ":NvimTreeToggle<CR>", desc = "Open Files" },
-			{ "<leader>p",  ":NvimTreeFocus<CR>",  desc = "Focus Files" },
+			{ "<leader>p", ":NvimTreeFocus<CR>", desc = "Focus Files" },
 		},
 	},
 	{

@@ -169,25 +169,44 @@ return {
 			vim.lsp.enable("vtsls")
 
 			vim.lsp.config("solargraph", {
-				cmd = { "bundle", "exec", "solargraph", "stdio" },
-				init_options = {
-					useBundler = true,
-					bundlerPath = "~/.local/share/mise/shims/bundler",
-					checkGemVersion = true,
-					rename = false,
-					logLevel = "error",
-					formatting = false,
-					diagnostics = true,
-					autoformat = false,
-					completion = true,
-					definitions = true,
-					references = true,
-					symbols = true,
-					folding = true,
+				cmd = { "/Users/sambitsahoo/.local/share/mise/shims/bundle", "exec", "solargraph", "stdio" },
+				settings = {
+					solargraph = {
+						useBundler = true,
+						bundlerPath = "~/.local/share/mise/shims/bundler",
+						checkGemVersion = true,
+						rename = false,
+						logLevel = "info",
+						formatting = true,
+						diagnostics = true,
+						autoformat = false,
+						completion = true,
+						definitions = true,
+						references = true,
+						symbols = true,
+						folding = true,
+					},
 				},
 			})
 
 			vim.lsp.enable("solargraph")
+
+			-- vim.lsp.config("rubocop", {
+			-- 	cmd = {
+			-- 		"env",
+			-- 		"RUBY_YJIT_ENABLE=1",
+			-- 		"/Users/sambitsahoo/.local/share/mise/shims/bundle",
+			-- 		"exec",
+			-- 		"rubocop",
+			-- 		"--lsp",
+			-- 	},
+			-- 	init_options = {
+			-- 		lintMode = false,
+			-- 		safeAutocorrect = false,
+			-- 	},
+			-- })
+			--
+			-- vim.lsp.enable("rubocop")
 
 			vim.lsp.config("jsonls", {
 				settings = {

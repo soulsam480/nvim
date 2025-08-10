@@ -54,15 +54,14 @@ M.setup = function()
 			disply_name = "Specs",
 			direction = "float",
 			float_opts = {
-				border = "double",
+				border = "rounded",
 			},
 			on_open = function(term)
 				term:set_mode("n")
 				term:persist_mode()
 
 				vim.api.nvim_buf_set_option(term.bufnr, "modifiable", false)
-				vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>",
-					{ noremap = true, silent = true })
+				vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
 			end,
 			on_exit = function()
 				specterm = nil

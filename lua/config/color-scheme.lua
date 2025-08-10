@@ -1,5 +1,5 @@
 local M = {}
 
-M.scheme = "base24-ayu"
+M.scheme = "base24-wombat"
 
 return M

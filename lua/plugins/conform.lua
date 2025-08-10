@@ -14,6 +14,21 @@ return {
 		end
 
 		local options = {
+			-- formatters = {
+			-- 	rubocop = {
+			-- 		command = "/Users/sambitsahoo/.local/share/mise/shims/bundle",
+			-- 		args = {
+			-- 			"exec",
+			-- 			"rubocop",
+			-- 			"--no-server",
+			-- 			"--auto-correct-all",
+			-- 			"--stderr",
+			-- 			"--force-exclusion",
+			-- 			"--stdin",
+			-- 			"$FILENAME",
+			-- 		},
+			-- 	},
+			-- },
 			formatters_by_ft = {
 				lua = { "stylua" },
 				javascript = js_formatters,
@@ -24,8 +39,8 @@ return {
 				html = js_formatters,
 				json = js_formatters,
 				yaml = js_formatters,
-				ruby = { "rubocop" },
-				eruby = { "rubocop" },
+				-- ruby = { "rubocop" },
+				-- eruby = { "rubocop" },
 				markdown = { "deno_fmt" },
 				vue = { "deno_fmt" },
 				sql = { "sqruff" },
