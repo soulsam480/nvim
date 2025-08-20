@@ -10,6 +10,16 @@ local function get_relative_path(filepath)
 	return path:make_relative(cwd)
 end
 
+local function get_line_at_cursor()
+	local row = vim.fn.line(".")
+	local line_text = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
+
+	line_text = line_text:match("^%s*(.-)%s*$")
+	line_text = line_text:gsub("%s+", " and ")
+
+	return '"' .. line_text .. '"'
+end
+
 M.file_type_to_command = {
 	ruby = function()
 		return {
@@ -21,6 +31,14 @@ M.file_type_to_command = {
 			"exec",
 			"rspec",
 			get_relative_path(vim.fn.expand("%:p")) .. ":" .. vim.fn.line("."),
+		}
+	end,
+	cucumber = function()
+		return {
+			"bun",
+			"test:e2e",
+			"--tags",
+			get_line_at_cursor(),
 		}
 	end,
 }

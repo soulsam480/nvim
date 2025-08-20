@@ -272,6 +272,20 @@ return {
 			})
 
 			vim.lsp.enable("ctags_lsp")
+
+			vim.lsp.config("cucumber_language_server", {
+				settings = {
+					cucumber = {
+						features = { require("utils.join_cwd").join("features/**/*.feature") },
+						glue = {
+							require("utils.join_cwd").join("e2e/stpport/**/*.ts"),
+							require("utils.join_cwd").join("e2e/steps/**/*.ts"),
+							require("utils.join_cwd").join("features/**/tests/**/*.ts"),
+						},
+					},
+				},
+			})
+			vim.lsp.enable("cucumber_language_server")
 		end,
 	},
 	{
