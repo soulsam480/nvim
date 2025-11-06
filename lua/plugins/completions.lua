@@ -17,6 +17,16 @@ return {
 			{
 				"huijiro/blink-cmp-supermaven",
 			},
+			{
+				"folke/lazydev.nvim",
+				ft = "lua", -- only load on lua files
+				opts = {
+					library = {
+						-- Load luvit types when the `vim.uv` word is found
+						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+					},
+				},
+			},
 		},
 		version = "1.*",
 		config = function()
@@ -40,8 +50,14 @@ return {
 							score_offset = 100,
 							async = true,
 						},
+						lazydev = {
+							name = "LazyDev",
+							module = "lazydev.integrations.blink",
+							score_offset = 90,
+						},
 					},
 					default = {
+						"lazydev",
 						"lsp",
 						"path",
 						"buffer",
@@ -51,6 +67,7 @@ return {
 				},
 				keymap = {
 					preset = "default",
+
 					["<Tab>"] = { "accept", "fallback" },
 
 					["<Up>"] = { "select_prev", "fallback" },

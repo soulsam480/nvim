@@ -34,12 +34,11 @@ return {
 					theme = "base16",
 					component_separators = "",
 					section_separators = { left = "", right = "" },
-					refresh = { statusline = 1000 }
+					refresh = { statusline = 1000 },
 				},
 				sections = {
 					lualine_a = {
 						{ "mode", separator = { left = "", right = "" } },
-
 					},
 					lualine_b = { "branch", "diff" },
 					lualine_c = {},
@@ -153,5 +152,10 @@ return {
 				},
 			})
 		end,
+	},
+	{
+		"catgoose/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = {},
 	},
 }

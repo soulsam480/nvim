@@ -41,6 +41,13 @@ M.file_type_to_command = {
 			get_line_at_cursor(),
 		}
 	end,
+	typescript = function()
+		return {
+			"bun",
+			"test:unit",
+			get_relative_path(vim.fn.expand("%:p")),
+		}
+	end,
 }
 
 -- Helper function to get the command for current filetype

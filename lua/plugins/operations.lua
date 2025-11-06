@@ -227,6 +227,12 @@ return {
 						},
 					},
 				},
+				on_select = {
+					move_to_front = true,
+				},
+				on_paste = {
+					move_to_front = true,
+				},
 			})
 		end,
 		keys = {

@@ -107,6 +107,8 @@ return {
 							"-g",
 							"!**/vendor",
 							"-g",
+							"!**/.gem_rbs_collection",
+							"-g",
 							"!**/tmp",
 							"-g",
 							"!**/.svelte-kit",
