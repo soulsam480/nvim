@@ -27,6 +27,9 @@ return {
 					},
 				},
 			},
+			{
+				"moyiz/blink-emoji.nvim",
+			}
 		},
 		version = "1.*",
 		config = function()
@@ -55,6 +58,23 @@ return {
 							module = "lazydev.integrations.blink",
 							score_offset = 90,
 						},
+						emoji = {
+							module = "blink-emoji",
+							name = "Emoji",
+							score_offset = 15,
+							opts = {
+								trigger = function()
+									return { ":" }
+								end,
+							},
+							should_show_items = function()
+								return vim.tbl_contains(
+									{ "gitcommit", "markdown" },
+									vim.o.filetype
+								)
+							end,
+						}
+
 					},
 					default = {
 						"lazydev",
@@ -63,6 +83,7 @@ return {
 						"buffer",
 						"snippets",
 						"supermaven",
+						"emoji",
 					},
 				},
 				keymap = {
@@ -94,10 +115,12 @@ return {
 							components = {
 								label = {
 									text = function(ctx)
-										return require("colorful-menu").blink_components_text(ctx)
+										return require("colorful-menu")
+										    .blink_components_text(ctx)
 									end,
 									highlight = function(ctx)
-										return require("colorful-menu").blink_components_highlight(ctx)
+										return require("colorful-menu")
+										    .blink_components_highlight(ctx)
 									end,
 								},
 							},

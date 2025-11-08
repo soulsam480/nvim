@@ -177,7 +177,17 @@ return {
 		"gregorias/coerce.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		tag = "v3.0.0",
-		config = true,
+		config = function()
+			require("coerce").setup({})
+
+			require("coerce").register_case {
+				keymap = "l",
+				case = function(str)
+					return vim.fn.tolower(str)
+				end,
+				description = "lowercase",
+			}
+		end
 	},
 	{
 		"jiaoshijie/undotree",
