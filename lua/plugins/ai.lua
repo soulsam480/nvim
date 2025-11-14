@@ -4,7 +4,9 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			{ "ravitemer/codecompanion-history.nvim", event = "VeryLazy" },
+			{ "ravitemer/codecompanion-history.nvim", event = "VeryLazy", opts = {
+				expiration_days = 10,
+			} },
 			{
 				"OXY2DEV/markview.nvim",
 				lazy = false,
@@ -26,6 +28,7 @@ return {
 				opts = {},
 				event = "VeryLazy",
 			},
+			"j-hui/fidget.nvim",
 		},
 		event = "VeryLazy",
 		config = function()
@@ -52,6 +55,7 @@ return {
 					http = {
 						openrouter = function()
 							return require("codecompanion.adapters").extend("openai_compatible", {
+								name = "OpenRouter",
 								env = {
 									url = "https://openrouter.ai/api",
 									api_key = "OPENROUTER_API_KEY",
@@ -60,6 +64,21 @@ return {
 								schema = {
 									model = {
 										default = "moonshotai/kimi-dev-72b:free",
+									},
+								},
+							})
+						end,
+						opencode_zen = function()
+							return require("codecompanion.adapters").extend("openai_compatible", {
+								name = "OpenCode Zen",
+								env = {
+									url = "https://opencode.ai/zen",
+									api_key = "OPENCODE_API_KEY",
+									chat_url = "/v1/chat/completions",
+								},
+								schema = {
+									model = {
+										default = "big-pickle",
 									},
 								},
 							})
@@ -95,5 +114,8 @@ return {
 				desc = "Add selection to Chat",
 			},
 		},
+		init = function()
+			require("utils.codecompanion-fidget"):init()
+		end,
 	},
 }
