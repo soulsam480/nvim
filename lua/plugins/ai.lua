@@ -1,6 +1,7 @@
 return {
 	{
 		"olimorris/codecompanion.nvim",
+		version = "^18.0.0",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
@@ -22,6 +23,7 @@ return {
 				build = "npm install -g mcp-hub@latest",
 				opts = {},
 				event = "VeryLazy",
+				cmd = "MCPHub",
 			},
 			{
 				"franco-ruggeri/codecompanion-spinner.nvim",
@@ -32,12 +34,11 @@ return {
 		},
 		event = "VeryLazy",
 		config = function()
-			require("mcphub").setup({})
+			require("mcphub").setup({
+				config = vim.fn.expand("~/.config/mcphub/servers.jsonc"),
+			})
 
 			require("codecompanion").setup({
-				opts = {
-					system_prompt = require("utils.system_prompt"),
-				},
 				extensions = {
 					mcphub = {
 						callback = "mcphub.extensions.codecompanion",
@@ -52,10 +53,21 @@ return {
 					},
 				},
 				adapters = {
+					acp = {
+						opts = {
+							show_presets = false,
+						},
+						opencode = require("codecompanion.adapters.acp.opencode"),
+					},
 					http = {
+						opts = {
+							show_presets = false,
+						},
+						gemini = require("codecompanion.adapters.http.gemini"),
 						openrouter = function()
 							return require("codecompanion.adapters").extend("openai_compatible", {
-								name = "OpenRouter",
+								name = "openrouter",
+								formatted_name = "OpenRouter",
 								env = {
 									url = "https://openrouter.ai/api",
 									api_key = "OPENROUTER_API_KEY",
@@ -66,11 +78,26 @@ return {
 										default = "moonshotai/kimi-dev-72b:free",
 									},
 								},
+								handlers = {
+									parse_message_meta = function(_, data)
+										local extra = data.extra
+
+										if extra and extra.reasoning then
+											data.output.reasoning = { content = extra.reasoning }
+											if data.output.content == "" then
+												data.output.content = nil
+											end
+										end
+
+										return data
+									end,
+								},
 							})
 						end,
 						opencode_zen = function()
 							return require("codecompanion.adapters").extend("openai_compatible", {
-								name = "OpenCode Zen",
+								name = "opencode_zen",
+								formatted_name = "OpenCode Zen",
 								env = {
 									url = "https://opencode.ai/zen",
 									api_key = "OPENCODE_API_KEY",
@@ -85,10 +112,13 @@ return {
 						end,
 					},
 				},
-				strategies = {
+				interactions = {
 					chat = {
 						adapter = "gemini",
 						model = "gemini-2.5-pro",
+						opts = {
+							system_prompt = require("utils.system_prompt"),
+						},
 					},
 					inline = {
 						adapter = "gemini",

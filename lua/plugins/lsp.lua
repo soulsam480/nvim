@@ -296,6 +296,8 @@ return {
 			local configs = require("nvim-treesitter.configs")
 
 			configs.setup({
+				ignore_install = {},
+				modules = {},
 				ensure_installed = {
 					"lua",
 					"vim",
