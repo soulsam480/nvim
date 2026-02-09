@@ -27,6 +27,10 @@ local prettier_config_files = {
 	".prettierrc.cjs",
 }
 
+local cspell_config_files = {
+	".cspell.json",
+}
+
 M.check_files = function(files)
 	local cwd = vim.fn.getcwd() -- Get the current working directory
 
@@ -77,6 +81,10 @@ M.has_linter = function(linter)
 
 	if linter == "eslint-format" then
 		return M.check_files(eslint_format_files)
+	end
+
+	if linter == "cspell" then
+		return M.check_files(cspell_config_files)
 	end
 end
 

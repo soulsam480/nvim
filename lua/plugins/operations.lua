@@ -11,44 +11,46 @@ return {
 		},
 	},
 	{
-		"nvim-pack/nvim-spectre",
-		opts = {
-			replace_engine = {
-				["sed"] = {
-					cmd = "sed",
-					args = {
-						"-i",
-						"",
-						"-E",
-					},
-				},
-			},
-		},
+		"MagicDuck/grug-far.nvim",
+		config = function()
+			require("grug-far").setup({})
+		end,
 		keys = {
 			{
 				"<leader>S",
-				mode = {
-					"n",
-				},
-				'<cmd>lua require("spectre").toggle()<CR>',
-				desc = "Toggle Spectre",
+				mode = { "n" },
+				function()
+					require("grug-far").toggle_instance({ instanceName = "far" })
+				end,
+				desc = "Toggle Grug Far",
 			},
 			{
 				"<leader>sw",
 				mode = { "n" },
-				'<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
+				function()
+					require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>") } })
+				end,
 				desc = "Search current word",
 			},
 			{
 				"<leader>sw",
 				mode = { "v" },
-				'<esc><cmd>lua require("spectre").open_visual()<CR>',
+				function()
+					require("grug-far").with_visual_selection()
+				end,
 				desc = "Search current word",
 			},
 			{
 				"<leader>sp",
 				mode = { "n" },
-				'<cmd>lua require("spectre").open_file_search({select_word=true})<CR>',
+				function()
+					require("grug-far").open({
+						prefills = {
+							search = vim.fn.expand("<cword>"),
+							paths = vim.fn.expand("%"),
+						},
+					})
+				end,
 				desc = "Search on current file",
 			},
 		},
@@ -200,7 +202,7 @@ return {
 				"undotreeDiff",
 				"qf",
 				"TelescopePrompt",
-				"spectre_panel",
+				"grug-far",
 				"tsplayground",
 				"BufTerm",
 				"oil",

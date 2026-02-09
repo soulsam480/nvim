@@ -62,6 +62,7 @@ return {
 					http = {
 						opts = {
 							show_presets = false,
+							show_model_choices = true,
 						},
 						gemini = require("codecompanion.adapters.http.gemini"),
 						openrouter = function()

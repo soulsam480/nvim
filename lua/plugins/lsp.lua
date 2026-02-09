@@ -17,7 +17,7 @@ return {
 			},
 		},
 		config = function()
-			require("mason").setup()
+			require("mason").setup({})
 
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -42,6 +42,7 @@ return {
 					exclude = {
 						"biome",
 						"vtsls",
+						"cspell_ls",
 					},
 				},
 			})
@@ -79,6 +80,7 @@ return {
 				nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 				nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
 				nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+
 				nmap("<leader>wl", function()
 					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 				end, "[W]orkspace [L]ist Folders")
@@ -166,7 +168,27 @@ return {
 				end,
 			})
 
-			vim.lsp.enable("vtsls")
+			-- vim.lsp.enable("vtsls")
+
+			vim.lsp.config("tsgo", {
+				settings = {
+					typescript = {
+						updateImportsOnFileMove = {
+							enabled = "always",
+						},
+						preferences = {
+							importModuleSpecifier = "non-relative",
+						},
+					},
+					javascript = {
+						updateImportsOnFileMove = {
+							enabled = "always",
+						},
+					},
+				},
+			})
+
+			vim.lsp.enable("tsgo")
 
 			vim.lsp.config("solargraph", {
 				cmd = { "/Users/sambitsahoo/.local/share/mise/shims/bundle", "exec", "solargraph", "stdio" },
@@ -285,8 +307,40 @@ return {
 					},
 				},
 			})
+
 			vim.lsp.enable("cucumber_language_server")
+
+			vim.lsp.config("cspell_ls", {
+				root_markers = {
+					"cspell.json",
+					".cspell.json",
+					"cspell.json",
+					".cSpell.json",
+					"cSpell.json",
+					"cspell.config.js",
+					"cspell.config.cjs",
+					"cspell.config.json",
+					"cspell.config.yaml",
+					"cspell.config.yml",
+					"cspell.yaml",
+					"cspell.yml",
+				},
+			})
+
+			if require("utils.linter").has_linter("cspell") then
+				vim.lsp.enable("cspell_ls")
+			end
 		end,
+		keys = {
+			{
+				"[d",
+				function()
+					vim.diagnostic.open_float()
+				end,
+				mode = "n",
+				desc = "SHow full diagnostics on line",
+			},
+		},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
