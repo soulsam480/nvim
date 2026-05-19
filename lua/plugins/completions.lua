@@ -12,6 +12,7 @@ return {
 				opts = {
 					disable_keymaps = true,
 					disable_inline_completion = true,
+					log_level = "off",
 				},
 			},
 			{
@@ -29,7 +30,7 @@ return {
 			},
 			{
 				"moyiz/blink-emoji.nvim",
-			}
+			},
 		},
 		version = "1.*",
 		config = function()
@@ -68,13 +69,9 @@ return {
 								end,
 							},
 							should_show_items = function()
-								return vim.tbl_contains(
-									{ "gitcommit", "markdown" },
-									vim.o.filetype
-								)
+								return vim.tbl_contains({ "gitcommit", "markdown" }, vim.o.filetype)
 							end,
-						}
-
+						},
 					},
 					default = {
 						"lazydev",
@@ -115,12 +112,10 @@ return {
 							components = {
 								label = {
 									text = function(ctx)
-										return require("colorful-menu")
-										    .blink_components_text(ctx)
+										return require("colorful-menu").blink_components_text(ctx)
 									end,
 									highlight = function(ctx)
-										return require("colorful-menu")
-										    .blink_components_highlight(ctx)
+										return require("colorful-menu").blink_components_highlight(ctx)
 									end,
 								},
 							},

@@ -1,16 +1,5 @@
 return {
 	{
-		"folke/flash.nvim",
-		-- stylua: ignore
-		keys = {
-			{ "<leader>f",  mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-			{ "<leader>ft", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-			{ "r",          mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-			{ "R",          mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-			{ "<c-s>",      mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
-		},
-	},
-	{
 		"MagicDuck/grug-far.nvim",
 		config = function()
 			require("grug-far").setup({})
@@ -127,7 +116,6 @@ return {
 		version = "*",
 		config = function()
 			require("toggleterm").setup({})
-			require("utils.lazygit").setup()
 
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "zsh",
@@ -182,48 +170,14 @@ return {
 		config = function()
 			require("coerce").setup({})
 
-			require("coerce").register_case {
+			require("coerce").register_case({
 				keymap = "l",
 				case = function(str)
 					return vim.fn.tolower(str)
 				end,
 				description = "lowercase",
-			}
-		end
-	},
-	{
-		"jiaoshijie/undotree",
-		dependencies = "nvim-lua/plenary.nvim",
-		config = true,
-		opts = {
-
-			ignore_filetype = {
-				"undotree",
-				"undotreeDiff",
-				"qf",
-				"TelescopePrompt",
-				"grug-far",
-				"tsplayground",
-				"BufTerm",
-				"oil",
-			},
-			window = {
-				winblend = 30,
-			},
-			keymaps = {
-				["<Down>"] = "move_next",
-				["<Up>"] = "move_prev",
-				["gj"] = "move2parent",
-				["J"] = "move_change_next",
-				["K"] = "move_change_prev",
-				["<cr>"] = "action_enter",
-				["p"] = "enter_diffbuf",
-				["q"] = "quit",
-			},
-		},
-		keys = { -- load the plugin only when using it's keybinding:
-			{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
-		},
+			})
+		end,
 	},
 	{
 		"AckslD/nvim-neoclip.lua",

@@ -11,10 +11,6 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
 			"smartpde/telescope-recent-files",
-			-- {
-			-- 	"nvim-telescope/telescope-fzf-native.nvim",
-			-- 	build = "make",
-			-- },
 			{
 				"natecraddock/telescope-zf-native.nvim",
 			},

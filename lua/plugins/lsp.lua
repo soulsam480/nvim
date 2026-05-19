@@ -189,9 +189,9 @@ return {
 				},
 			})
 
-			local path = vim.fs.find(".tsgoignore", { upward = true })[1]
+			local has_tsgo_ignore = vim.fs.find(".tsgoignore", { upward = true })[1]
 
-			if path then
+			if has_tsgo_ignore then
 				vim.lsp.enable("vtsls")
 			else
 				vim.lsp.enable("tsgo")
@@ -231,23 +231,6 @@ return {
 
 			vim.lsp.enable("solargraph")
 
-			-- vim.lsp.config("rubocop", {
-			-- 	cmd = {
-			-- 		"env",
-			-- 		"RUBY_YJIT_ENABLE=1",
-			-- 		"/Users/sambitsahoo/.local/share/mise/shims/bundle",
-			-- 		"exec",
-			-- 		"rubocop",
-			-- 		"--lsp",
-			-- 	},
-			-- 	init_options = {
-			-- 		lintMode = false,
-			-- 		safeAutocorrect = false,
-			-- 	},
-			-- })
-			--
-			-- vim.lsp.enable("rubocop")
-
 			vim.lsp.config("jsonls", {
 				settings = {
 					json = {
@@ -261,26 +244,6 @@ return {
 					},
 				},
 			})
-
-			-- vim.lsp.config("pylsp", {
-			-- 	settings = {
-			-- 		pylsp = {
-			-- 			plugins = {
-			-- 				flake8 = {
-			-- 					enabled = false,
-			-- 				},
-			-- 				autopep8 = {
-			-- 					enabled = false,
-			-- 				},
-			-- 				mccabe = {
-			-- 					enabled = false,
-			-- 				},
-			-- 				pyflakes = { enabled = false },
-			-- 				pylint = { enabled = false },
-			-- 			},
-			-- 		},
-			-- 	},
-			-- })
 
 			if require("utils.linter").has_linter("biome") then
 				vim.lsp.config("biome", {})

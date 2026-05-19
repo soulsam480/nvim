@@ -14,21 +14,6 @@ return {
 		end
 
 		local options = {
-			-- formatters = {
-			-- 	rubocop = {
-			-- 		command = "/Users/sambitsahoo/.local/share/mise/shims/bundle",
-			-- 		args = {
-			-- 			"exec",
-			-- 			"rubocop",
-			-- 			"--no-server",
-			-- 			"--auto-correct-all",
-			-- 			"--stderr",
-			-- 			"--force-exclusion",
-			-- 			"--stdin",
-			-- 			"$FILENAME",
-			-- 		},
-			-- 	},
-			-- },
 			formatters_by_ft = {
 				lua = { "stylua" },
 				javascript = js_formatters,
