@@ -34,15 +34,18 @@ return {
 					"biome",
 					"elixirls",
 					"ruff",
-					"pylsp",
+					"ty",
+					-- "pylsp",
 					"rust_analyzer",
 					"astro",
+					"tsgo",
 				},
 				automatic_enable = {
 					exclude = {
 						"biome",
 						"vtsls",
 						"cspell_ls",
+						"tsgo",
 					},
 				},
 			})
@@ -168,8 +171,6 @@ return {
 				end,
 			})
 
-			-- vim.lsp.enable("vtsls")
-
 			vim.lsp.config("tsgo", {
 				settings = {
 					typescript = {
@@ -188,7 +189,24 @@ return {
 				},
 			})
 
-			vim.lsp.enable("tsgo")
+			local path = vim.fs.find(".tsgoignore", { upward = true })[1]
+
+			if path then
+				vim.lsp.enable("vtsls")
+			else
+				vim.lsp.enable("tsgo")
+			end
+
+			vim.lsp.config("astro", {
+				-- NOTE: always force to use mason astro-ls binary
+				cmd = function(dispatchers)
+					local cmd = vim.fn.expand("$MASON/packages")
+						.. "/astro-language-server"
+						.. "/node_modules/.bin/astro-ls"
+
+					return vim.lsp.rpc.start({ cmd, "--stdio" }, dispatchers)
+				end,
+			})
 
 			vim.lsp.config("solargraph", {
 				cmd = { "/Users/sambitsahoo/.local/share/mise/shims/bundle", "exec", "solargraph", "stdio" },
@@ -244,25 +262,25 @@ return {
 				},
 			})
 
-			vim.lsp.config("pylsp", {
-				settings = {
-					pylsp = {
-						plugins = {
-							flake8 = {
-								enabled = false,
-							},
-							autopep8 = {
-								enabled = false,
-							},
-							mccabe = {
-								enabled = false,
-							},
-							pyflakes = { enabled = false },
-							pylint = { enabled = false },
-						},
-					},
-				},
-			})
+			-- vim.lsp.config("pylsp", {
+			-- 	settings = {
+			-- 		pylsp = {
+			-- 			plugins = {
+			-- 				flake8 = {
+			-- 					enabled = false,
+			-- 				},
+			-- 				autopep8 = {
+			-- 					enabled = false,
+			-- 				},
+			-- 				mccabe = {
+			-- 					enabled = false,
+			-- 				},
+			-- 				pyflakes = { enabled = false },
+			-- 				pylint = { enabled = false },
+			-- 			},
+			-- 		},
+			-- 	},
+			-- })
 
 			if require("utils.linter").has_linter("biome") then
 				vim.lsp.config("biome", {})
@@ -284,16 +302,6 @@ return {
 			vim.lsp.enable("astro")
 			vim.lsp.enable("rust_analyzer")
 			vim.lsp.enable("jdtls")
-
-			vim.lsp.config("ctags_lsp", {
-				cmd = { "ctags-lsp" },
-				filetypes = { "ruby" },
-				root_dir = function()
-					return vim.fn.getcwd()
-				end,
-			})
-
-			vim.lsp.enable("ctags_lsp")
 
 			vim.lsp.config("cucumber_language_server", {
 				settings = {
@@ -346,40 +354,40 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		event = { "VeryLazy" },
 		build = ":TSUpdate",
-		config = function()
-			local configs = require("nvim-treesitter.configs")
-
-			configs.setup({
-				ignore_install = {},
-				modules = {},
-				ensure_installed = {
-					"lua",
-					"vim",
-					"vimdoc",
-					"query",
-					"javascript",
-					"typescript",
-					"vue",
-					"css",
-					"tsx",
-					"html",
-					"ruby",
+	},
+	{
+		"MeanderingProgrammer/treesitter-modules.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		opts = {
+			ignore_install = {},
+			modules = {},
+			ensure_installed = {
+				"lua",
+				"vim",
+				"vimdoc",
+				"query",
+				"javascript",
+				"typescript",
+				"vue",
+				"css",
+				"tsx",
+				"html",
+				"ruby",
+			},
+			auto_install = true,
+			sync_install = true,
+			highlight = { enable = true },
+			indent = { enable = true },
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "<CR>",
+					scope_incremental = "<CR>",
+					node_incremental = "<TAB>",
+					node_decremental = "<S-TAB>",
 				},
-				auto_install = true,
-				sync_install = true,
-				highlight = { enable = true },
-				indent = { enable = true },
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "<CR>",
-						scope_incremental = "<CR>",
-						node_incremental = "<TAB>",
-						node_decremental = "<S-TAB>",
-					},
-				},
-			})
-		end,
+			},
+		},
 	},
 	{ "soulsam480/nvim-eslint", branch = "lazy-init", event = { "BufReadPre", "BufNewFile" }, opts = {} },
 	{
